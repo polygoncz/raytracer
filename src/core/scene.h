@@ -7,7 +7,8 @@
 #include "light.h"
 #include "color.h"
 #include "integrator.h"
-#include "viewplane.h"
+#include "film.h"
+#include "camera.h"
 
 using namespace std;
 
@@ -32,7 +33,8 @@ public:
     vector<Light*> lights;
     vector<Primitive*> objects;
     RenderThread* pixelArea;
-    Film* vp;
+    Film* film;
+	Camera* cam;
 private:
     Integrator* tracer;
 };

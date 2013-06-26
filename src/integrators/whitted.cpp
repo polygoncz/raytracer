@@ -30,7 +30,8 @@ RGBColor WhittedTracer::traceRay(const Ray& ray) const
             sr.hitObject = true;
             tMin = t;
             sr.material = obj->getMaterial();
-            sr.hitPoint = ray(t);
+			sr.hitPoint = ray(tMin);
+			sr.t = tMin;
         }
     }
 

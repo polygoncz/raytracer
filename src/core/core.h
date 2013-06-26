@@ -13,6 +13,7 @@ class RGBColor;
 class Integrator;
 class Primitive;
 class Film;
+class Camera;
 
 inline float Clamp(float val, float from, float to)
 {

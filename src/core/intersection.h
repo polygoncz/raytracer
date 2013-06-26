@@ -2,6 +2,7 @@
 
 #include "core.h"
 
+#include "constants.h"
 #include "scene.h"
 #include "geometry.h"
 #include "material.h"
@@ -14,7 +15,7 @@ public:
         hitObject(false),
         material(NULL),
         depth(0),
-        t(0.0) {}
+        t(INFINITY) {}
     Intersection(const Intersection& sr)
         :   scene(sr.scene),
         hitObject(sr.hitObject),

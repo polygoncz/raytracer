@@ -91,6 +91,11 @@ public:
 		return Vector(x * k, y * k, z * k);
 	}
 
+	friend Vector operator *(float k, const Vector& v)
+	{
+		return Vector(v.x * k, v.y * k, v.z * k);
+	}
+
 	Vector& operator *=(float k)
     {
         x *= k;
@@ -387,22 +392,22 @@ inline float Dot(const Normal& u, const Normal& v)
 
 inline Vector Cross(const Vector& u, const Vector& v)
 {
-	return Vector(u.y*v.z - v.z*u.y, u.z*v.x - u.x*v.z, u.x*v.y - u.y*v.x);
+	return Vector(u.y*v.z - u.z*v.y, u.z*v.x - u.x*v.z, u.x*v.y - u.y*v.x);
 }
 
 inline Vector Cross(const Normal& u, const Vector& v)
 {
-	return Vector(u.y*v.z - v.z*u.y, u.z*v.x - u.x*v.z, u.x*v.y - u.y*v.x);
+	return Vector(u.y*v.z - u.z*v.y, u.z*v.x - u.x*v.z, u.x*v.y - u.y*v.x);
 }
 
 inline Vector Cross(const Normal& u, const Normal& v)
 {
-	return Vector(u.y*v.z - v.z*u.y, u.z*v.x - u.x*v.z, u.x*v.y - u.y*v.x);
+	return Vector(u.y*v.z - u.z*v.y, u.z*v.x - u.x*v.z, u.x*v.y - u.y*v.x);
 }
 
 inline Vector Cross(const Vector& u, const Normal& v)
 {
-	return Vector(u.y*v.z - v.z*u.y, u.z*v.x - u.x*v.z, u.x*v.y - u.y*v.x);
+	return Vector(u.y*v.z - u.z*v.y, u.z*v.x - u.x*v.z, u.x*v.y - u.y*v.x);
 }
 
 inline float Distance(const Point& p1, const Point& p2)
