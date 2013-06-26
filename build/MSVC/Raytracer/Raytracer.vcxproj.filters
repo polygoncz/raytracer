@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\BRDF">
+      <UniqueIdentifier>{828eaf6f-ff4e-4ae1-9167-7ea9dbe1d051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BRDF">
+      <UniqueIdentifier>{711b876f-f74b-4148-b168-5f3d6fd864e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{5bde1ba1-b5f5-4607-a0e4-14625a9d9214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{77093baf-3c01-458b-b6f8-5da251b7ef7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Integrators">
+      <UniqueIdentifier>{f6668ef9-ab7f-46bb-96f1-5edf0ba93d68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Integrators">
+      <UniqueIdentifier>{95992587-4a2e-49eb-88c8-6929961af14e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lights">
+      <UniqueIdentifier>{62906dde-f271-4307-9ff4-22db934d8cd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lights">
+      <UniqueIdentifier>{11da2ec8-eca9-4052-b850-2046acf5857c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Materials">
+      <UniqueIdentifier>{89e1d97d-86a0-46e9-a73f-6646daf0bbab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Materials">
+      <UniqueIdentifier>{071c2ead-41cc-4e69-9e84-816cf4062ab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Shapes">
+      <UniqueIdentifier>{dc286917-7bd0-49ae-bbaa-26f21b2966e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shapes">
+      <UniqueIdentifier>{5e1e27a7-3add-4378-8d34-6a45fa7c5581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\wxGUI">
+      <UniqueIdentifier>{4460709c-f93e-47b6-ae8d-2d926c1f3aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\wxGUI">
+      <UniqueIdentifier>{5b271bb1-653c-44ee-acde-a84aba30f90c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\brdf\specular.cpp">
+      <Filter>Source Files\BRDF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\brdf\lambert.cpp">
+      <Filter>Source Files\BRDF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\viewplane.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\geometry.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\integrator.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\primitive.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\scene.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\integrators\whitted.cpp">
+      <Filter>Source Files\Integrators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ligths\ambient.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ligths\point.cpp">
+      <Filter>Source Files\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\materials\phong.cpp">
+      <Filter>Source Files\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\shapes\sphere.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\wxgui\imagebuffer.cpp">
+      <Filter>Source Files\wxGUI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\brdf\lambert.h">
+      <Filter>Header Files\BRDF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\brdf\specular.h">
+      <Filter>Header Files\BRDF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\brdf.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\color.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\constants.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\core.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\geometry.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\headers.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\integrator.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\intersection.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\light.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\material.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\primitive.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\scene.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\vector.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\viewplane.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\integrators\whitted.h">
+      <Filter>Header Files\Integrators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\ligths\ambient.h">
+      <Filter>Header Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\ligths\point.h">
+      <Filter>Header Files\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\materials\phong.h">
+      <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\shapes\sphere.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\wxgui\imagebuffer.h">
+      <Filter>Header Files\wxGUI</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
