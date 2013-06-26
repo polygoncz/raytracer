@@ -6,10 +6,6 @@
 #include "core.h"
 #include "constants.h"
 
-class Normal;
-class Point;
-
-
 class Vector
 {
 public:
