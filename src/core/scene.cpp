@@ -80,17 +80,13 @@ void Scene::build()
 {
     film = new Film(800, 800, 0.125);
 
-    background = BLACK;
+    background = DARK_GREY;
     
-    ambient = new AmbientLight(0.3, RGBColor(1.0, 1.0, 1.0));
+    ambient = new AmbientLight(0.3, WHITE);
 
-    Light* main = new PointLight(5.0, RGBColor(1.f, 1.f, 1.f), Point(50.f, -70.f, 80.f));
-    Light* bottom = new PointLight(1.0, RGBColor(0.f, 0.f, 1.f), Point(0.f, 80.f, 100.f));
-    Light* back = new PointLight(0.8, RGBColor(1.f, 0.f, 0.f), Point(-80.f, -80.f, 100.f));
+    Light* main = new PointLight(5.0, WHITE, Point(50.f, 50.f, 50.f));
 
     addLight(main);
-    addLight(bottom);
-    addLight(back);
 
     Primitive* sphere1 = new Sphere(Point(0.f, 0.f, 0.f), 40.f, new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(1.f,1.f,1.f), 0.1f, 0.7f, 1000.f));
     Primitive* sphere2 = new Sphere(Point(40.f, 0.f, 0.f), 25.f, new Phong(RGBColor(0.8f, 0.0f, 0.8f), RGBColor(1.f,1.f,1.f), 0.1f, 0.7f, 500.f));
@@ -98,7 +94,7 @@ void Scene::build()
 	addObject(sphere1);
     addObject(sphere2);
 
-	cam = new PerspectiveCamera(Point(200.f, 200.f, 200.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 200.f);
+	cam = new PerspectiveCamera(Point(200.f, 0.f, 0.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 200.f);
 
     tracer = new WhittedTracer(this);
 }
@@ -119,7 +115,7 @@ void Scene::render()
             cam->GenerateRay(sample, &ray);
             color = tracer->traceRay(ray);
 
-            displayPixel(c, film->height - r, color);
+            displayPixel(c, r, color);
         }
     }
 }

@@ -122,4 +122,11 @@ public:
 	float r, g, b;
 };
 
-const RGBColor BLACK(0.f,0.f,0.f);
+const RGBColor BLACK(0.f, 0.f, 0.f);
+const RGBColor WHITE(1.f, 1.f, 1.f);
+const RGBColor GREY(0.5f, 0.5f, 0.5f);
+const RGBColor LIGHT_GREY(0.8f, 0.8f, 0.8f);
+const RGBColor DARK_GREY(0.3f, 0.3f, 0.3f);
+const RGBColor RED(1.0f, 0.f, 0.f);
+const RGBColor GRENN(0.0f, 1.0f, 0.0f);
+const RGBColor BLUE(0.0f, 0.0f, 1.0f);
