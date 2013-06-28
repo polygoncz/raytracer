@@ -14,7 +14,5 @@ public:
     WhittedTracer(const WhittedTracer& tr);
     virtual ~WhittedTracer(void);
 
-    virtual RGBColor traceRay(const Ray& ray) const;
-private:
-    Scene* scene;
+    virtual RGBColor L(const Ray& ray) const;
 };

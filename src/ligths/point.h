@@ -13,7 +13,7 @@ public:
     PointLight(double _ls, const RGBColor& _c, const Point& _loc);
     virtual ~PointLight(void);
 
-    virtual Vector getDirection(const Intersection& sr) const;
+    virtual Vector GetDirection(const Intersection& sr) const;
     virtual RGBColor L(const Intersection& sr) const;
 
 private:
@@ -22,7 +22,7 @@ private:
     RGBColor c; //color
 };
 
-inline Vector PointLight::getDirection(const Intersection& sr) const
+inline Vector PointLight::GetDirection(const Intersection& sr) const
 {
     return (location - sr.hitPoint).Normalize();
 }

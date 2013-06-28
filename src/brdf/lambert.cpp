@@ -14,7 +14,7 @@ Lambert::Lambert(float _kd, const RGBColor& _cd)
 Lambert::~Lambert(void)
 {}
 
-BRDF* Lambert::clone() const
+BRDF* Lambert::Clone() const
 {
     return new Lambert(*this);
 }

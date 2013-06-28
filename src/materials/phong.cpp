@@ -21,11 +21,11 @@ Phong::Phong(const Phong& mat)
     : Material(mat)
 {
     if (mat.ambientBRDF)
-        ambientBRDF = mat.ambientBRDF->clone();
+        ambientBRDF = mat.ambientBRDF->Clone();
     if (mat.diffuseBRDF)
-        diffuseBRDF = mat.diffuseBRDF->clone();
+        diffuseBRDF = mat.diffuseBRDF->Clone();
     if (mat.specularBRDF)
-        specularBRDF = mat.specularBRDF->clone();
+        specularBRDF = mat.specularBRDF->Clone();
 }
 
 Phong::~Phong(void)
@@ -49,7 +49,7 @@ Phong::~Phong(void)
     }
 }
 
-Material* Phong::clone() const
+Material* Phong::Clone() const
 {
     return new Phong(*this);
 }

@@ -13,7 +13,7 @@ public:
     AmbientLight(double _ls, const RGBColor& _c);
     virtual ~AmbientLight(void);
 
-    virtual Vector getDirection(const Intersection& sr) const;
+    virtual Vector GetDirection(const Intersection& sr) const;
     virtual RGBColor L(const Intersection& sr) const;
 
 private:
@@ -21,7 +21,7 @@ private:
     RGBColor c; //Color
 };
 
-inline Vector AmbientLight::getDirection(const Intersection& sr) const
+inline Vector AmbientLight::GetDirection(const Intersection& sr) const
 {
     return Vector(0.0, 0.0, 0.0);
 }

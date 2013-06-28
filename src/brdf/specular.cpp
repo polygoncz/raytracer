@@ -14,7 +14,7 @@ Specular::Specular(const Specular& spec)
 Specular::~Specular(void)
 {}
 
-BRDF* Specular::clone() const
+BRDF* Specular::Clone() const
 {
     return new Specular(*this);
 }

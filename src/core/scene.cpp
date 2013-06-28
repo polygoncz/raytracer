@@ -1,18 +1,26 @@
 #include "constants.h"
 #include "geometry.h"
 #include "color.h"
+#include "intersection.h"
 
 #include "ligths/ambient.h"
 #include "ligths/point.h"
 
 #include "shapes/sphere.h"
+#include "shapes/plane.h"
+
 #include "materials/phong.h"
+#include "materials/matte.h"
 
 #include "integrators/whitted.h"
 
 #include "core/scene.h"
 
 #include "cameras/perspective.h"
+
+#include <vector>
+
+using namespace std;
 
 Scene::Scene()
     :   background(BLACK),
@@ -57,7 +65,7 @@ Scene::~Scene()
 		delete cam;
 }
 
-void Scene::displayPixel(int x, int y, RGBColor& in)
+void Scene::DisplayPixel(int x, int y, RGBColor& in)
 {
     RGBColor color = in.Clamp();
 
@@ -66,17 +74,56 @@ void Scene::displayPixel(int x, int y, RGBColor& in)
                               (int) (color.b * 255));
 }
 
-void Scene::addLight(Light* light)
+void Scene::AddLight(Light* light)
 {
     lights.push_back(light);
 }
 
-void Scene::addObject(Primitive* obj)
+void Scene::AddObject(Primitive* obj)
 {
     objects.push_back(obj);
 }
 
-void Scene::build()
+bool Scene::Intersect(const Ray& ray, Intersection& inter) const
+{
+	float tMin = INFINITY;
+	float t = 0.f;
+
+	for (vector<Primitive*>::const_iterator itr = objects.begin(); itr != objects.end(); itr++)
+	{
+		Primitive* obj = (*itr);
+		if (obj->Hit(ray, t, inter) && (t < tMin))
+		{
+			inter.hitObject = true;
+			tMin = t;
+			inter.material = obj->GetMaterial();
+			inter.hitPoint = ray(tMin);
+			inter.t = tMin;
+		}
+	}
+
+	return inter.hitObject;
+}
+
+bool Scene::IntersectP(const Ray& ray) const
+{
+	Intersection inter;
+	float tMin = INFINITY;
+	float t = 0.f;
+
+	for (vector<Primitive*>::const_iterator itr = objects.begin(); itr != objects.end(); itr++)
+	{
+		Primitive* obj = (*itr);
+		if (obj->Hit(ray, t, inter))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void Scene::Build()
 {
     film = new Film(800, 800, 0.125);
 
@@ -86,36 +133,17 @@ void Scene::build()
 
     Light* main = new PointLight(5.0, WHITE, Point(50.f, 50.f, 50.f));
 
-    addLight(main);
+    AddLight(main);
 
     Primitive* sphere1 = new Sphere(Point(0.f, 0.f, 0.f), 40.f, new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(1.f,1.f,1.f), 0.1f, 0.7f, 1000.f));
-    Primitive* sphere2 = new Sphere(Point(40.f, 0.f, 0.f), 25.f, new Phong(RGBColor(0.8f, 0.0f, 0.8f), RGBColor(1.f,1.f,1.f), 0.1f, 0.7f, 500.f));
+    Primitive* sphere2 = new Sphere(Point(40.f, 0.f, 20.f), 25.f, new Matte(GREY, 0.1f, 0.7f));
+	Primitive* plane = new Plane(Point(0.f, 0.f, 0.f), Normal(0.f, 1.f, 0.f), new Matte(GREY, 0.1f, 0.7f));
 
-	addObject(sphere1);
-    addObject(sphere2);
+	AddObject(plane);
+	AddObject(sphere1);
+    AddObject(sphere2);
 
-	cam = new PerspectiveCamera(Point(200.f, 0.f, 0.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 200.f);
+	cam = new PerspectiveCamera(Point(200.f, 45.f, -100.f), Point(20.f, 15.f, 0.f), Vector(0.f, 1.f, 0.f), film, 200.f);
 
     tracer = new WhittedTracer(this);
-}
-
-void Scene::render()
-{
-    Ray ray;
-    double zw = 100.0;
-    RGBColor color;
-
-    for (int r = 0; r < film->height; r++)
-    {
-        for (int c = 0; c < film->width; c++)
-        {
-			CameraSample sample;
-            sample.x = c;
-            sample.y = r;
-            cam->GenerateRay(sample, &ray);
-            color = tracer->traceRay(ray);
-
-            displayPixel(c, r, color);
-        }
-    }
 }

@@ -14,6 +14,6 @@ public:
 	Light(const Light& light) {}
 	virtual ~Light() {}
 
-	virtual Vector getDirection(const Intersection& sr) const = 0;
+	virtual Vector GetDirection(const Intersection& sr) const = 0;
 	virtual RGBColor L(const Intersection& sr) const = 0;
 };

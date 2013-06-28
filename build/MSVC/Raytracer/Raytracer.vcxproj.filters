@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Cameras">
       <UniqueIdentifier>{15a803d2-1558-4957-b64f-598c239ebffc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{e42fc73b-a769-4472-ae2c-f6f62775c618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{43e3ed67-fe31-44b0-a16b-f8337f8775c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\brdf\specular.cpp">
@@ -108,6 +114,18 @@
     <ClCompile Include="..\..\..\src\cameras\perspective.cpp">
       <Filter>Source Files\Cameras</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\materials\matte.cpp">
+      <Filter>Source Files\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\shapes\plane.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\renderer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\renderers\raytracer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\brdf\lambert.h">
@@ -149,9 +167,6 @@
     <ClInclude Include="..\..\..\src\core\scene.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\core\vector.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\integrators\whitted.h">
       <Filter>Header Files\Integrators</Filter>
     </ClInclude>
@@ -178,6 +193,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\cameras\perspective.h">
       <Filter>Header Files\Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\materials\matte.h">
+      <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\shapes\plane.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\renderer.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\renderers\raytracer.h">
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

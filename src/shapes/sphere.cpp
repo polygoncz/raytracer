@@ -6,10 +6,6 @@
 
 #include <cmath>
 
-
-float Min(float t1, float t2);
-bool Quadratic(float a, float b, float c, float* t0, float* t1);
-
 Sphere::Sphere(void) : Primitive() {}
 
 Sphere::Sphere(const Point& _center, float _radius, Material* _material)
@@ -23,7 +19,7 @@ Sphere::Sphere(const Sphere& sphere)
 Sphere::~Sphere(void)
 {}
 
-bool Sphere::hit(const Ray& ray, float& tmin, Intersection& sr) const
+bool Sphere::Hit(const Ray& ray, float& tmin, Intersection& sr) const
 {
     Vector temp = ray.o - center;
     float a = Dot(ray.d, ray.d);
@@ -50,27 +46,4 @@ bool Sphere::hit(const Ray& ray, float& tmin, Intersection& sr) const
     }
 
     return false;
-}
-
-inline float Min(float t1, float t2)
-{
-	return t1 < t2 ? t1 : t2;
-}
-
-inline bool Quadratic(float a, float b, float c, float* t0, float* t1)
-{
-	float disc = b*b - 4*a*c;
-
-	if (disc < 0.f)
-	{
-		return false;
-	}
-
-	float e = sqrt(disc);
-	float lowerPart = 2.0 * a;
-
-	*t0 = (-b + e) / lowerPart;
-	*t1 = (-b - e) / lowerPart;
-
-	return true;
 }

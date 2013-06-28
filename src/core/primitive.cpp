@@ -9,7 +9,7 @@ Primitive::Primitive(Material* _mat)
 Primitive::Primitive(const Primitive& prm)
 {
 	if (prm.material != NULL)
-		material = prm.material->clone();
+		material = prm.material->Clone();
 	else material = NULL;
 }
 
@@ -22,12 +22,12 @@ Primitive::~Primitive( void )
 	}
 }
 
-Material* Primitive::getMaterial() const
+Material* Primitive::GetMaterial() const
 {
 	return material;
 }
 
-void Primitive::setMaterial(Material* _material)
+void Primitive::SetMaterial(Material* _material)
 {
 	if (material != NULL)
 		delete material;

@@ -14,7 +14,8 @@ public:
     Material(const Material& material) {}
     virtual ~Material() {}
 
-    virtual Material* clone() const = 0;
+    virtual Material* Clone() const = 0;
 
-    virtual RGBColor shade(const Intersection& sr) const = 0;
+	virtual RGBColor L(const Intersection& inter, const Vector& wi, const RGBColor& li) const = 0;
+	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi, const RGBColor& li) const = 0;
 };

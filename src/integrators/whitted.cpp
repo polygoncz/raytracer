@@ -2,44 +2,44 @@
 #include "core/geometry.h"
 
 #include "core/constants.h"
+#include "core/light.h"
+
+#include <vector>
 
 using namespace std;
 
+class Light;
+
 WhittedTracer::WhittedTracer(Scene* scene)
-    : Integrator(), scene(scene)
+    : Integrator(scene)
 {}
 
 WhittedTracer::WhittedTracer(const WhittedTracer& tr)
-    : Integrator(tr), scene(tr.scene)
+    : Integrator(tr)
 {}
 
 WhittedTracer::~WhittedTracer(void)
 {}
 
-RGBColor WhittedTracer::traceRay(const Ray& ray) const
+RGBColor WhittedTracer::L(const Ray& ray) const
 {
-    Intersection sr(*scene);
+    Intersection inter;
     float tMin = INFINITY;
     float t = 0.f;
 
-    for (vector<Primitive*>::iterator itr = scene->objects.begin(); itr != scene->objects.end(); itr++)
-    {
-        Primitive* obj = (*itr);
-        if (obj->hit(ray, t, sr) && (t < tMin))
-        {
-            sr.hitObject = true;
-            tMin = t;
-            sr.material = obj->getMaterial();
-			sr.hitPoint = ray(tMin);
-			sr.t = tMin;
-        }
-    }
+    if (scene->Intersect(ray, inter))
+	{
+		RGBColor l;
+		l += inter.material->Ambient(inter, scene->ambient->GetDirection(inter), scene->ambient->L(inter));
 
-    if (sr.hitObject)
-    {
-        sr.ray = ray;
-        return sr.material->shade(sr);
-    }
+		for (vector<Light*>::const_iterator itr = scene->lights.begin(); itr != scene->lights.end(); itr++)
+		{
+			Light* light = (*itr);
+			l += inter.material->L(inter, light->GetDirection(inter), light->L(inter));
+		}
 
+		return l;
+	}
+	
     return scene->background;
 }

@@ -12,7 +12,7 @@ public:
     Sphere(const Sphere& sphere);
     virtual ~Sphere(void);
 
-    virtual bool hit(const Ray& ray, float& tmin, Intersection& sr) const;
+    virtual bool Hit(const Ray& ray, float& tmin, Intersection& sr) const;
 private:
     Point center;
     float radius;

@@ -12,9 +12,9 @@ public:
 	BRDF(const BRDF& brdf) {}
 	virtual ~BRDF() {}
 
-	virtual BRDF* clone() const = 0;
+	virtual BRDF* Clone() const = 0;
 
-	virtual RGBColor f(const Intersection& sr, const Vector& wi, const Vector& wo) const = 0;
-	virtual RGBColor sampleF(const Intersection& sr, const Vector& wi, const Vector& wo) const = 0;
-	virtual RGBColor rho(const Intersection& sr, const Vector& wo) const = 0;
+	virtual RGBColor F(const Vector& wi, const Vector& wo, const Normal& n) const = 0;
+	virtual RGBColor SampleF(const Vector& wi, const Vector& wo, const Normal& n) const = 0;
+	virtual RGBColor Rho(const Vector& wi, const Vector& wo, const Normal& n) const = 0;
 };

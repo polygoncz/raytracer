@@ -9,6 +9,7 @@
 #include "integrator.h"
 #include "film.h"
 #include "camera.h"
+#include "intersection.h"
 
 using namespace std;
 
@@ -19,13 +20,15 @@ public:
     Scene(RenderThread* pixelArea);
     ~Scene();
 
-    void build();
-    void render();
+    void Build();
+    void Render();
+	bool Intersect(const Ray& ray, Intersection& inter) const;
+	bool IntersectP(const Ray& ray) const;
 
 private:
-    void addObject(Primitive* obj);
-    void addLight(Light* light);
-    void displayPixel(int x, int y, RGBColor& color);
+    void AddObject(Primitive* obj);
+    void AddLight(Light* light);
+    void DisplayPixel(int x, int y, RGBColor& color);
 
 public:
     RGBColor background;
@@ -35,6 +38,5 @@ public:
     RenderThread* pixelArea;
     Film* film;
 	Camera* cam;
-private:
     Integrator* tracer;
 };

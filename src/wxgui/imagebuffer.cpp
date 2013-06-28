@@ -9,7 +9,8 @@
 
 #include "core/core.h"
 #include "core/scene.h"
-
+#include "core/renderer.h"
+#include "renderers/raytracer.h"
 
 /************************************************************************/
 /* ImageBufferApp                                                       */
@@ -361,11 +362,11 @@ void RenderCanvas::OnTimerUpdate(wxTimerEvent& event)
 
 void RenderCanvas::renderStart(void)
 {
-    scene = new Scene();
-    
     wxGetApp().SetStatusText("Building...");
-    scene->build();
+	scene = new Scene();
+    scene->Build();
 
+	renderer = new Raytracer(scene, thread);
     wxGetApp().SetStatusText("Rendering...");
 
     pixelsRendered = 0;
@@ -386,9 +387,9 @@ void RenderCanvas::renderStart(void)
 
     timer  = new wxStopWatch();
 
-    thread = new RenderThread(this, scene);
+    thread = new RenderThread(this, renderer);
     thread->Create();
-    scene->pixelArea = thread;
+    renderer->SetPixelArea(thread);
     thread->SetPriority(20);
     thread->Run();
 }
@@ -449,7 +450,7 @@ void* RenderThread::Entry()
     lastUpdateTime = 0;
     timer = new wxStopWatch();
 
-    scene->render();
+    renderer->Render();
 
     return NULL;
 }

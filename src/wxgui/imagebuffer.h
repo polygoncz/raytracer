@@ -13,6 +13,7 @@ class RenderCanvas;
 class RenderThread;
 class RenderPixel;
 class Scene;
+class Renderer;
 
 class ImageBufferApp : public wxApp
 {
@@ -77,6 +78,7 @@ public:
 protected:
     wxBitmap* m_image;
     Scene* scene;
+	Renderer* renderer;
 
 private:
     RenderThread* thread;
@@ -109,14 +111,14 @@ DECLARE_EVENT_TYPE(wxEVT_RENDER, -1)
 class RenderThread : public wxThread
 {
 public:
-    RenderThread(RenderCanvas* c, Scene* s) : wxThread(), scene(s), canvas(c) {}
+    RenderThread(RenderCanvas* c, Renderer* s) : wxThread(), renderer(s), canvas(c) {}
     virtual void *Entry();
     virtual void OnExit();
     virtual void setPixel(int x, int y, int r, int g, int b);
 
 private:
     void NotifyCanvas();
-    Scene* scene;
+    Renderer* renderer;
     RenderCanvas* canvas;
 
     std::vector<RenderPixel*> pixels;

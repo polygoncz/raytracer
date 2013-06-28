@@ -13,28 +13,28 @@ public:
     Lambert(float _kd, const RGBColor& _cd);
     virtual ~Lambert(void);
 
-    virtual BRDF* clone() const;
+    virtual BRDF* Clone() const;
 
-    virtual RGBColor f(const Intersection& sr, const Vector& wi, const Vector& wo) const;
-    virtual RGBColor sampleF(const Intersection& sr, const Vector& wi, const Vector& wo) const;
-    virtual RGBColor rho(const Intersection& sr, const Vector& wo) const;
+	virtual RGBColor F(const Vector& wi, const Vector& wo, const Normal& n) const;
+	virtual RGBColor SampleF(const Vector& wi, const Vector& wo, const Normal& n) const;
+	virtual RGBColor Rho(const Vector& wi, const Vector& wo, const Normal& n) const;
 
 private:
     float kd;
     RGBColor cd;
 };
 
-inline RGBColor Lambert::f(const Intersection& sr, const Vector& wi, const Vector& wo) const
+inline RGBColor Lambert::F(const Vector& wi, const Vector& wo, const Normal& n) const
 {
     return (kd * cd) * INV_PI;
 }
 
-inline RGBColor Lambert::sampleF(const Intersection& sr, const Vector& wi, const Vector& wo) const
+inline RGBColor Lambert::SampleF(const Vector& wi, const Vector& wo, const Normal& n) const
 {
     return BLACK;
 }
 
-inline RGBColor Lambert::rho(const Intersection& sr, const Vector& wo) const
+inline RGBColor Lambert::Rho(const Vector& wi, const Vector& wo, const Normal& n) const
 {
     return kd*cd;
 }

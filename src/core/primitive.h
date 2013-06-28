@@ -13,10 +13,10 @@ public:
 
     virtual ~Primitive();
 
-    virtual bool hit(const Ray& ray, float& tmin, Intersection& sr) const = 0;
+    virtual bool Hit(const Ray& ray, float& tmin, Intersection& sr) const = 0;
 
-    Material* getMaterial(void) const;
-    void setMaterial(Material* _material);
+    Material* GetMaterial(void) const;
+    void SetMaterial(Material* _material);
 
 protected:
     mutable Material* material;

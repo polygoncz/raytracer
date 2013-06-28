@@ -13,7 +13,8 @@ void Camera::ComputeUVW()
 {
 	w = eye - target;
 	w.Normalize();
-	v = Cross(up, w);
-//	v.Normalize();
-	u = Cross(v, w);
+	u = Cross(up, w);
+	u.Normalize();
+	v = Cross(u, w);
+	v.Normalize();
 }
