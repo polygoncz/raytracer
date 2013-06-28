@@ -35,7 +35,12 @@ RGBColor WhittedTracer::L(const Ray& ray) const
 		for (vector<Light*>::const_iterator itr = scene->lights.begin(); itr != scene->lights.end(); itr++)
 		{
 			Light* light = (*itr);
-			l += inter.material->L(inter, light->GetDirection(inter), light->L(inter));
+			Vector shDir = light->GetDirection(inter);
+			Ray shadowRay(inter.hitPoint, shDir);
+			if (!scene->IntersectP(shadowRay))
+			{
+				l += inter.material->L(inter, light->GetDirection(inter), light->L(inter));
+			}
 		}
 
 		return l;
