@@ -99,7 +99,6 @@ bool Scene::Intersect(const Ray& ray, Intersection& inter) const
 			inter.material = obj->GetMaterial();
 			inter.hitPoint = ray(tMin);
 			inter.t = tMin;
-			inter.ray = ray;
 		}
 	}
 
@@ -139,15 +138,17 @@ void Scene::Build()
 	AddLight(main);
 	AddLight(back);
 
-	Primitive* sphere1 = new Sphere(Point(0.f, 0.f, 0.f), 40.f, new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(1.f,1.f,1.f), 0.1f, 0.7f, 1000.f));
-	Primitive* sphere2 = new Sphere(Point(40.f, 0.f, 20.f), 25.f, new Matte(RED, 0.1f, 0.7f));
+	Primitive* sphere1 = new Sphere(Point(0.f, 0.f, 0.f), 40.f, new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
+	Primitive* sphere2 = new Sphere(Point(40.f, 25.f, 20.f), 10.f, new Matte(RED, 0.1f, 0.7f));
+	Primitive* sphere3 = new Sphere(Point(9.f, 5.f, -35.f), 20.f, new Matte(BLUE, 0.1f, 0.7f));
 	Primitive* plane = new Plane(Point(0.f, 0.f, 0.f), Normal(0.f, 1.f, 0.f), new Matte(GREY, 0.1f, 0.7f));
 
-	AddObject(plane);
 	AddObject(sphere1);
 	AddObject(sphere2);
+	AddObject(sphere3);
+	AddObject(plane);
 
-	cam = new PerspectiveCamera(Point(200.f, 45.f, -100.f), Point(20.f, 15.f, 0.f), Vector(0.f, 1.f, 0.f), film, 200.f);
+	cam = new PerspectiveCamera(Point(200.f, 45.f, -100.f), Point(0.f, 7.f, -20.f), Vector(0.f, 1.f, 0.f), film, 220.f);
 
 	tracer = new WhittedTracer(this);
 }

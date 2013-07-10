@@ -40,6 +40,8 @@ public:
     void OnRenderCompleted(wxCommandEvent& event);
     void OnRenderPaused(wxCommandEvent& event);
     void OnRenderResume(wxCommandEvent& event);
+	void RenderStart();
+	void KeyShortcuts(wxKeyEvent& evt);
 
 private:
     RenderCanvas* canvas;

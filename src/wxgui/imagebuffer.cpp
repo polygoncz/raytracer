@@ -54,6 +54,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_MENU(ID_MENU_FILE_OPEN, MainFrame::OnOpenFile)
     EVT_MENU(ID_MENU_QUIT, MainFrame::OnQuit)
     EVT_COMMAND(ID_RENDER_COMPLETED, wxEVT_RENDER, MainFrame::OnRenderCompleted)
+	EVT_KEY_DOWN(MainFrame::KeyShortcuts)
 END_EVENT_TABLE()
 
 MainFrame::MainFrame(const wxPoint& pos, const wxSize& size)
@@ -90,6 +91,19 @@ MainFrame::MainFrame(const wxPoint& pos, const wxSize& size)
     wxStatusBar* statusBar = GetStatusBar();
     int widths[] = {150,300};
     statusBar->SetFieldsCount(2, widths);
+}
+
+void MainFrame::KeyShortcuts(wxKeyEvent& evt)
+{
+	if (evt.GetModifiers() == wxMOD_CONTROL)
+	{
+		switch (evt.GetKeyCode())
+		{
+		case 'r':
+			this->RenderStart();
+			break;
+		}
+	}
 }
 
 void MainFrame::OnQuit(wxCommandEvent& event)
@@ -159,16 +173,21 @@ void MainFrame::OnOpenFile(wxCommandEvent& event)
 
 void MainFrame::OnRenderStart(wxCommandEvent& event)
 {
-    wxMenu* menu = GetMenuBar()->GetMenu(1);
-    menu->Enable(menu->FindItem("&Start"), false);
-    menu->Enable(menu->FindItem("&Pause"), true);
-    menu->Enable(menu->FindItem("&Resume"), false);
+    this->RenderStart();
+}
 
-    canvas->renderStart();
+void MainFrame::RenderStart()
+{
+	wxMenu* menu = GetMenuBar()->GetMenu(1);
+	menu->Enable(menu->FindItem("&Start"), false);
+	menu->Enable(menu->FindItem("&Pause"), true);
+	menu->Enable(menu->FindItem("&Resume"), false);
 
-    wxMenu* menuFile = GetMenuBar()->GetMenu(0);
-    menuFile->Enable(ID_MENU_FILE_OPEN, false);
-    menuFile->Enable(ID_MENU_FILE_SAVE, true);
+	canvas->renderStart();
+
+	wxMenu* menuFile = GetMenuBar()->GetMenu(0);
+	menuFile->Enable(ID_MENU_FILE_OPEN, false);
+	menuFile->Enable(ID_MENU_FILE_SAVE, true);
 }
 
 void MainFrame::OnRenderCompleted(wxCommandEvent& event)
