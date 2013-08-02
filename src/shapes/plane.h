@@ -4,7 +4,7 @@
 #include "core/primitive.h"
 #include "core/geometry.h"
 
-class Plane : public Primitive
+class Plane : public Shape
 {
 public:
 	Plane( void );
@@ -12,7 +12,8 @@ public:
 	Plane (const Plane& pl);
 	virtual ~Plane();
 
-	virtual bool Hit(const Ray& ray, float& tmin, Intersection& sr) const;
+	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr) const;
+	virtual bool IntersectP(const Ray& ray) const;
 private:
 	Point p;
 	Normal n;

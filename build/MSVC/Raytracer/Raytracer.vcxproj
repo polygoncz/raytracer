@@ -81,6 +81,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -132,6 +133,7 @@
     <ClCompile Include="..\..\..\src\renderers\raytracer.cpp" />
     <ClCompile Include="..\..\..\src\shapes\plane.cpp" />
     <ClCompile Include="..\..\..\src\shapes\sphere.cpp" />
+    <ClCompile Include="..\..\..\src\shapes\trianglemesh.cpp" />
     <ClCompile Include="..\..\..\src\wxgui\imagebuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +162,7 @@
     <ClInclude Include="..\..\..\src\renderers\raytracer.h" />
     <ClInclude Include="..\..\..\src\shapes\plane.h" />
     <ClInclude Include="..\..\..\src\shapes\sphere.h" />
+    <ClInclude Include="..\..\..\src\shapes\trianglemesh.h" />
     <ClInclude Include="..\..\..\src\wxgui\imagebuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

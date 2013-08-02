@@ -4,16 +4,23 @@
 #include "material.h"
 #include "intersection.h"
 
-class Primitive
+#include <vector>
+
+using namespace std;
+
+class Shape
 {
 public:
-    Primitive(void);
-    Primitive(Material* _mat);
-    Primitive(const Primitive& prm);
+    Shape(void);
+    Shape(Material* _mat);
+    Shape(const Shape& prm);
 
-    virtual ~Primitive();
+    virtual ~Shape();
 
-    virtual bool Hit(const Ray& ray, float& tmin, Intersection& sr) const = 0;
+    virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr) const;
+	virtual bool IntersectP(const Ray& ray) const;
+	virtual bool CanIntersect() const;
+	virtual vector<Shape*>* Refine();
 
     Material* GetMaterial(void) const;
     void SetMaterial(Material* _material);
@@ -21,4 +28,3 @@ public:
 protected:
     mutable Material* material;
 };
-

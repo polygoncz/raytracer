@@ -1,7 +1,11 @@
 #pragma once
 #include <cfloat>
 
-const float PI = 3.14159265359f;
-const float INV_PI = 0.314159265359f;
-const float EPSILON = 0.0001f;
-const float INFINITY = FLT_MAX;
+#define PI 3.14159265359f
+#define INV_PI 0.314159265359f
+#define EPSILON 0.0001f
+
+#ifdef INFINITY
+	#undef INFINITY
+#endif
+#define INFINITY FLT_MAX

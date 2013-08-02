@@ -4,7 +4,7 @@
 #include "core/geometry.h"
 #include "core/primitive.h"
 
-class Sphere : public Primitive
+class Sphere : public Shape
 {
 public:
     Sphere(void);
@@ -12,7 +12,9 @@ public:
     Sphere(const Sphere& sphere);
     virtual ~Sphere(void);
 
-    virtual bool Hit(const Ray& ray, float& tmin, Intersection& sr) const;
+    virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr) const;
+	virtual bool IntersectP(const Ray& ray) const;
+
 private:
     Point center;
     float radius;

@@ -26,7 +26,7 @@ public:
 	bool IntersectP(const Ray& ray) const;
 
 private:
-    void AddObject(Primitive* obj);
+    void AddObject(Shape* obj);
     void AddLight(Light* light);
     void DisplayPixel(int x, int y, RGBColor& color);
 
@@ -34,7 +34,7 @@ public:
     RGBColor background;
     Light* ambient;
     vector<Light*> lights;
-    vector<Primitive*> objects;
+    vector<Shape*> objects;
     RenderThread* pixelArea;
     Film* film;
 	Camera* cam;

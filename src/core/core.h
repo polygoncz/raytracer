@@ -13,7 +13,7 @@ class Scene;
 class Intersection;
 class RGBColor;
 class Integrator;
-class Primitive;
+class Shape;
 class Film;
 class Camera;
 

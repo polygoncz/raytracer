@@ -99,9 +99,6 @@
     <ClCompile Include="..\..\..\src\materials\phong.cpp">
       <Filter>Source Files\Materials</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\shapes\sphere.cpp">
-      <Filter>Source Files\Shapes</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\wxgui\imagebuffer.cpp">
       <Filter>Source Files\wxGUI</Filter>
     </ClCompile>
@@ -125,6 +122,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\renderers\raytracer.cpp">
       <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\shapes\sphere.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\shapes\trianglemesh.cpp">
+      <Filter>Source Files\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\renderers\raytracer.h">
       <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\shapes\trianglemesh.h">
+      <Filter>Header Files\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
