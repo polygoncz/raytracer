@@ -18,6 +18,7 @@
 #include "core/scene.h"
 
 #include "cameras/perspective.h"
+#include "import/objimporter.h"
 
 #include <vector>
 
@@ -206,17 +207,18 @@ void Scene::Build()
 	tracer = new WhittedTracer(this);
 }*/
 
+/*//SCENA JEDNA
 void Scene::Build()
 {
 	film = new Film(800, 800, 0.125);
 
 	ambient = new AmbientLight(0.6, WHITE);
 
-	Light* main = new PointLight(2.0, WHITE, Point(-10.f, 7.5f, 10.f));
-	Light* back = new PointLight(0.7, WHITE, Point(10.f, 10.f, 10.f));
+	Light* main = new PointLight(4.0, WHITE, Point(-10.f, 7.5f, 10.f));
+	Light* back = new PointLight(0.7, RED, Point(10.f, 10.f, -10.f));
 
 	AddLight(main);
-	//AddLight(back);
+	AddLight(back);
 
 	Point *v = new Point[8];
 
@@ -244,7 +246,7 @@ void Scene::Build()
 	topology[30] = 6; topology[31] = 7; topology[32] = 3;
 	topology[33] = 0; topology[34] = 3; topology[35] = 7;
 
-	Shape* mesh = new TriangleMesh(12, 8, topology, v, new Matte(RED, 0.1f, 1.f));
+	Shape* mesh = new TriangleMesh(12, 8, topology, v, new Phong(RED, RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
 	
 
 	Shape* plane = new Plane(Point(0.f, -1.0f, 0.f), Normal(0.f, 1.f, 0.f), new Matte(GREY, 0.1f, 0.7f));
@@ -255,6 +257,30 @@ void Scene::Build()
 	AddObject(mesh);
 
 	cam = new PerspectiveCamera(Point(10.f, 6.5f, 10.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 220.f);
+
+	tracer = new WhittedTracer(this);
+}*/
+
+
+void Scene::Build()
+{
+	film = new Film(800, 800, 0.125);
+
+	ambient = new AmbientLight(0.6, WHITE);
+
+	Light* main = new PointLight(4.0, WHITE, Point(-10.f, 7.5f, 10.f));
+	//Light* back = new PointLight(0.7, RED, Point(10.f, 10.f, -10.f));
+
+	AddLight(main);
+	//AddLight(back);
+    
+    ObjImporter imp;
+	Shape* mesh = imp.LoadObj("/home/pavel/Dokumenty/vopice.obj");
+    mesh->SetMaterial(new Matte(GREY, 0.1f, 0.7f));
+    
+	AddObject(mesh);
+
+	cam = new PerspectiveCamera(Point(10.f, 6.5f, 10.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 420.f);
 
 	tracer = new WhittedTracer(this);
 }
