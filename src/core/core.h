@@ -16,6 +16,7 @@ class Integrator;
 class Shape;
 class Film;
 class Camera;
+class Statistics;
 
 inline float Clamp(float val, float from, float to)
 {

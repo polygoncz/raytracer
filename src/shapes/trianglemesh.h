@@ -2,6 +2,7 @@
 
 #include "core/core.h"
 #include "core/primitive.h"
+#include "core/statistics.h"
 
 struct Vertex
 {

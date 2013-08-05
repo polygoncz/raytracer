@@ -11,6 +11,7 @@
 #include "core/scene.h"
 #include "core/renderer.h"
 #include "renderers/raytracer.h"
+#include "core/statistics.h"
 
 /************************************************************************/
 /* ImageBufferApp                                                       */
@@ -88,7 +89,7 @@ MainFrame::MainFrame(const wxPoint& pos, const wxSize& size)
 	SetStatusText("Ready");
 	wxStatusBar* statusBar = GetStatusBar();
 	int widths[] =
-	{ 150, 300 };
+	{ 150, 1300 };
 	statusBar->SetFieldsCount(2, widths);
 }
 
@@ -179,6 +180,7 @@ void MainFrame::OnRenderStart(wxCommandEvent& event)
 
 void MainFrame::RenderStart()
 {
+	STATS_RESET();
 	wxMenu* menu = GetMenuBar()->GetMenu(1);
 	menu->Enable(menu->FindItem("&Start"), false);
 	menu->Enable(menu->FindItem("&Pause"), true);
@@ -201,7 +203,8 @@ void MainFrame::OnRenderCompleted(wxCommandEvent& event)
 	wxMenu* menuFile = GetMenuBar()->GetMenu(0);
 	menuFile->Enable(ID_MENU_FILE_OPEN, true);
 
-	wxGetApp().SetStatusText("Rendering complete");
+	wxString str = wxString::Format("Rendering complete.");
+	wxGetApp().SetStatusText(str);
 }
 
 void MainFrame::OnRenderPaused(wxCommandEvent& event)
@@ -290,7 +293,9 @@ void RenderCanvas::OnRenderCompleted(wxCommandEvent& event)
 
 		wxTimeSpan timeElapsed(0, 0, 0, interval);
 		wxString timeString = timeElapsed.Format("Elapsed time: %H:%M:%S:%l");
-		wxGetApp().SetStatusText(timeString, 1);
+		wxString stats = wxString::Format(" Triangles: %ld Pr. ray: %ld Sh. ray: %ld RT inter: %ld", Statistics::numTriangles, Statistics::numPrimaryRays, Statistics::numShadowRays, Statistics::numRayTriangleInters);
+		wxString str = timeString.Append(stats);
+		wxGetApp().SetStatusText(str, 1);
 
 		delete timer;
 		timer = NULL;

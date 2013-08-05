@@ -1,4 +1,5 @@
 #include "raytracer.h"
+#include "core/statistics.h"
 
 Raytracer::Raytracer(Scene* sc, RenderThread* thr)
 		: Renderer(sc, thr)
@@ -23,6 +24,7 @@ void Raytracer::Render() const
 			sample.x = c;
 			sample.y = r;
 			cam->GenerateRay(sample, &ray);
+			STATS_ADD_PRIMARY_RAY();
 			color = integrator->L(ray);
 
 			DisplayPixel(c, r, color);

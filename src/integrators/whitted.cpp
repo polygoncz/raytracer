@@ -4,6 +4,8 @@
 #include "core/constants.h"
 #include "core/light.h"
 
+#include "core/statistics.h"
+
 #include <vector>
 
 using namespace std;
@@ -27,8 +29,8 @@ WhittedTracer::~WhittedTracer(void)
 RGBColor WhittedTracer::L(const Ray& ray) const
 {
 	Intersection inter;
-	float tMin = INFINITY;
-	float t = 0.f;
+//	float tMin = INFINITY;
+//	float t = 0.f;
 
 	if (scene->Intersect(ray, inter))
 	{
@@ -42,6 +44,7 @@ RGBColor WhittedTracer::L(const Ray& ray) const
 		{
 			Light* light = (*itr);
 			Vector shDir = light->GetDirection(inter);
+			STATS_ADD_SHADOW_RAY();
 			Ray shadowRay(inter.hitPoint + inter.normal * inter.ray.rayEpsilon,
 					shDir, 0.f, INFINITY, inter.ray.rayEpsilon);
 			if (!scene->IntersectP(shadowRay))

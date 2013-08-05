@@ -1,4 +1,5 @@
 #include "trianglemesh.h"
+#include <cstdlib>
 
 TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
 	Normal *N, Material* mat)
@@ -62,6 +63,7 @@ Triangle::Triangle(TriangleMesh* m, int n)
 {
 	mesh = m;
 	v = &mesh->topology[3 * n];
+	STATS_ADD_TRIANGLE();
 }
 
 Triangle::~Triangle()
@@ -70,6 +72,8 @@ Triangle::~Triangle()
 
 bool Triangle::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 {
+	STATS_ADD_RAY_TRIANGLE();
+
 	const Point &p0 = mesh->p[v[0].p];
 	const Point &p1 = mesh->p[v[1].p];
 	const Point &p2 = mesh->p[v[2].p];
@@ -109,6 +113,8 @@ bool Triangle::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 
 bool Triangle::IntersectP(const Ray& ray)
 {
+	STATS_ADD_RAY_TRIANGLE();
+
 	const Point &p0 = mesh->p[v[0].p];
 	const Point &p1 = mesh->p[v[1].p];
 	const Point &p2 = mesh->p[v[2].p];
@@ -140,8 +146,7 @@ bool Triangle::IntersectP(const Ray& ray)
 
 Normal Triangle::InterpolateNormal(float beta, float gamma)
 {
-	Normal n(
-			(1.f - beta - gamma) * mesh->n[v[0].n] + beta * mesh->n[v[1].n]
+	Normal n((1.f - beta - gamma) * mesh->n[v[0].n] + beta * mesh->n[v[1].n]
 					+ gamma * mesh->n[v[2].n]);
 	n.Normalize();
 	return n;

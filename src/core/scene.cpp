@@ -276,7 +276,7 @@ void Scene::Build()
 
 	Shape* plane = new Plane(Point(0.f, -1.0f, 0.f), Normal(0.f, 1.f, 0.f),
 			new Matte(GREY, 0.1f, 0.7f));
-	AddObject(plane);
+	//AddObject(plane);
 
 	cam = new PerspectiveCamera(Point(10.f, 6.5f, 10.f), Point(0.f, 0.f, 0.f),
 			Vector(0.f, 1.f, 0.f), film, 50.f);
