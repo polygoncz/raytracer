@@ -6,14 +6,15 @@
  */
 
 #ifndef OBJIMPORTER_H
-#define	OBJIMPORTER_H
+#define OBJIMPORTER_H
 
 #include "shapes/trianglemesh.h"
 
-class ObjImporter {
+class ObjImporter
+{
 public:
-    ObjImporter();
-    TriangleMesh* LoadObj(const char* path) const;
+	ObjImporter();
+	TriangleMesh* LoadObj(const char* path) const;
 private:
 
 };

@@ -6,6 +6,6 @@
 #define EPSILON 0.0001f
 
 #ifdef INFINITY
-	#undef INFINITY
+#undef INFINITY
 #endif
 #define INFINITY FLT_MAX

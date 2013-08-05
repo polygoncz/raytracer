@@ -3,25 +3,22 @@
 #include "brdf/specular.h"
 
 Matte::Matte()
-	:   Material(),
-	ambientBRDF(NULL),
-	diffuseBRDF(NULL)
-{}
+		: Material(), ambientBRDF(NULL), diffuseBRDF(NULL)
+{
+}
 
 Matte::Matte(const RGBColor& baseColor, float ca, float cd)
-	: Material()
+		: Material()
 {
 	ambientBRDF = new Lambert(ca, baseColor);
 	diffuseBRDF = new Lambert(cd, baseColor);
 }
 
 Matte::Matte(const Matte& mat)
-	: Material(mat)
+		: Material(mat)
 {
-	if (mat.ambientBRDF)
-		ambientBRDF = mat.ambientBRDF->Clone();
-	if (mat.diffuseBRDF)
-		diffuseBRDF = mat.diffuseBRDF->Clone();
+	if (mat.ambientBRDF) ambientBRDF = mat.ambientBRDF->Clone();
+	if (mat.diffuseBRDF) diffuseBRDF = mat.diffuseBRDF->Clone();
 }
 
 Matte::~Matte(void)

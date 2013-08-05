@@ -18,8 +18,9 @@ struct Pixel
 class Camera
 {
 public:
-	Camera( void );
-	Camera(const Point& eye, const Point& target, const Vector& up, float exposure = 1.f);
+	Camera(void);
+	Camera(const Point& eye, const Point& target, const Vector& up,
+		float exposure = 1.f);
 
 	virtual void GenerateRay(const CameraSample& sample, Ray* ray) const = 0;
 

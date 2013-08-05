@@ -22,6 +22,14 @@ CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/raytracer-netbeans
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Release=raytracer-netbeans.tar
 CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/raytracer-netbeans.tar
+# Release_Clang configuration
+CND_PLATFORM_Release_Clang=CLang-Linux-x86
+CND_ARTIFACT_DIR_Release_Clang=dist/Release_Clang/CLang-Linux-x86
+CND_ARTIFACT_NAME_Release_Clang=raytracer-netbeans
+CND_ARTIFACT_PATH_Release_Clang=dist/Release_Clang/CLang-Linux-x86/raytracer-netbeans
+CND_PACKAGE_DIR_Release_Clang=dist/Release_Clang/CLang-Linux-x86/package
+CND_PACKAGE_NAME_Release_Clang=raytracer-netbeans.tar
+CND_PACKAGE_PATH_Release_Clang=dist/Release_Clang/CLang-Linux-x86/package/raytracer-netbeans.tar
 #
 # include compiler specific variables
 #

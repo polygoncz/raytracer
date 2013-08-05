@@ -8,15 +8,30 @@
 class RGBColor
 {
 public:
-	RGBColor() {r = g = b = 0.f;}
+	RGBColor()
+	{
+		r = g = b = 0.f;
+	}
 	RGBColor(float _r, float _g, float _b)
-		: r(_r), g(_g), b(_b) { }
+			: r(_r), g(_g), b(_b)
+	{
+	}
 	RGBColor(const RGBColor& c)
-		: r(c.r), g(c.g), b(c.b) { }
-	~RGBColor() { }
+			: r(c.r), g(c.g), b(c.b)
+	{
+	}
+	~RGBColor()
+	{
+	}
 
-	const RGBColor& operator+() const { return *this; }
-	RGBColor operator-() const { return RGBColor(-r, -g, -b); }
+	const RGBColor& operator+() const
+	{
+		return *this;
+	}
+	RGBColor operator-() const
+	{
+		return RGBColor(-r, -g, -b);
+	}
 
 	bool operator ==(const RGBColor& v)
 	{
@@ -128,5 +143,5 @@ const RGBColor GREY(0.5f, 0.5f, 0.5f);
 const RGBColor LIGHT_GREY(0.8f, 0.8f, 0.8f);
 const RGBColor DARK_GREY(0.3f, 0.3f, 0.3f);
 const RGBColor RED(1.0f, 0.f, 0.f);
-const RGBColor GRENN(0.0f, 1.0f, 0.0f);
+const RGBColor GREEN(0.0f, 1.0f, 0.0f);
 const RGBColor BLUE(0.0f, 0.0f, 1.0f);

@@ -341,5 +341,137 @@
       <item path="../../src/wxgui/imagebuffer.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
+    <conf name="Release_Clang" type="1">
+      <toolsSet>
+        <compilerSet>CLang|CLang</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>8</standard>
+          <incDir>
+            <pElem>../../src</pElem>
+          </incDir>
+          <commandLine>`wx-config --cxxflags`</commandLine>
+          <preprocessorList>
+            <Elem>WXUSINGDLL</Elem>
+            <Elem>_FILE_OFFSET_BITS=64</Elem>
+            <Elem>__WXGTK__</Elem>
+          </preprocessorList>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <commandLine>`wx-config --libs`</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="../../src/brdf/lambert.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/brdf/lambert.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/brdf/specular.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/brdf/specular.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/cameras/perspective.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/cameras/perspective.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/brdf.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/camera.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/core/camera.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/color.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/constants.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/core.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/film.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/core/film.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/geometry.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/core/geometry.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/integrator.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/core/integrator.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/intersection.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/light.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/material.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/primitive.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/core/primitive.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/renderer.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/core/renderer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/core/scene.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/core/scene.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/import/objimporter.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/import/objimporter.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/integrators/whitted.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/integrators/whitted.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/ligths/ambient.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/ligths/ambient.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/ligths/point.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/ligths/point.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/materials/matte.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/materials/matte.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/materials/phong.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/materials/phong.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/renderers/raytracer.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/renderers/raytracer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/shapes/plane.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/shapes/plane.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/shapes/sphere.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/shapes/sphere.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/shapes/trianglemesh.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/shapes/trianglemesh.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../../src/wxgui/imagebuffer.cpp" ex="false" tool="1" flavor2="8">
+      </item>
+      <item path="../../src/wxgui/imagebuffer.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
   </confs>
 </configurationDescriptor>

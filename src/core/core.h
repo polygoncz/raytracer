@@ -19,10 +19,8 @@ class Camera;
 
 inline float Clamp(float val, float from, float to)
 {
-	if (val < from)
-		return from;
-	if (val > to)
-		return to;
+	if (val < from) return from;
+	if (val > to) return to;
 
 	return val;
 }
@@ -34,7 +32,7 @@ inline float Min(float t1, float t2)
 
 inline bool Quadratic(float a, float b, float c, float* t0, float* t1)
 {
-	float disc = b*b - 4*a*c;
+	float disc = b * b - 4 * a * c;
 
 	if (disc < 0.f)
 	{

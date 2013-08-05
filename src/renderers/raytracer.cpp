@@ -1,9 +1,13 @@
 #include "raytracer.h"
 
 Raytracer::Raytracer(Scene* sc, RenderThread* thr)
-	: Renderer(sc, thr) { }
+		: Renderer(sc, thr)
+{
+}
 
-Raytracer::~Raytracer() { }
+Raytracer::~Raytracer()
+{
+}
 
 void Raytracer::Render() const
 {

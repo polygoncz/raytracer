@@ -1,21 +1,24 @@
 #include "primitive.h"
 
-Shape::Shape( void )
-	: material(NULL) { }
+Shape::Shape(void)
+		: material(NULL)
+{
+}
 
 Shape::Shape(Material* _mat)
-	: material(_mat) { }
+		: material(_mat)
+{
+}
 
 Shape::Shape(const Shape& prm)
 {
-	if (prm.material != NULL)
-		material = prm.material->Clone();
+	if (prm.material != NULL) material = prm.material->Clone();
 	else material = NULL;
 }
 
-Shape::~Shape( void )
+Shape::~Shape(void)
 {
-	
+
 	if (material != NULL)
 	{
 		delete material;
@@ -30,8 +33,7 @@ Material* Shape::GetMaterial() const
 
 void Shape::SetMaterial(Material* _material)
 {
-	if (material != NULL)
-		delete material;
+	if (material != NULL) delete material;
 
 	material = _material;
 }
@@ -46,12 +48,12 @@ vector<Shape*>* Shape::Refine()
 	return NULL;
 }
 
-bool Shape::Intersect(const Ray& ray, float& tmin, Intersection& sr) const
+bool Shape::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 {
 	return false;
 }
 
-bool Shape::IntersectP(const Ray& ray) const
+bool Shape::IntersectP(const Ray& ray)
 {
 	return false;
 }

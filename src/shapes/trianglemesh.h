@@ -3,33 +3,40 @@
 #include "core/core.h"
 #include "core/primitive.h"
 
-#include <memory>
+struct Vertex
+{
+	int p; //Index of point
+	int n; //Index of normal
+};
 
-class TriangleMesh : public Shape
+class TriangleMesh: public Shape
 {
 public:
-	TriangleMesh(int nf, int nv, const int *topo, Point *P, Material* mat);
+	TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
+		Normal *N, Material* mat);
 	virtual ~TriangleMesh();
 	bool CanIntersect() const;
 	virtual vector<Shape*>* Refine();
 public:
-	int nfaces, nverts;
-	int *topology;
+	int nfaces, nverts, nnorms;
+	Vertex *topology;
 	Point *p;
 	Normal *n;
 private:
 	vector<Shape*>* refined;
 };
 
-class Triangle : public Shape
+class Triangle: public Shape
 {
 public:
 	Triangle(TriangleMesh* m, int n);
 	virtual ~Triangle();
 
-	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr) const;
-	virtual bool IntersectP(const Ray& ray) const;
+	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr);
+	virtual bool IntersectP(const Ray& ray);
+private:
+	Normal InterpolateNormal(const float beta, const float gamma);
 private:
 	TriangleMesh *mesh;
-	int *v;
+	Vertex *v;
 };

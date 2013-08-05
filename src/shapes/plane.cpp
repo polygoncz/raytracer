@@ -4,33 +4,38 @@
 #include "core/core.h"
 #include "core/geometry.h"
 
-Plane::Plane(void) : Shape() {}
+Plane::Plane(void)
+		: Shape()
+{
+}
 
 Plane::Plane(const Point& p, const Normal& n, Material* _material)
-	: Shape(_material), p(p), n(n)
-{}
+		: Shape(_material), p(p), n(n)
+{
+}
 
 Plane::Plane(const Plane& pl)
-	: Shape(pl.material), p(pl.p), n(pl.n)
-{}
+		: Shape(pl.material), p(pl.p), n(pl.n)
+{
+}
 
 Plane::~Plane(void)
-{}
+{
+}
 
-bool Plane::IntersectP(const Ray& ray) const
+bool Plane::IntersectP(const Ray& ray)
 {
 	float t = Dot(p - ray.o, n) / Dot(ray.d, n);
 
-	if (t > EPSILON)
-		return true;
+	if (t > EPSILON) return true;
 
 	return false;
 }
 
-bool Plane::Intersect(const Ray& ray, float& tmin, Intersection& sr) const
+bool Plane::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 {
 	float t = Dot(p - ray.o, n) / Dot(ray.d, n);
-	
+
 	if (t > EPSILON && t < sr.t)
 	{
 		tmin = t;

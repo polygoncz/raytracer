@@ -2,16 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <data xmlns="http://www.netbeans.org/ns/make-project-private/1">
         <activeConfTypeElem>1</activeConfTypeElem>
-        <activeConfIndexElem>1</activeConfIndexElem>
+        <activeConfIndexElem>2</activeConfIndexElem>
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/pavel/Dokumenty/_dev/raytracer/src/shapes/trianglemesh.h</file>
-            <file>file:/home/pavel/Dokumenty/_dev/raytracer/src/import/objimporter.h</file>
-            <file>file:/home/pavel/Dokumenty/_dev/raytracer/src/import/objimporter.cpp</file>
-            <file>file:/home/pavel/Dokumenty/_dev/raytracer/src/core/scene.cpp</file>
-            <file>file:/home/pavel/Dokumenty/_dev/raytracer/src/shapes/trianglemesh.cpp</file>
+            <file>file:/home/pavel/Dokumenty/_dev/raytracer/src/brdf/specular.cpp</file>
+            <file>file:/home/pavel/Dokumenty/_dev/raytracer/src/brdf/specular.h</file>
         </group>
     </open-files>
 </project-private>

@@ -6,6 +6,8 @@
  */
 
 #include "objimporter.h"
+#include <cstdlib>
+#include <cstdio>
 
 ObjImporter::ObjImporter()
 {
@@ -13,45 +15,55 @@ ObjImporter::ObjImporter()
 
 TriangleMesh* ObjImporter::LoadObj(const char* path) const
 {
-    FILE* f = fopen(path, "r");
-    if (f == NULL)
-    {
-        cout << "Cannot open file." << endl;
-        return NULL;
-    }
-    
-    vector<Point> points;
-    vector<int> topology;
-    int nf = 0;
-    
-    while (true)
-    {
-        char lineHeader[128];
-        int res = fscanf(f, "%s", lineHeader);
-        if (res == EOF)
-            break;
-        
-        if (strcmp(lineHeader, "v") == 0)
-        {
-            Point p;
-            fscanf(f, "%f %f %f\n", &p.x, &p.y, &p.z);
-            points.push_back(p);
-        }
-        
-        if (strcmp(lineHeader, "f") == 0)
-        {
-            int a = 0;
-            for (int i = 0; i < 3; i++)
-            {
-                fscanf(f, "%d", &a);
-                topology.push_back(--a);
-            }
-            nf++;
-        }
-    }
-    
-    fclose(f);
-    
-    TriangleMesh* mesh = new TriangleMesh(nf, points.size(), &topology[0], &points[0], NULL);
-    return mesh;
+	FILE* f = fopen(path, "r");
+	if (f == NULL)
+	{
+		cout << "Cannot open file." << endl;
+		return NULL;
+	}
+
+	vector<Point> points;
+	vector<Vertex> topology;
+	vector<Normal> normals;
+	int nf = 0;
+
+	while (true)
+	{
+		char lineHeader[128];
+		int res = fscanf(f, "%s", lineHeader);
+		if (res == EOF) break;
+
+		if (strcmp(lineHeader, "v") == 0)
+		{
+			Point p;
+			fscanf(f, "%f %f %f\n", &p.x, &p.y, &p.z);
+			points.push_back(p);
+		}
+
+		if (strcmp(lineHeader, "vn") == 0)
+		{
+			Normal n;
+			fscanf(f, "%f %f %f\n", &n.x, &n.y, &n.z);
+			normals.push_back(n);
+		}
+
+		if (strcmp(lineHeader, "f") == 0)
+		{
+			Vertex a;
+			for (int i = 0; i < 3; i++)
+			{
+				fscanf(f, "%d//%d", &a.p, &a.n);
+				--a.p;
+				--a.n;
+				topology.push_back(a);
+			}
+			nf++;
+		}
+	}
+
+	fclose(f);
+
+	TriangleMesh* mesh = new TriangleMesh(nf, points.size(), normals.size(),
+			&topology[0], &points[0], &normals[0], NULL);
+	return mesh;
 }

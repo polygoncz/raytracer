@@ -2,10 +2,15 @@
 #include <cstdlib>
 
 Integrator::Integrator(Scene* scene)
-	: scene(scene) {}
+		: scene(scene)
+{
+}
 
 Integrator::Integrator(const Integrator& tr)
-	: scene(tr.scene) {}
+		: scene(tr.scene)
+{
+}
 
 Integrator::~Integrator()
-{}
+{
+}

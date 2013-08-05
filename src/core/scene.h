@@ -16,27 +16,27 @@ using namespace std;
 class Scene
 {
 public:
-    Scene();
-    Scene(RenderThread* pixelArea);
-    ~Scene();
+	Scene();
+	Scene(RenderThread* pixelArea);
+	~Scene();
 
-    void Build();
-    void Render();
+	void Build();
+	void Render();
 	bool Intersect(const Ray& ray, Intersection& inter) const;
 	bool IntersectP(const Ray& ray) const;
 
 private:
-    void AddObject(Shape* obj);
-    void AddLight(Light* light);
-    void DisplayPixel(int x, int y, RGBColor& color);
+	void AddObject(Shape* obj);
+	void AddLight(Light* light);
+	void DisplayPixel(int x, int y, RGBColor& color);
 
 public:
-    RGBColor background;
-    Light* ambient;
-    vector<Light*> lights;
-    vector<Shape*> objects;
-    RenderThread* pixelArea;
-    Film* film;
+	RGBColor background;
+	Light* ambient;
+	vector<Light*> lights;
+	vector<Shape*> objects;
+	RenderThread* pixelArea;
+	Film* film;
 	Camera* cam;
-    Integrator* tracer;
+	Integrator* tracer;
 };

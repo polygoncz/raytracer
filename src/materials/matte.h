@@ -7,8 +7,9 @@
 #include "core/material.h"
 #include "core/brdf.h"
 #include "core/scene.h"
+#include <cmath>
 
-class Matte : public Material
+class Matte: public Material
 {
 public:
 	Matte(const Matte& mat);
@@ -16,24 +17,28 @@ public:
 	virtual ~Matte(void);
 
 	virtual Material* Clone() const;
-	virtual RGBColor L(const Intersection& inter, const Vector& wi, const RGBColor& li) const;
-	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi, const RGBColor& li) const;
+	virtual RGBColor L(const Intersection& inter, const Vector& wi,
+		const RGBColor& li) const;
+	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi,
+		const RGBColor& li) const;
 private:
 	Matte();
 	BRDF* ambientBRDF;
 	BRDF* diffuseBRDF;
 };
 
-inline RGBColor Matte::Ambient(const Intersection& inter, const Vector& wi, const RGBColor& li) const
+inline RGBColor Matte::Ambient(const Intersection& inter, const Vector& wi,
+	const RGBColor& li) const
 {
 	return ambientBRDF->Rho(wi, -inter.ray.d, inter.normal) * li;
 }
 
-inline RGBColor Matte::L(const Intersection& inter, const Vector& wi, const RGBColor& li) const
+inline RGBColor Matte::L(const Intersection& inter, const Vector& wi,
+	const RGBColor& li) const
 {
 	float ndotwi = Dot(inter.normal, wi);
 
-	if (ndotwi > 0.0)
-		return (diffuseBRDF->F(wi, -inter.ray.d, inter.normal) * li * ndotwi);
+	if (ndotwi > 0.0) return (diffuseBRDF->F(wi, -inter.ray.d, inter.normal)
+			* li * ndotwi);
 	return BLACK;
 }

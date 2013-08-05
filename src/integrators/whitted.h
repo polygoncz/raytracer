@@ -7,12 +7,12 @@
 #include "core/integrator.h"
 #include "core/primitive.h"
 
-class WhittedTracer : public Integrator
+class WhittedTracer: public Integrator
 {
 public:
-    WhittedTracer(Scene* scene);
-    WhittedTracer(const WhittedTracer& tr);
-    virtual ~WhittedTracer(void);
+	WhittedTracer(Scene* scene);
+	WhittedTracer(const WhittedTracer& tr);
+	virtual ~WhittedTracer(void);
 
-    virtual RGBColor L(const Ray& ray) const;
+	virtual RGBColor L(const Ray& ray) const;
 };

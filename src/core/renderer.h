@@ -12,7 +12,7 @@ class Renderer
 public:
 	Renderer(Scene* sc, RenderThread* thread);
 	virtual ~Renderer();
-	
+
 	virtual void Render() const = 0;
 	void SetPixelArea(RenderThread* thread);
 protected:
