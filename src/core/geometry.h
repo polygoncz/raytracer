@@ -1,3 +1,7 @@
+/**
+ * @file
+ */
+
 #pragma once
 
 #include <cmath>
@@ -7,16 +11,19 @@
 #include "constants.h"
 
 /**
- * Trida trojrozmerneho vektoru.
- * Umoznuje provadet s vektorem základní matematické operace.
+ * Trida trojrozmerneho vektoru.\n
+ * Umoznuje provadet s vektorem základní matematické operace jako scitani,
+ * odcitani, nasobeni konstantou, deleni konstantou, zjistovat jeho delku
+ * a provadet jeho normalizaci.
+ * @author Pavel Lokvenc
  */
 class Vector
 {
 public:
 
 	/**
-	 * Defaultní konstruktor.
-	 * Všechny složky mají hodnotu 0.
+	 * Defaultni konstruktor. \n
+	 * Vsechny slozky maji hodnotu 0.
 	 */
 	Vector()
 	{
@@ -289,27 +296,48 @@ public:
 		return (&x)[i];
 	}
 
-	/** hodnota slozky x */
+	/** hodnota slozky vektoru x */
 	float x;
-	/** hodnota slozky y */
+	/** hodnota slozky vektoru y */
 	float y;
-	/** hodnota slozky z */
+	/** hodnota slozky vektoru z */
 	float z;
 };
 
+/**
+ * Trida predstavujici bod ve trojrozmernem prostoru.\n
+ * Prestoze by se dala pouzit trida Vector, je zde pouzito specialni tridy pro
+ * prehlednost a pro dodrzeni zazitych konvenci znamych z matematiky a
+ * lin. algebry (bod - bod = vektor, bod + vektor = bod).
+ * @author Pavel Lokvenc
+ */
 class Point
 {
 public:
+	/**
+	 * Defaultni konstruktor. \n
+	 * Vsechny slozky maji hodnotu 0.
+	 */
 	Point()
 			: x(0.f), y(0.f), z(0.f)
 	{
 	}
 
+	/**
+	 * Konstruktor
+	 * @param _x hodnota slozky x
+	 * @param _y hodnota slozky y
+	 * @param _z hodnota slozky z
+	 */
 	Point(float _x, float _y, float _z)
 			: x(_x), y(_y), z(_z)
 	{
 	}
 
+	/**
+	 * Kopirovaci konstruktor
+	 * @param p Point urceny ke kopirovani
+	 */
 	Point(const Point& p)
 			: x(p.x), y(p.y), z(p.z)
 	{
@@ -319,36 +347,71 @@ public:
 	{
 	}
 
+	/**
+	 * Pretizeni unarniho operatoru +.
+	 * @return referenci na this.
+	 */
 	const Point& operator+() const
 	{
 		return *this;
 	}
 
+	/**
+	 * Pretizeni unarniho operatoru -. Vraci bod se zapornymi slozkami.
+	 * @return novy objekt tridy Point
+	 */
 	Point operator-() const
 	{
 		return Point(-x, -y, -z);
 	}
 
+	/**
+	 * Pretizeni operatoru rovnosti (==).
+	 * Porovnavaji se jednotlive slozky.
+	 * @param v objekt tridy Point, se kterym porovnavame.
+	 * @return true/false
+	 */
 	bool operator ==(const Vector& v) const
 	{
 		return x == v.x && y == v.y && z == v.z;
 	}
 
+	/**
+	 * Pretizeni operatoru nerovnosti (!=)
+	 * Porovnavaji se jednotlive slozky.
+	 * @param v objekt tridy Point, se kterym porovnavame.
+	 * @return true/false
+	 */
 	bool operator !=(const Vector& v) const
 	{
 		return x != v.x || y != v.y || z != v.z;
 	}
 
+	/**
+	 * Pretizeni operatoru scitani (+).
+	 * Posun bodu o vektor v. Scitaji se jednotlive slozky.
+	 * @param v objekt tridy Vector, ktery chceme pricist
+	 * @return novy objekt typu Point
+	 */
 	Point operator +(const Vector& v) const
 	{
 		return Point(x + v.x, y + v.y, z + v.z);
 	}
 
+	/**
+	 * Pretizeni operatoru scitani (+).
+	 * Scitaji se jednotlive slozky.
+	 * @param v objekt tridy Vector, ktery chceme pricist
+	 * @return novy objekt typu Vector
+	 */
 	Point operator +(const Point& v) const
 	{
 		return Point(x + v.x, y + v.y, z + v.z);
 	}
 
+	/**
+	 * @see operator +(const Vector& v)
+	 */
 	Point& operator +=(const Vector& v)
 	{
 		x += v.x;
@@ -357,16 +420,46 @@ public:
 		return *this;
 	}
 
-	Vector operator -(const Point& v) const
+	/**
+	 * @see operator +(const Point& v)
+	 */
+	Point& operator +=(const Point& p)
 	{
-		return Vector(x - v.x, y - v.y, z - v.z);
+		x += p.x;
+		y += p.y;
+		z += p.z;
+		return *this;
 	}
 
+	/**
+	 * Operace odcitani dvou objektu Point. Abychom dostali spravne smerovany
+	 * vektor je treba odecitat KONCOVY bod od POCATECNIHO.
+	 * @param p pocateni bod
+	 * @return vektor mezi dvema zadanymi body
+	 */
+	Vector operator -(const Point& p) const
+	{
+		return Vector(x - p.x, y - p.y, z - p.z);
+	}
+
+	/**
+	 * Operace posun bodu v zapornem smeru vektoru. Neni diky tomu nutne psat
+	 * komplikovane \f$ p + (-v) \f$.
+	 * @param v vektor o ktery chceme presunout bod
+	 * @return Point posunuty v zapornem smeru vektoru
+	 */
 	Point operator -(const Vector& v) const
 	{
 		return Point(x - v.x, y - v.y, z - v.z);
 	}
 
+	/**
+	 * Pretizeni operatoru deleni (/).
+	 * Osetreno deleni 0 pomoci makra assert z <assert.h>.
+	 * @see assert()
+	 * @param k hodnota kterou chceme delit vsechny slozky.
+	 * @return novy objekt tridy Point
+	 */
 	Point operator /(float k) const
 	{
 		assert(k != 0);
@@ -374,6 +467,13 @@ public:
 		return Point(x * invK, y * invK, z * invK);
 	}
 
+	/**
+	 * Pretizeni operatoru deleni (/).
+	 * Osetreno deleni 0 pomoci makra assert z <assert.h>.
+	 * @see assert()
+	 * @param k hodnota kterou chceme delit vsechny slozky.
+	 * @return reference na this
+	 */
 	Point& operator /=(float k)
 	{
 		assert(k != 0);
@@ -386,16 +486,34 @@ public:
 		return *this;
 	}
 
+	/**
+	 * Pretizeni operatoru nasobeni (*).
+	 * Nasobime vsechny slozky konstantou.
+	 * @param k konstanta pro nasobeni.
+	 * @return novy objekt typu Vector
+	 */
 	Point operator *(float k) const
 	{
 		return Point(x * k, y * k, z * k);
 	}
 
+	/**
+	 * Pretizeni operatoru nasobeni (*).
+	 * Nasobime vsechny slozky konstantou.
+	 * @param k konstanta pro nasobeni.
+	 * @return novy objekt typu Point
+	 */
 	friend Point operator *(float k, const Point& v)
 	{
 		return Point(v.x * k, v.y * k, v.z * k);
 	}
 
+	/**
+	 * Pretizeni operatoru nasobeni (*).
+	 * Nasobime vsechny slozky konstantou.
+	 * @param k konstanta pro nasobeni.
+	 * @return novy objekt typu Vector
+	 */
 	Point& operator *=(float k)
 	{
 		x *= k;
@@ -404,12 +522,39 @@ public:
 		return *this;
 	}
 
+	/**
+	 * Pretizeni operatoru prirazeni (=).
+	 * @param v vektor, jehoz hodnotu chceme priradit.
+	 * @return reference na this
+	 */
+	Point& operator =(const Point& v)
+	{
+		x = v.x;
+		y = v.y;
+		z = v.z;
+		return *this;
+	}
+
+	/**
+	 * Pretizeni operatoru pro pristup do pole ([]).
+	 * Pomoci makra assert z <assert.h> osetren rozsah v intervalu (0; 2).
+	 * Vyuzito vlastnosti, ze prekladace radi promenne "za sebe", takze lze k nim pristupovat jako k poli.
+	 * @param i index v intervalu (0; 2).
+	 * @return hodnotu x resp. y,z dle vstupniho parametru.
+	 */
 	float operator[](int i) const
 	{
 		assert(i >= 0 && i <= 2);
 		return (&x)[i];
 	}
 
+	/**
+	 * Pretizeni operatoru pro pristup do pole ([]).
+	 * Pomoci makra assert z <assert.h> osetren rozsah v intervalu (0; 2).
+	 * Vyuzito vlastnosti, ze prekladace radi promenne "za sebe", takze lze k nim pristupovat jako k poli.
+	 * @param i index v intervalu (0; 2).
+	 * @return hodnotu x resp. y,z dle vstupniho parametru.
+	 */
 	float& operator[](int i)
 	{
 		assert(i >= 0 && i <= 2);
@@ -435,16 +580,16 @@ public:
 			: x(_x), y(_y), z(_z)
 	{
 	}
-	Normal(const Normal& v)
-			: x(v.x), y(v.y), z(v.z)
+	Normal(const Normal& n)
+			: x(n.x), y(n.y), z(n.z)
 	{
 	}
 	Normal(const Point& p)
 			: x(p.x), y(p.y), z(p.z)
 	{
 	}
-	Normal(const Vector& p)
-			: x(p.x), y(p.y), z(p.z)
+	Normal(const Vector& v)
+			: x(v.x), y(v.y), z(v.z)
 	{
 	}
 
@@ -478,35 +623,35 @@ public:
 		return Normal(-x, -y, -z);
 	}
 
-	bool operator ==(const Normal& v)
+	bool operator ==(const Normal& n)
 	{
-		return x == v.x && y == v.y && z == v.z;
+		return x == n.x && y == n.y && z == n.z;
 	}
 
-	bool operator !=(const Normal& v)
+	bool operator !=(const Normal& n)
 	{
-		return x != v.x || y != v.y || z != v.z;
+		return x != n.x || y != n.y || z != n.z;
 	}
 
-	Normal operator +(const Normal& v) const
+	Normal operator +(const Normal& n) const
 	{
-		return Normal(x + v.x, y + v.y, z + v.z);
+		return Normal(x + n.x, y + n.y, z + n.z);
 	}
 
-	Normal& operator +=(const Normal& v)
+	Normal& operator +=(const Normal& n)
 	{
-		*this = *this + v;
+		*this = *this + n;
 		return *this;
 	}
 
-	Normal operator -(const Normal& v) const
+	Normal operator -(const Normal& n) const
 	{
-		return Normal(x - v.x, y - v.y, z - v.z);
+		return Normal(x - n.x, y - n.y, z - n.z);
 	}
 
-	Normal& operator -=(const Normal& v)
+	Normal& operator -=(const Normal& n)
 	{
-		*this = *this - v;
+		*this = *this - n;
 		return *this;
 	}
 
@@ -534,9 +679,9 @@ public:
 		return Normal(x * k, y * k, z * k);
 	}
 
-	friend Normal operator *(float k, const Normal& v)
+	friend Normal operator *(float k, const Normal& n)
 	{
-		return Normal(v.x * k, v.y * k, v.z * k);
+		return Normal(n.x * k, n.y * k, n.z * k);
 	}
 
 	Normal& operator *=(float k)
@@ -547,11 +692,11 @@ public:
 		return *this;
 	}
 
-	Normal& operator =(const Normal& v)
+	Normal& operator =(const Normal& n)
 	{
-		x = v.x;
-		y = v.y;
-		z = v.z;
+		x = n.x;
+		y = n.y;
+		z = n.z;
 		return *this;
 	}
 
@@ -579,6 +724,7 @@ public:
 			: mint(0.f), maxt(INFINITY), rayEpsilon(EPSILON), depth(0)
 	{
 	}
+
 	Ray(const Point& _o, const Vector& _d, float start = 0.f, float end =
 	INFINITY, float eps = EPSILON, int _depth = 0)
 			: o(_o), d(_d), mint(start), maxt(end), rayEpsilon(eps), depth(
@@ -591,11 +737,12 @@ public:
 		return o + d * t;
 	}
 
-	Point o;
-	Vector d;
-	mutable float mint, maxt;
-	mutable float rayEpsilon;
-	int depth;
+	Point o; ///< pocatek paprsku
+	Vector d; ///< smer paprsku
+	mutable float mint; ///< minimalni hodnota parametru t
+	mutable float maxt; ///< maximalni hodnota parametru t
+	mutable float rayEpsilon; ///< vypocitane epsilon (zamezuje vzniku artefaktu)
+	int depth; ///< hloubka rekurze
 };
 
 class BBox
@@ -646,9 +793,13 @@ public:
 				::Lerp(tz, pMin.z, pMax.z));
 	}
 
-	Point pMin, pMax;
+	Point pMin;
+	Point pMax;
 };
 
+/**
+ * Skalarni soucin
+ */
 inline float Dot(const Vector& u, const Vector& v)
 {
 	return u.x * v.x + u.y * v.y + u.z * v.z;
