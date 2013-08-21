@@ -3,11 +3,12 @@
 #include "color.h"
 #include "core.h"
 #include "intersection.h"
+#include "reference.h"
 
 class RGBColor;
 class Intersection;
 
-class Material
+class Material : ReferenceCounted
 {
 public:
 	Material(void)

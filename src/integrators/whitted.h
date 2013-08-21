@@ -11,7 +11,6 @@ class WhittedTracer: public Integrator
 {
 public:
 	WhittedTracer(Scene* scene);
-	WhittedTracer(const WhittedTracer& tr);
 	virtual ~WhittedTracer(void);
 
 	virtual RGBColor L(const Ray& ray) const;

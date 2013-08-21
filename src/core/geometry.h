@@ -447,6 +447,57 @@ public:
 	int depth;
 };
 
+class BBox
+{
+public:
+	BBox()
+	{
+		pMin = Point(INFINITY, INFINITY, INFINITY);
+		pMax = Point(-INFINITY, -INFINITY, -INFINITY);
+	}
+
+	BBox(const Point& p)
+		: pMin(p), pMax(p)
+	{}
+
+	BBox(const Point& _pmin, const Point& _pmax)
+		: pMin(_pmin), pMax(_pmax)
+	{}
+
+	BBox(const BBox& b)
+		: pMin(b.pMin), pMax(b.pMax)
+	{}
+
+	bool IsInside(const Point& p)
+	{
+		return (p.x >= pMin.x && p.x <= pMax.x &&
+				p.y >= pMin.y && p.y <= pMax.y &&
+				p.z >= pMin.z && p.z <= pMax.z);
+	}
+
+	bool IsOverlaps(const BBox& b)
+	{
+		bool x = (pMax.x >= b.pMin.x && pMin.x <= b.pMax.x);
+		bool y = (pMax.y >= b.pMin.y && pMin.y <= b.pMax.y);
+		bool z = (pMax.z >= b.pMin.z && pMin.z <= b.pMax.z);
+		return (x && y && z);
+	}
+
+	friend BBox Union(const BBox& b, const Point& p);
+	friend BBox Union(const BBox& b, const BBox& b2);
+
+	bool IntersectP(const Ray& ray, float* hitt0, float* hitt1) const;
+
+	Point Lerp(float tx, float ty, float tz) const
+	{
+		return Point(::Lerp(tx, pMin.x, pMax.x),
+				::Lerp(ty, pMin.y, pMax.y),
+				::Lerp(tz, pMin.z, pMax.z));
+	}
+
+	Point pMin, pMax;
+};
+
 inline Vector::Vector(const Point& p)
 		: x(p.x), y(p.y), z(p.z)
 {

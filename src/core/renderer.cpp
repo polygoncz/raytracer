@@ -5,7 +5,7 @@ Renderer::Renderer(Scene* sc, RenderThread* thread)
 {
 	cam = scene->cam;
 	film = scene->film;
-	integrator = scene->tracer;
+	integrator = NULL;
 }
 
 Renderer::~Renderer()

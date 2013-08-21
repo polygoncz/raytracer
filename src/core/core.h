@@ -31,6 +31,23 @@ inline float Min(float t1, float t2)
 	return t1 < t2 ? t1 : t2;
 }
 
+inline float Max(float t1, float t2)
+{
+	return t1 > t2 ? t1 : t2;
+}
+
+inline void Swap(float& a, float& b)
+{
+	float temp = a;
+	a = b;
+	b = temp;
+}
+
+inline float Lerp(float t, float a, float b)
+{
+	return (1.f - t) * a + t * b;
+}
+
 inline bool Quadratic(float a, float b, float c, float* t0, float* t1)
 {
 	float disc = b * b - 4 * a * c;

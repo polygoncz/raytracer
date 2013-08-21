@@ -1,9 +1,11 @@
 #include "raytracer.h"
 #include "core/statistics.h"
+#include "integrators/whitted.h"
 
 Raytracer::Raytracer(Scene* sc, RenderThread* thr)
 		: Renderer(sc, thr)
 {
+	this->integrator = new WhittedTracer(scene);
 }
 
 Raytracer::~Raytracer()
@@ -13,7 +15,6 @@ Raytracer::~Raytracer()
 void Raytracer::Render() const
 {
 	Ray ray;
-	double zw = 100.0;
 	RGBColor color;
 
 	for (int r = 0; r < film->height; r++)

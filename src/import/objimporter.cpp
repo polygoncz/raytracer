@@ -6,6 +6,8 @@
  */
 
 #include "objimporter.h"
+#include "core/reference.h"
+#include "materials/matte.h"
 #include <cstdlib>
 #include <cstdio>
 
@@ -63,7 +65,8 @@ TriangleMesh* ObjImporter::LoadObj(const char* path) const
 
 	fclose(f);
 
+	Reference<Material> matte(new Matte(GREY, 0.1f, 0.8f));
 	TriangleMesh* mesh = new TriangleMesh(nf, points.size(), normals.size(),
-			&topology[0], &points[0], &normals[0], NULL);
+			&topology[0], &points[0], &normals[0], matte);
 	return mesh;
 }

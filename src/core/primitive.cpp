@@ -1,40 +1,25 @@
 #include "primitive.h"
-
-Shape::Shape(void)
-		: material(NULL)
+Shape::Shape(cosnt Reference<Material>& _mat)
 {
-}
-
-Shape::Shape(Material* _mat)
-		: material(_mat)
-{
+	material = _mat;
 }
 
 Shape::Shape(const Shape& prm)
 {
-	if (prm.material != NULL) material = prm.material->Clone();
-	else material = NULL;
+	material = prm.material;
 }
 
 Shape::~Shape(void)
 {
-
-	if (material != NULL)
-	{
-		delete material;
-		material = NULL;
-	}
 }
 
 Material* Shape::GetMaterial() const
 {
-	return material;
+	return material.ptr;
 }
 
-void Shape::SetMaterial(Material* _material)
+void Shape::SetMaterial(const Reference<Material>& _material)
 {
-	if (material != NULL) delete material;
-
 	material = _material;
 }
 

@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
-	Normal *N, Material* mat)
+	Normal *N, const Reference<Material>& mat)
 		: Shape(mat)
 {
 	nfaces = nf;
@@ -57,9 +57,17 @@ vector<Shape*>* TriangleMesh::Refine()
 	return refined;
 }
 
+BBox TriangleMesh::Bounds() const
+{
+	BBox ret;
+	for(int i = 0; i < nverts; i++)
+		ret = Union(ret, p[i]);
+	return ret;
+}
+
 ////////////////Triangle////////////////////
 Triangle::Triangle(TriangleMesh* m, int n)
-		: Shape(NULL)
+		: Shape(m->material)
 {
 	mesh = m;
 	v = &mesh->topology[3 * n];
@@ -150,4 +158,14 @@ Normal Triangle::InterpolateNormal(float beta, float gamma)
 					+ gamma * mesh->n[v[2].n]);
 	n.Normalize();
 	return n;
+}
+
+BBox Triangle::Bounds() const
+{
+	const Point &p0 = mesh->p[v[0].p];
+	const Point &p1 = mesh->p[v[1].p];
+	const Point &p2 = mesh->p[v[2].p];
+
+	BBox b(p0, p1);
+	return Union(b, p2);
 }

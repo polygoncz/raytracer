@@ -14,10 +14,12 @@ class TriangleMesh: public Shape
 {
 public:
 	TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
-		Normal *N, Material* mat);
+		Normal *N, const Reference<Material>& mat);
 	virtual ~TriangleMesh();
 	bool CanIntersect() const;
+	virtual BBox Bounds() const;
 	virtual vector<Shape*>* Refine();
+	friend class Triangle;
 public:
 	int nfaces, nverts, nnorms;
 	Vertex *topology;
@@ -35,6 +37,7 @@ public:
 
 	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr);
 	virtual bool IntersectP(const Ray& ray);
+	virtual BBox Bounds() const;
 private:
 	Normal InterpolateNormal(const float beta, const float gamma);
 private:
