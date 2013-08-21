@@ -3,7 +3,7 @@
 
 TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
 	Normal *N, const Reference<Material>& mat)
-		: Shape(mat)
+		: Primitive(mat)
 {
 	nfaces = nf;
 	nverts = nv;
@@ -19,6 +19,7 @@ TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
 	memcpy(n, N, nn * sizeof(Normal));
 
 	refined = NULL;
+	//material = mat;
 }
 
 TriangleMesh::~TriangleMesh()
@@ -43,11 +44,11 @@ bool TriangleMesh::CanIntersect() const
 	return false;
 }
 
-vector<Shape*>* TriangleMesh::Refine()
+vector<Primitive*>* TriangleMesh::Refine()
 {
 	if (refined == NULL)
 	{
-		refined = new vector<Shape*>;
+		refined = new vector<Primitive*>;
 		for (int i = 0; i < nfaces; i++)
 		{
 			refined->push_back(new Triangle(this, i));
@@ -67,7 +68,7 @@ BBox TriangleMesh::Bounds() const
 
 ////////////////Triangle////////////////////
 Triangle::Triangle(TriangleMesh* m, int n)
-		: Shape(m->material)
+		: Primitive(m->material)
 {
 	mesh = m;
 	v = &mesh->topology[3 * n];

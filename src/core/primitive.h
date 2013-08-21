@@ -9,18 +9,18 @@
 
 using namespace std;
 
-class Shape
+class Primitive : public ReferenceCounted
 {
 public:
-	Shape(const Reference<Material>& _mat);
-	Shape(const Shape& prm);
+	Primitive(const Reference<Material>& _mat);
+	Primitive(const Primitive& prm);
 
-	virtual ~Shape();
+	virtual ~Primitive();
 
 	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr);
 	virtual bool IntersectP(const Ray& ray);
 	virtual bool CanIntersect() const;
-	virtual vector<Shape*>* Refine();
+	virtual vector<Primitive*>* Refine();
 	virtual BBox Bounds() const = 0;
 
 	Material* GetMaterial(void) const;

@@ -1,44 +1,45 @@
 #include "primitive.h"
-Shape::Shape(cosnt Reference<Material>& _mat)
-{
-	material = _mat;
-}
+#include <cstdlib>
 
-Shape::Shape(const Shape& prm)
+Primitive::Primitive(const Reference<Material>& _mat)
+	: material(_mat)
+{ }
+
+Primitive::Primitive(const Primitive& prm)
 {
 	material = prm.material;
 }
 
-Shape::~Shape(void)
+Primitive::~Primitive(void)
 {
 }
 
-Material* Shape::GetMaterial() const
+Material* Primitive::GetMaterial() const
 {
-	return material.ptr;
+	return &material;
 }
 
-void Shape::SetMaterial(const Reference<Material>& _material)
+void Primitive::SetMaterial(const Reference<Material>& _material)
 {
 	material = _material;
 }
 
-bool Shape::CanIntersect() const
+bool Primitive::CanIntersect() const
 {
 	return true;
 }
 
-vector<Shape*>* Shape::Refine()
+vector<Primitive*>* Primitive::Refine()
 {
 	return NULL;
 }
 
-bool Shape::Intersect(const Ray& ray, float& tmin, Intersection& sr)
+bool Primitive::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 {
 	return false;
 }
 
-bool Shape::IntersectP(const Ray& ray)
+bool Primitive::IntersectP(const Ray& ray)
 {
 	return false;
 }

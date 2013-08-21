@@ -10,7 +10,7 @@ struct Vertex
 	int n; //Index of normal
 };
 
-class TriangleMesh: public Shape
+class TriangleMesh: public Primitive
 {
 public:
 	TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
@@ -18,7 +18,7 @@ public:
 	virtual ~TriangleMesh();
 	bool CanIntersect() const;
 	virtual BBox Bounds() const;
-	virtual vector<Shape*>* Refine();
+	virtual vector<Primitive*>* Refine();
 	friend class Triangle;
 public:
 	int nfaces, nverts, nnorms;
@@ -26,10 +26,10 @@ public:
 	Point *p;
 	Normal *n;
 private:
-	vector<Shape*>* refined;
+	vector<Primitive*>* refined;
 };
 
-class Triangle: public Shape
+class Triangle: public Primitive
 {
 public:
 	Triangle(TriangleMesh* m, int n);

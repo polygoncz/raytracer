@@ -1,6 +1,7 @@
 #include "camera.h"
 
 Camera::Camera(void)
+	: exposure(0.f)
 {
 }
 
@@ -9,6 +10,11 @@ Camera::Camera(const Point& eye, const Point& target, const Vector& up,
 		: eye(eye), target(target), up(up), exposure(exposure)
 {
 	ComputeUVW();
+}
+
+Camera::~Camera()
+{
+	if (film) delete film;
 }
 
 void Camera::ComputeUVW()

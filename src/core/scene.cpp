@@ -65,7 +65,7 @@ void Scene::AddLight(Light* light)
 	lights.push_back(light);
 }
 
-void Scene::AddObject(Shape* obj)
+void Scene::AddObject(Primitive* obj)
 {
 	objects.push_back(obj);
 }
@@ -75,10 +75,10 @@ bool Scene::Intersect(const Ray& ray, Intersection& inter) const
 	float tMin = INFINITY;
 	float t = 0.f;
 
-	for (vector<Shape*>::const_iterator itr = objects.begin();
+	for (vector<Primitive*>::const_iterator itr = objects.begin();
 			itr != objects.end(); itr++)
 	{
-		Shape* obj = (*itr);
+		Primitive* obj = (*itr);
 		if (obj->CanIntersect())
 		{
 			if (obj->Intersect(ray, t, inter) && (t < tMin))
@@ -92,9 +92,9 @@ bool Scene::Intersect(const Ray& ray, Intersection& inter) const
 		}
 		else
 		{
-			vector<Shape*>* refined = obj->Refine();
+			vector<Primitive*>* refined = obj->Refine();
 
-			for (vector<Shape*>::const_iterator ref_shape = refined->begin();
+			for (vector<Primitive*>::const_iterator ref_shape = refined->begin();
 					ref_shape != refined->end(); ref_shape++)
 			{
 				if ((*ref_shape)->Intersect(ray, t, inter) && (t < tMin))
@@ -114,19 +114,19 @@ bool Scene::Intersect(const Ray& ray, Intersection& inter) const
 
 bool Scene::IntersectP(const Ray& ray) const
 {
-	for (vector<Shape*>::const_iterator itr = objects.begin();
+	for (vector<Primitive*>::const_iterator itr = objects.begin();
 			itr != objects.end(); itr++)
 	{
-		Shape* obj = (*itr);
+		Primitive* obj = (*itr);
 		if (obj->CanIntersect())
 		{
 			if (obj->IntersectP(ray)) return true;
 		}
 		else
 		{
-			vector<Shape*>* refined = obj->Refine();
+			vector<Primitive*>* refined = obj->Refine();
 
-			for (vector<Shape*>::const_iterator ref_shape = refined->begin();
+			for (vector<Primitive*>::const_iterator ref_shape = refined->begin();
 					ref_shape != refined->end(); ref_shape++)
 			{
 				if ((*ref_shape)->IntersectP(ray)) return true;
@@ -260,14 +260,14 @@ void Scene::Build()
 	//AddLight(back);
 
 	ObjImporter imp;
-	Shape* mesh = imp.LoadObj("/home/pavel/Dokumenty/vopice.obj");
+	Primitive* mesh = imp.LoadObj("/home/pavel/Dokumenty/vopice.obj");
 	Reference<Material> greenMat(new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
 	mesh->SetMaterial(greenMat);
 
 	AddObject(mesh);
 
-	Reference<Material> matteMat(new Matte(GREY, 0.1f, 0.7f));
-	Shape* plane = new Plane(Point(0.f, -1.0f, 0.f), Normal(0.f, 1.f, 0.f), matteMat);
+	//Reference<Material> matteMat(new Matte(GREY, 0.1f, 0.7f));
+	//Shape* plane = new Plane(Point(0.f, -1.0f, 0.f), Normal(0.f, 1.f, 0.f), matteMat);
 	//AddObject(plane);
 
 	cam = new PerspectiveCamera(Point(10.f, 6.5f, 10.f), Point(0.f, 0.f, 0.f),

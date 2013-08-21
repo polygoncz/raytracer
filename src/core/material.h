@@ -8,7 +8,7 @@
 class RGBColor;
 class Intersection;
 
-class Material : ReferenceCounted
+class Material : public ReferenceCounted
 {
 public:
 	Material(void)

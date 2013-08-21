@@ -4,7 +4,7 @@
 #include "core/primitive.h"
 #include "core/geometry.h"
 
-class Plane: public Shape
+class Plane: public Primitive
 {
 public:
 	Plane(const Point& p, const Normal& n, Reference<Material> _material);

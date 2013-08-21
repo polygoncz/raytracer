@@ -26,14 +26,14 @@ public:
 	BBox Bounds() const;
 
 private:
-	void AddObject(Shape* obj);
+	void AddObject(Primitive* obj);
 	void AddLight(Light* light);
 
 public:
 	RGBColor background;
 	Light* ambient;
 	vector<Light*> lights;
-	vector<Shape*> objects;
+	vector<Primitive*> objects;
 	Film* film;
 	Camera* cam;
 };

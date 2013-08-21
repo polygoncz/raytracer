@@ -6,35 +6,85 @@
 #include "core.h"
 #include "constants.h"
 
+/**
+ * Trida trojrozmerneho vektoru.
+ * Umoznuje provadet s vektorem základní matematické operace.
+ */
 class Vector
 {
 public:
-	//ctors
+
+	/**
+	 * Defaultní konstruktor.
+	 * Všechny složky mají hodnotu 0.
+	 */
 	Vector()
 	{
 		x = y = z = 0.f;
 	}
+
+	/**
+	 * Konstruktor
+	 * @param _x hodnota slozky x
+	 * @param _y hodnota slozky y
+	 * @param _z hodnota slozky z
+	 */
 	Vector(float _x, float _y, float _z)
 			: x(_x), y(_y), z(_z)
 	{
 	}
+
+	/**
+	 * Kopirovaci konstruktor
+	 * @param v vektor urceny ke kopirovani
+	 */
 	Vector(const Vector& v)
 			: x(v.x), y(v.y), z(v.z)
 	{
 	}
-	Vector(const Point& p);
-	Vector(const Normal& p);
 
+	/**
+	 * Konstruktor pro vytvoreni vektoru z objektu Point.
+	 * Prislusne souradnice objektu tridy Point se priradi novemu objektu tridy Vector.
+	 * @param p objekt tridy Point.
+	 */
+	Vector(const Point& p)
+		: x(p.x), y(p.y), z(p.z)
+	{
+	}
+
+	/**
+	 * Konstruktor pro vytvoreni vektoru z objektu Normal.
+	 * Prislusne souradnice objektu tridy Normal se priradi novemu objektu tridy Vector.
+	 * @param n objekt tridy Normal.
+	 */
+	Vector(const Normal& n)
+		: x(n.x), y(n.y), z(n.z)
+	{
+	}
+
+	/**
+	 * Vypocet delky vektoru.
+	 * @return delka vektoru.
+	 */
 	float Length() const
 	{
 		return sqrt(x * x + y * y + z * z);
 	}
 
+	/**
+	 * Vypocet druhe mocniny delky vektoru
+	 * @return delka na druhou.
+	 */
 	float SquarredLenght() const
 	{
 		return x * x + y * y + z * z;
 	}
 
+	/**
+	 * Normalizuje dany vektor. Vyuzito fluent interface.
+	 * @return normalizovany vektor.
+	 */
 	Vector Normalize()
 	{
 		float lengthInv = 1.f / Length();
@@ -46,47 +96,97 @@ public:
 		return *this;
 	}
 
+	/**
+	 * Pretizeni unarniho operatoru +.
+	 * @return hodnotu objektu (Vector).
+	 */
 	const Vector& operator+() const
 	{
 		return *this;
 	}
+
+	/**
+	 * Pretizeni unarniho operatoru -.
+	 * @return novy objekt tridy Vector
+	 */
 	Vector operator-() const
 	{
 		return Vector(-x, -y, -z);
 	}
 
+	/**
+	 * Pretizeni operatoru rovnosti (==).
+	 * Porovnavaji se jednotlive slozky.
+	 * @param v objekt tridy vektor, se kterym porovnavame.
+	 * @return true/false
+	 */
 	bool operator ==(const Vector& v)
 	{
 		return x == v.x && y == v.y && z == v.z;
 	}
 
+	/**
+	 * Pretizeni operatoru nerovnosti (!=)
+	 * Porovnavaji se jednotlive slozky.
+	 * @param v objekt tridy vektor, se kterym porovnavame.
+	 * @return true/false
+	 */
 	bool operator !=(const Vector& v)
 	{
 		return x != v.x || y != v.y || z != v.z;
 	}
 
+	/**
+	 * Pretizeni operatoru scitani (+).
+	 * Scitaji se jednotlive slozky.
+	 * @param v objekt tridy Vector, ktery chceme pricist
+	 * @return novy objekt typu Vector
+	 */
 	Vector operator +(const Vector& v) const
 	{
 		return Vector(x + v.x, y + v.y, z + v.z);
 	}
 
+	/**
+	 * Pretizeni operatoru +=
+	 * Scitaji se jednotlive slozky.
+	 * @return reference na this
+	 */
 	Vector& operator +=(const Vector& v)
 	{
 		*this = *this + v;
 		return *this;
 	}
 
+	/**
+	 * Pretizeni operatoru odcitani (-).
+	 * Odcitaji se jednotlive slozky.
+	 * @param v objekt tridy Vector, ktery chceme odecist
+	 * @return novy objekt typu Vector
+	 */
 	Vector operator -(const Vector& v) const
 	{
 		return Vector(x - v.x, y - v.y, z - v.z);
 	}
 
+	/**
+	 * Pretizeni operatoru -=
+	 * Odcitaji se jednotlive slozky.
+	 * @return reference na this
+	 */
 	Vector& operator -=(const Vector& v)
 	{
 		*this = *this - v;
 		return *this;
 	}
 
+	/**
+	 * Pretizeni operatoru deleni (/).
+	 * Osetreno deleni 0 pomoci makra assert z <assert.h>.
+	 * @see assert()
+	 * @param k hodnota kterou chceme delit vsechny slozky.
+	 * @return novy objekt tridy Vector
+	 */
 	Vector operator /(float k) const
 	{
 		assert(k != 0);
@@ -94,6 +194,13 @@ public:
 		return Vector(x * invK, y * invK, z * invK);
 	}
 
+	/**
+	 * Pretizeni operatoru deleni (/=).
+	 * Osetreno deleni 0 pomoci makra assert z <assert.h>.
+	 * @see assert()
+	 * @param k hodnota kterou chceme delit vsechny slozky.
+	 * @return reference na this
+	 */
 	Vector& operator /=(float k)
 	{
 		assert(k != 0);
@@ -106,16 +213,35 @@ public:
 		return *this;
 	}
 
+	/**
+	 * Pretizeni operatoru nasobeni (*).
+	 * Nasobime vsechny slozky konstantou.
+	 * @param k konstanta pro nasobeni.
+	 * @return novy objekt typu Vector
+	 */
 	Vector operator *(float k) const
 	{
 		return Vector(x * k, y * k, z * k);
 	}
 
+	/**
+	 * Pretizeni operatoru nasobeni (*).
+	 * Nasobime vsechny slozky konstantou zleva.
+	 * @param k konstanta pro nasobeni.
+	 * @param v vektor, ktery chceme nasobit.
+	 * @return novy objekt typu Vector
+	 */
 	friend Vector operator *(float k, const Vector& v)
 	{
 		return Vector(v.x * k, v.y * k, v.z * k);
 	}
 
+	/**
+	 * Pretizeni operatoru nasobeni (*).
+	 * Nasobime vsechny slozky konstantou.
+	 * @param k konstanta pro nasobeni.
+	 * @return reference na this
+	 */
 	Vector& operator *=(float k)
 	{
 		x *= k;
@@ -124,6 +250,11 @@ public:
 		return *this;
 	}
 
+	/**
+	 * Pretizeni operatoru prirazeni (=).
+	 * @param v vektor, jehoz hodnotu chceme priradit.
+	 * @return reference na this
+	 */
 	Vector& operator =(const Vector& v)
 	{
 		x = v.x;
@@ -132,20 +263,37 @@ public:
 		return *this;
 	}
 
+	/**
+	 * Pretizeni operatoru pro pristup do pole ([]).
+	 * Pomoci makra assert z <assert.h> osetren rozsah v intervalu (0; 2).
+	 * Vyuzito vlastnosti, ze prekladace radi promenne "za sebe", takze lze k nim pristupovat jako k poli.
+	 * @param i index v intervalu (0; 2).
+	 * @return hodnotu x resp. y,z dle vstupniho parametru.
+	 */
 	float operator[](int i) const
 	{
 		assert(i >= 0 && i <= 2);
 		return (&x)[i];
 	}
 
+	/**
+	 * Pretizeni operatoru pro pristup do pole ([]).
+	 * Pomoci makra assert z <assert.h> osetren rozsah v intervalu (0; 2).
+	 * Vyuzito vlastnosti, ze prekladace radi promenne "za sebe", takze lze k nim pristupovat jako k poli.
+	 * @param i index v intervalu (0; 2).
+	 * @return hodnotu x resp. y,z dle vstupniho parametru.
+	 */
 	float& operator[](int i)
 	{
 		assert(i >= 0 && i <= 2);
 		return (&x)[i];
 	}
 
+	/** hodnota slozky x */
 	float x;
+	/** hodnota slozky y */
 	float y;
+	/** hodnota slozky z */
 	float z;
 };
 
@@ -268,8 +416,11 @@ public:
 		return (&x)[i];
 	}
 
+	/** hodnota slozky x */
 	float x;
+	/** hodnota slozky y */
 	float y;
+	/** hodnota slozky z */
 	float z;
 };
 
@@ -497,15 +648,6 @@ public:
 
 	Point pMin, pMax;
 };
-
-inline Vector::Vector(const Point& p)
-		: x(p.x), y(p.y), z(p.z)
-{
-}
-inline Vector::Vector(const Normal& p)
-		: x(p.x), y(p.y), z(p.z)
-{
-}
 
 inline float Dot(const Vector& u, const Vector& v)
 {

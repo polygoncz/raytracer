@@ -41,6 +41,9 @@ public:
 	T* operator-> ()
 	{ return ptr; }
 
+	T* operator& ()
+	{ return ptr; }
+
 	bool operator== (const Reference<T>& right) const
 	{ return ptr == right.ptr; }
 
@@ -58,7 +61,7 @@ public:
 		return *this;
 	}
 
-	Reference<T>& operator= (Reference<T>& right)
+	Reference<T>& operator= (const Reference<T>& right)
 	{
 		if (this == &right)
 			return *this;
