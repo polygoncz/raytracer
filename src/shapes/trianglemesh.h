@@ -18,15 +18,13 @@ public:
 	virtual ~TriangleMesh();
 	bool CanIntersect() const;
 	virtual BBox Bounds() const;
-	virtual vector<Primitive*>* Refine();
+	virtual void Refine(vector<Reference<Primitive> > &refined);
 	friend class Triangle;
 public:
 	int nfaces, nverts, nnorms;
 	Vertex *topology;
 	Point *p;
 	Normal *n;
-private:
-	vector<Primitive*>* refined;
 };
 
 class Triangle: public Primitive

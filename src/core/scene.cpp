@@ -249,7 +249,7 @@ bool Scene::IntersectP(const Ray& ray) const
 
 void Scene::Build()
 {
-	film = new Film(800, 800, 0.008);
+	film = new Film(1000, 1000, 0.008);
 
 	ambient = new AmbientLight(1.f, WHITE);
 

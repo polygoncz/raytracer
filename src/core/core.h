@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cmath>
+//#include <mmintrin.h>
+//#include <xmmintrin.h>
 
 class BRDF;
 class Light;

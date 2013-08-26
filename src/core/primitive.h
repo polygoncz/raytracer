@@ -20,7 +20,7 @@ public:
 	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr);
 	virtual bool IntersectP(const Ray& ray);
 	virtual bool CanIntersect() const;
-	virtual vector<Primitive*>* Refine();
+	virtual void Refine(vector<Reference<Primitive> > &refined);
 	virtual BBox Bounds() const = 0;
 
 	Material* GetMaterial(void) const;

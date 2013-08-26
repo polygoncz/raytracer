@@ -29,10 +29,8 @@ bool Primitive::CanIntersect() const
 	return true;
 }
 
-vector<Primitive*>* Primitive::Refine()
-{
-	return NULL;
-}
+void Primitive::Refine(vector<Reference<Primitive> > &refined)
+{ }
 
 bool Primitive::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 {

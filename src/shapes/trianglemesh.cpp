@@ -18,22 +18,11 @@ TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
 	n = new Normal[nn];
 	memcpy(n, N, nn * sizeof(Normal));
 
-	refined = NULL;
 	//material = mat;
 }
 
 TriangleMesh::~TriangleMesh()
 {
-	if (refined != NULL)
-	{
-		for (unsigned i = 0; i < refined->size(); i++)
-		{
-			delete (*refined)[i];
-		}
-		refined->clear();
-		delete refined;
-	}
-
 	if (topology != NULL) delete[] topology;
 	if (p != NULL) delete[] p;
 	if (n != NULL) delete[] n;
@@ -44,18 +33,10 @@ bool TriangleMesh::CanIntersect() const
 	return false;
 }
 
-vector<Primitive*>* TriangleMesh::Refine()
+void TriangleMesh::Refine(vector<Reference<Primitive> > &refined)
 {
-	if (refined == NULL)
-	{
-		refined = new vector<Primitive*>;
-		for (int i = 0; i < nfaces; i++)
-		{
-			refined->push_back(new Triangle(this, i));
-		}
-	}
-
-	return refined;
+	for (uint32_t i = 0; i < nfaces; i++)
+		refined.push_back(new Triangle(this, i));
 }
 
 BBox TriangleMesh::Bounds() const

@@ -14,7 +14,7 @@ Camera::Camera(const Point& eye, const Point& target, const Vector& up,
 
 Camera::~Camera()
 {
-	if (film) delete film;
+	//if (film) delete film;
 }
 
 void Camera::ComputeUVW()

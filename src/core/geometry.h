@@ -55,20 +55,14 @@ public:
 	 * Prislusne souradnice objektu tridy Point se priradi novemu objektu tridy Vector.
 	 * @param p objekt tridy Point.
 	 */
-	Vector(const Point& p)
-		: x(p.x), y(p.y), z(p.z)
-	{
-	}
+	Vector(const Point& p);
 
 	/**
 	 * Konstruktor pro vytvoreni vektoru z objektu Normal.
 	 * Prislusne souradnice objektu tridy Normal se priradi novemu objektu tridy Vector.
 	 * @param n objekt tridy Normal.
 	 */
-	Vector(const Normal& n)
-		: x(n.x), y(n.y), z(n.z)
-	{
-	}
+	Vector(const Normal& n);
 
 	/**
 	 * Vypocet delky vektoru.
@@ -796,6 +790,16 @@ public:
 	Point pMin;
 	Point pMax;
 };
+
+inline Vector::Vector(const Point& p)
+	: x(p.x), y(p.y), z(p.z)
+{
+}
+
+inline Vector::Vector(const Normal& n)
+	: x(n.x), y(n.y), z(n.z)
+{
+}
 
 /**
  * Skalarni soucin

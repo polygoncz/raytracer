@@ -10,6 +10,7 @@ public:
 	PerspectiveCamera(void);
 	PerspectiveCamera(const Point& eye, const Point& target, const Vector& up,
 		Film* film, float d, float exposure = 1.f);
+	virtual ~PerspectiveCamera() {}
 
 	virtual void GenerateRay(const CameraSample& sample, Ray* ray) const;
 private:
