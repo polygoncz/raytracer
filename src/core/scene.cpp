@@ -267,7 +267,7 @@ void Scene::Build()
 	//AddLight(back);
 
 	ObjImporter imp;
-	Shape* mesh = imp.LoadObj("/home/pavel/Dokumenty/vopice.obj");
+	Shape* mesh = imp.LoadObj("vopice.obj");
 	mesh->SetMaterial(
 			new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(0.7f, 0.7f, 0.7f),
 					0.1f, 0.7f, 100.f));
