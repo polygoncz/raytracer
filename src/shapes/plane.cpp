@@ -3,19 +3,13 @@
 #include "core/constants.h"
 #include "core/core.h"
 #include "core/geometry.h"
-
-Plane::Plane(void)
-		: Shape()
-{
-}
-
-Plane::Plane(const Point& p, const Normal& n, Material* _material)
-		: Shape(_material), p(p), n(n)
+Plane::Plane(const Point& p, const Normal& n, Reference<Material> _material)
+		: Primitive(_material), p(p), n(n)
 {
 }
 
 Plane::Plane(const Plane& pl)
-		: Shape(pl.material), p(pl.p), n(pl.n)
+		: Primitive(pl.material), p(pl.p), n(pl.n)
 {
 }
 
@@ -44,4 +38,10 @@ bool Plane::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 	}
 
 	return false;
+}
+
+BBox Plane::Bounds() const
+{
+	BBox b;
+	return b;
 }

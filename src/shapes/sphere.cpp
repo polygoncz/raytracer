@@ -5,19 +5,13 @@
 #include "core/geometry.h"
 
 #include <cmath>
-
-Sphere::Sphere(void)
-		: Shape()
-{
-}
-
-Sphere::Sphere(const Point& _center, float _radius, Material* _material)
-		: Shape(_material), center(_center), radius(_radius)
+Sphere::Sphere(const Point& _center, float _radius, const Reference<Material>& _material)
+		: Primitive(_material), center(_center), radius(_radius)
 {
 }
 
 Sphere::Sphere(const Sphere& sphere)
-		: Shape(sphere.material), center(sphere.center), radius(sphere.radius)
+		: Primitive(sphere.material), center(sphere.center), radius(sphere.radius)
 {
 }
 
@@ -70,4 +64,11 @@ bool Sphere::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 	}
 
 	return false;
+}
+
+BBox Sphere::Bounds() const
+{
+	Vector dir(radius, radius, radius);
+	return BBox(center - dir,
+			center + dir);
 }

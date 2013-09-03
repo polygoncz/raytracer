@@ -15,12 +15,13 @@ public:
 
 	virtual void Render() const = 0;
 	void SetPixelArea(RenderThread* thread);
+
 protected:
 	void DisplayPixel(int x, int y, RGBColor& in) const;
 
-	Integrator* integrator;
+	Scene* scene;
 	RenderThread* pixelArea;
+	Integrator* integrator;
 	Film* film;
 	Camera* cam;
-	Scene* scene;
 };

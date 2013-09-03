@@ -10,24 +10,24 @@ struct Vertex
 	int n; //Index of normal
 };
 
-class TriangleMesh: public Shape
+class TriangleMesh: public Primitive
 {
 public:
 	TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
-		Normal *N, Material* mat);
+		Normal *N, const Reference<Material>& mat);
 	virtual ~TriangleMesh();
 	bool CanIntersect() const;
-	virtual vector<Shape*>* Refine();
+	virtual BBox Bounds() const;
+	virtual void Refine(vector<Reference<Primitive> > &refined);
+	friend class Triangle;
 public:
 	int nfaces, nverts, nnorms;
 	Vertex *topology;
 	Point *p;
 	Normal *n;
-private:
-	vector<Shape*>* refined;
 };
 
-class Triangle: public Shape
+class Triangle: public Primitive
 {
 public:
 	Triangle(TriangleMesh* m, int n);
@@ -35,6 +35,7 @@ public:
 
 	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr);
 	virtual bool IntersectP(const Ray& ray);
+	virtual BBox Bounds() const;
 private:
 	Normal InterpolateNormal(const float beta, const float gamma);
 private:

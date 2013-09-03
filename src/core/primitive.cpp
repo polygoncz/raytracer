@@ -1,59 +1,43 @@
 #include "primitive.h"
+#include <cstdlib>
 
-Shape::Shape(void)
-		: material(NULL)
+Primitive::Primitive(const Reference<Material>& _mat)
+	: material(_mat)
+{ }
+
+Primitive::Primitive(const Primitive& prm)
+{
+	material = prm.material;
+}
+
+Primitive::~Primitive(void)
 {
 }
 
-Shape::Shape(Material* _mat)
-		: material(_mat)
+Material* Primitive::GetMaterial() const
 {
+	return &material;
 }
 
-Shape::Shape(const Shape& prm)
+void Primitive::SetMaterial(const Reference<Material>& _material)
 {
-	if (prm.material != NULL) material = prm.material->Clone();
-	else material = NULL;
-}
-
-Shape::~Shape(void)
-{
-
-	if (material != NULL)
-	{
-		delete material;
-		material = NULL;
-	}
-}
-
-Material* Shape::GetMaterial() const
-{
-	return material;
-}
-
-void Shape::SetMaterial(Material* _material)
-{
-	if (material != NULL) delete material;
-
 	material = _material;
 }
 
-bool Shape::CanIntersect() const
+bool Primitive::CanIntersect() const
 {
 	return true;
 }
 
-vector<Shape*>* Shape::Refine()
-{
-	return NULL;
-}
+void Primitive::Refine(vector<Reference<Primitive> > &refined)
+{ }
 
-bool Shape::Intersect(const Ray& ray, float& tmin, Intersection& sr)
+bool Primitive::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 {
 	return false;
 }
 
-bool Shape::IntersectP(const Ray& ray)
+bool Primitive::IntersectP(const Ray& ray)
 {
 	return false;
 }

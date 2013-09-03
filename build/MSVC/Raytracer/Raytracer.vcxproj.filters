@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Renderer">
       <UniqueIdentifier>{43e3ed67-fe31-44b0-a16b-f8337f8775c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Import">
+      <UniqueIdentifier>{5ab500fa-57aa-4455-ab8e-6842f01af9af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Import">
+      <UniqueIdentifier>{b1429499-1d3f-43c7-85fe-2254c2ab3e5a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\brdf\specular.cpp">
@@ -128,6 +134,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\shapes\trianglemesh.cpp">
       <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\import\objimporter.cpp">
+      <Filter>Source Files\Import</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\statistics.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +223,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\shapes\trianglemesh.h">
       <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\import\objimporter.h">
+      <Filter>Header Files\Import</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\statistics.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

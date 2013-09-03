@@ -1,9 +1,10 @@
 #include "trianglemesh.h"
 #include <cstdlib>
+#include <cstdint>
 
 TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
-	Normal *N, Material* mat)
-		: Shape(mat)
+	Normal *N, const Reference<Material>& mat)
+		: Primitive(mat)
 {
 	nfaces = nf;
 	nverts = nv;
@@ -18,21 +19,11 @@ TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
 	n = new Normal[nn];
 	memcpy(n, N, nn * sizeof(Normal));
 
-	refined = NULL;
+	//material = mat;
 }
 
 TriangleMesh::~TriangleMesh()
 {
-	if (refined != NULL)
-	{
-		for (unsigned i = 0; i < refined->size(); i++)
-		{
-			delete (*refined)[i];
-		}
-		refined->clear();
-		delete refined;
-	}
-
 	if (topology != NULL) delete[] topology;
 	if (p != NULL) delete[] p;
 	if (n != NULL) delete[] n;
@@ -43,23 +34,23 @@ bool TriangleMesh::CanIntersect() const
 	return false;
 }
 
-vector<Shape*>* TriangleMesh::Refine()
+void TriangleMesh::Refine(vector<Reference<Primitive> > &refined)
 {
-	if (refined == NULL)
-	{
-		refined = new vector<Shape*>;
-		for (int i = 0; i < nfaces; i++)
-		{
-			refined->push_back(new Triangle(this, i));
-		}
-	}
+	for (uint32_t i = 0; i < nfaces; i++)
+		refined.push_back(new Triangle(this, i));
+}
 
-	return refined;
+BBox TriangleMesh::Bounds() const
+{
+	BBox ret;
+	for(int i = 0; i < nverts; i++)
+		ret = Union(ret, p[i]);
+	return ret;
 }
 
 ////////////////Triangle////////////////////
 Triangle::Triangle(TriangleMesh* m, int n)
-		: Shape(NULL)
+		: Primitive(m->material)
 {
 	mesh = m;
 	v = &mesh->topology[3 * n];
@@ -150,4 +141,14 @@ Normal Triangle::InterpolateNormal(float beta, float gamma)
 					+ gamma * mesh->n[v[2].n]);
 	n.Normalize();
 	return n;
+}
+
+BBox Triangle::Bounds() const
+{
+	const Point &p0 = mesh->p[v[0].p];
+	const Point &p1 = mesh->p[v[1].p];
+	const Point &p2 = mesh->p[v[2].p];
+
+	BBox b(p0, p1);
+	return Union(b, p2);
 }

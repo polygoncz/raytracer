@@ -14,13 +14,7 @@ class Light;
 
 WhittedTracer::WhittedTracer(Scene* scene)
 		: Integrator(scene)
-{
-}
-
-WhittedTracer::WhittedTracer(const WhittedTracer& tr)
-		: Integrator(tr)
-{
-}
+{ ; }
 
 WhittedTracer::~WhittedTracer(void)
 {
