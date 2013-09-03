@@ -28,7 +28,7 @@
 									<listOptionValue builtIn="false" value="/usr/include/wx-2.9-unofficial"/>
 									<listOptionValue builtIn="false" value="/usr/lib/x86_64-linux-gnu/wx/include/gtk2-unicode-2.9-unofficial"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.other.other.1990365593" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 `wx-config --cxxflags`" valueType="string"/>
+								<option id="gnu.cpp.compiler.option.other.other.1990365593" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 `wx-config --cxxflags` -std=c++11" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1565928846" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.968082970" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug">
@@ -100,7 +100,7 @@
 								<option id="gnu.cpp.compiler.option.include.paths.885669275" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Raytracer/src}&quot;"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.other.other.752397384" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 `wx-config --cxxflags`" valueType="string"/>
+								<option id="gnu.cpp.compiler.option.other.other.752397384" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 `wx-config --cxxflags` -std=c++11" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2140540096" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.380020543" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release">
@@ -134,22 +134,6 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.exe.release.1219467833" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.release">
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.2047167220" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-							</tool>
-						</toolChain>
-					</folderInfo>
-					<folderInfo id="cdt.managedbuild.config.gnu.exe.release.1714116409.522805219" name="/" resourcePath="src">
-						<toolChain id="cdt.managedbuild.toolchain.gnu.exe.release.1953788104" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.release" unusedChildren="">
-							<tool id="cdt.managedbuild.tool.gnu.archiver.base.859587879" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1079485756"/>
-							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1600528565" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1247607976">
-								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.152087465" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-							</tool>
-							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.release.1747510966" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.release.380020543">
-								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.224459023" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
-							</tool>
-							<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.release.1644114879" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.release.171052613"/>
-							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.704351279" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.release.2078456382"/>
-							<tool id="cdt.managedbuild.tool.gnu.assembler.exe.release.1567155939" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.release.1219467833">
-								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.487389167" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
 					</folderInfo>

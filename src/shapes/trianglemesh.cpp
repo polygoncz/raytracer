@@ -1,5 +1,6 @@
 #include "trianglemesh.h"
 #include <cstdlib>
+#include <cstdint>
 
 TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
 	Normal *N, const Reference<Material>& mat)

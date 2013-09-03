@@ -28,6 +28,23 @@ inline float Clamp(float val, float from, float to)
 	return val;
 }
 
+inline float Clamp(int val, int from, int to)
+{
+	if (val < from) return from;
+	if (val > to) return to;
+
+	return val;
+}
+
+template <class T>
+inline T Clamp(T val, T from, T to)
+{
+	if (val < from) return from;
+	if (val > to) return to;
+
+	return val;
+}
+
 inline float Min(float t1, float t2)
 {
 	return t1 < t2 ? t1 : t2;
@@ -66,4 +83,9 @@ inline bool Quadratic(float a, float b, float c, float* t0, float* t1)
 	*t1 = (-b - e) / lowerPart;
 
 	return true;
+}
+
+inline int Round2Int(float f)
+{
+	return (int) (f + 0.5f);
 }

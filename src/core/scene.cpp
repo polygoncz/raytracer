@@ -6,6 +6,8 @@
 #include "ligths/ambient.h"
 #include "ligths/point.h"
 
+#include "agreggates/grid.h"
+
 #include "shapes/sphere.h"
 #include "shapes/plane.h"
 #include "shapes/trianglemesh.h"
@@ -39,24 +41,23 @@ Scene::~Scene()
 	}
 	lights.clear();
 
-	for (unsigned long i = 0; i < objects.size(); i++)
-	{
-		delete objects[i];
-	}
-	objects.clear();
-
 	if (film != NULL) delete film;
 
 	if (ambient != NULL) delete ambient;
 
 	if (cam != NULL) delete cam;
+
+	if (agr != NULL) delete agr;
 }
 
 BBox Scene::Bounds() const
 {
 	BBox b;
-	for (int i = 0; i < objects.size(); i++)
-		b = Union(b, objects[i]->Bounds());
+	for (unsigned int i = 0; i < objects.size(); i++)
+	{
+		Reference<Primitive> p = objects[i];
+		b = Union(b, p->Bounds());
+	}
 	return b;
 }
 
@@ -72,69 +73,13 @@ void Scene::AddObject(Primitive* obj)
 
 bool Scene::Intersect(const Ray& ray, Intersection& inter) const
 {
-	float tMin = INFINITY;
-	float t = 0.f;
-
-	for (vector<Primitive*>::const_iterator itr = objects.begin();
-			itr != objects.end(); itr++)
-	{
-		Primitive* obj = (*itr);
-		if (obj->CanIntersect())
-		{
-			if (obj->Intersect(ray, t, inter) && (t < tMin))
-			{
-				inter.hitObject = true;
-				tMin = t;
-				inter.material = obj->GetMaterial();
-				inter.hitPoint = ray(tMin);
-				inter.t = tMin;
-			}
-		}
-		else
-		{
-			vector<Primitive*>* refined = obj->Refine();
-
-			for (vector<Primitive*>::const_iterator ref_shape = refined->begin();
-					ref_shape != refined->end(); ref_shape++)
-			{
-				if ((*ref_shape)->Intersect(ray, t, inter) && (t < tMin))
-				{
-					inter.hitObject = true;
-					tMin = t;
-					inter.material = obj->GetMaterial();
-					inter.hitPoint = ray(tMin);
-					inter.t = tMin;
-				}
-			}
-		}
-	}
-
-	return inter.hitObject;
+	float t = INFINITY;
+	return agr->Intersect(ray, t, inter);
 }
 
 bool Scene::IntersectP(const Ray& ray) const
 {
-	for (vector<Primitive*>::const_iterator itr = objects.begin();
-			itr != objects.end(); itr++)
-	{
-		Primitive* obj = (*itr);
-		if (obj->CanIntersect())
-		{
-			if (obj->IntersectP(ray)) return true;
-		}
-		else
-		{
-			vector<Primitive*>* refined = obj->Refine();
-
-			for (vector<Primitive*>::const_iterator ref_shape = refined->begin();
-					ref_shape != refined->end(); ref_shape++)
-			{
-				if ((*ref_shape)->IntersectP(ray)) return true;
-			}
-		}
-	}
-
-	return false;
+	return agr->IntersectP(ray);
 }
 
 /* SCENA 01
@@ -249,7 +194,7 @@ bool Scene::IntersectP(const Ray& ray) const
 
 void Scene::Build()
 {
-	film = new Film(1000, 1000, 0.008);
+	film = new Film(200, 200, 0.008);
 
 	ambient = new AmbientLight(1.f, WHITE);
 
@@ -259,12 +204,14 @@ void Scene::Build()
 	AddLight(main);
 	//AddLight(back);
 
+	vector<Reference<Primitive> > p;
+
 	ObjImporter imp;
 	Primitive* mesh = imp.LoadObj("/home/pavel/Dokumenty/vopice.obj");
 	Reference<Material> greenMat(new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
 	mesh->SetMaterial(greenMat);
 
-	AddObject(mesh);
+	p.push_back(mesh);
 
 	//Reference<Material> matteMat(new Matte(GREY, 0.1f, 0.7f));
 	//Shape* plane = new Plane(Point(0.f, -1.0f, 0.f), Normal(0.f, 1.f, 0.f), matteMat);
@@ -272,4 +219,6 @@ void Scene::Build()
 
 	cam = new PerspectiveCamera(Point(10.f, 6.5f, 10.f), Point(0.f, 0.f, 0.f),
 			Vector(0.f, 1.f, 0.f), film, 50.f);
+
+	agr = new Grid(p);
 }

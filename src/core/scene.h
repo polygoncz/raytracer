@@ -10,6 +10,9 @@
 #include "film.h"
 #include "camera.h"
 #include "intersection.h"
+#include "reference.h"
+#include "primitive.h"
+#include "agreggate.h"
 
 using namespace std;
 
@@ -33,7 +36,8 @@ public:
 	RGBColor background;
 	Light* ambient;
 	vector<Light*> lights;
-	vector<Primitive*> objects;
+	vector<Reference<Primitive> > objects;
 	Film* film;
 	Camera* cam;
+	Agreggate* agr;
 };

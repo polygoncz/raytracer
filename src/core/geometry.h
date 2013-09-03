@@ -760,19 +760,35 @@ public:
 		: pMin(b.pMin), pMax(b.pMax)
 	{}
 
-	bool IsInside(const Point& p)
+	bool IsInside(const Point& p) const
 	{
 		return (p.x >= pMin.x && p.x <= pMax.x &&
 				p.y >= pMin.y && p.y <= pMax.y &&
 				p.z >= pMin.z && p.z <= pMax.z);
 	}
 
-	bool IsOverlaps(const BBox& b)
+	bool IsOverlaps(const BBox& b) const
 	{
 		bool x = (pMax.x >= b.pMin.x && pMin.x <= b.pMax.x);
 		bool y = (pMax.y >= b.pMin.y && pMin.y <= b.pMax.y);
 		bool z = (pMax.z >= b.pMin.z && pMin.z <= b.pMax.z);
 		return (x && y && z);
+	}
+
+	Vector Diagonal() const
+	{
+		return pMax - pMin;
+	}
+
+	int MaxDimensionIndex() const
+	{
+		Vector diag = Diagonal();
+		if (diag.x > diag.y && diag.x > diag.z)
+			return 0;
+		else if (diag.y > diag.z)
+			return 1;
+		else
+			return 2;
 	}
 
 	friend BBox Union(const BBox& b, const Point& p);
