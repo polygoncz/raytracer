@@ -15,7 +15,7 @@ ObjImporter::ObjImporter()
 {
 }
 
-TriangleMesh* ObjImporter::LoadObj(const char* path) const
+Reference<Primitive> ObjImporter::LoadObj(const char* path) const
 {
 	FILE* f = fopen(path, "r");
 	if (f == NULL)
@@ -38,14 +38,14 @@ TriangleMesh* ObjImporter::LoadObj(const char* path) const
 		if (strcmp(lineHeader, "v") == 0)
 		{
 			Point p;
-			fscanf(f, "%f %f %f\n", &p.x, &p.y, &p.z);
+			fscanf(f, "%f %f %f", &p.x, &p.y, &p.z);
 			points.push_back(p);
 		}
 
 		if (strcmp(lineHeader, "vn") == 0)
 		{
 			Normal n;
-			fscanf(f, "%f %f %f\n", &n.x, &n.y, &n.z);
+			fscanf(f, "%f %f %f", &n.x, &n.y, &n.z);
 			normals.push_back(n);
 		}
 
@@ -66,7 +66,7 @@ TriangleMesh* ObjImporter::LoadObj(const char* path) const
 	fclose(f);
 
 	Reference<Material> matte(new Matte(GREY, 0.1f, 0.8f));
-	TriangleMesh* mesh = new TriangleMesh(nf, points.size(), normals.size(),
-			&topology[0], &points[0], &normals[0], matte);
+	Reference<Primitive> mesh(new TriangleMesh(nf, points.size(), normals.size(),
+			&topology[0], &points[0], &normals[0], matte));
 	return mesh;
 }

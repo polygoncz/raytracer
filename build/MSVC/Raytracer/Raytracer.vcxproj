@@ -115,9 +115,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\agreggates\bruteforce.cpp" />
+    <ClCompile Include="..\..\..\src\agreggates\grid.cpp" />
     <ClCompile Include="..\..\..\src\brdf\lambert.cpp" />
     <ClCompile Include="..\..\..\src\brdf\specular.cpp" />
     <ClCompile Include="..\..\..\src\cameras\perspective.cpp" />
+    <ClCompile Include="..\..\..\src\core\agreggate.cpp" />
     <ClCompile Include="..\..\..\src\core\camera.cpp" />
     <ClCompile Include="..\..\..\src\core\film.cpp" />
     <ClCompile Include="..\..\..\src\core\geometry.cpp" />
@@ -139,9 +142,12 @@
     <ClCompile Include="..\..\..\src\wxgui\imagebuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\agreggates\bruteforce.h" />
+    <ClInclude Include="..\..\..\src\agreggates\grid.h" />
     <ClInclude Include="..\..\..\src\brdf\lambert.h" />
     <ClInclude Include="..\..\..\src\brdf\specular.h" />
     <ClInclude Include="..\..\..\src\cameras\perspective.h" />
+    <ClInclude Include="..\..\..\src\core\agreggate.h" />
     <ClInclude Include="..\..\..\src\core\brdf.h" />
     <ClInclude Include="..\..\..\src\core\camera.h" />
     <ClInclude Include="..\..\..\src\core\color.h" />
@@ -154,6 +160,7 @@
     <ClInclude Include="..\..\..\src\core\light.h" />
     <ClInclude Include="..\..\..\src\core\material.h" />
     <ClInclude Include="..\..\..\src\core\primitive.h" />
+    <ClInclude Include="..\..\..\src\core\reference.h" />
     <ClInclude Include="..\..\..\src\core\renderer.h" />
     <ClInclude Include="..\..\..\src\core\scene.h" />
     <ClInclude Include="..\..\..\src\core\statistics.h" />

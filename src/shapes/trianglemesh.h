@@ -14,7 +14,8 @@ class TriangleMesh: public Primitive
 {
 public:
 	TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
-		Normal *N, const Reference<Material>& mat);
+		Normal *N, Reference<Material>& mat);
+	TriangleMesh(int nf, vector<Vertex>& topo, vector<Point>& P, vector<Normal>& N, Reference<Material>& mat);
 	virtual ~TriangleMesh();
 	bool CanIntersect() const;
 	virtual BBox Bounds() const;
@@ -39,6 +40,6 @@ public:
 private:
 	Normal InterpolateNormal(const float beta, const float gamma);
 private:
-	TriangleMesh *mesh;
+	TriangleMesh* mesh;
 	Vertex *v;
 };

@@ -9,12 +9,13 @@
 #define OBJIMPORTER_H
 
 #include "shapes/trianglemesh.h"
+#include "core/reference.h"
 
 class ObjImporter
 {
 public:
 	ObjImporter();
-	TriangleMesh* LoadObj(const char* path) const;
+	Reference<Primitive> LoadObj(const char* path) const;
 private:
 
 };

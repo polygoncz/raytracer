@@ -44,7 +44,7 @@ public:
 	Grid(vector<Reference<Primitive> > &p);
 	virtual ~Grid();
 
-	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr) const;
+	virtual bool Intersect(const Ray& ray, Intersection& sr) const;
 	virtual bool IntersectP(const Ray& ray) const;
 	virtual BBox Bounds() const;
 

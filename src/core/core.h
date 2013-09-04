@@ -28,7 +28,7 @@ inline float Clamp(float val, float from, float to)
 	return val;
 }
 
-inline float Clamp(int val, int from, int to)
+inline int Clamp(int val, int from, int to)
 {
 	if (val < from) return from;
 	if (val > to) return to;

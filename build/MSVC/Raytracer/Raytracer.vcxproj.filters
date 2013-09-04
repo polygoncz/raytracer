@@ -73,6 +73,12 @@
     <Filter Include="Source Files\Import">
       <UniqueIdentifier>{b1429499-1d3f-43c7-85fe-2254c2ab3e5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Agreggates">
+      <UniqueIdentifier>{c53efbdf-879a-4e99-aebe-3db6ad5be565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Agreggates">
+      <UniqueIdentifier>{0967cce2-1ec0-443f-98b7-591430a74d2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\brdf\specular.cpp">
@@ -140,6 +146,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\core\statistics.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\agreggate.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\agreggates\grid.cpp">
+      <Filter>Source Files\Agreggates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\agreggates\bruteforce.cpp">
+      <Filter>Source Files\Agreggates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +244,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\core\statistics.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\agreggate.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\reference.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\agreggates\grid.h">
+      <Filter>Header Files\Agreggates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\agreggates\bruteforce.h">
+      <Filter>Header Files\Agreggates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

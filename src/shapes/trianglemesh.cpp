@@ -3,7 +3,7 @@
 #include <cstdint>
 
 TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
-	Normal *N, const Reference<Material>& mat)
+	Normal *N, Reference<Material>& mat)
 		: Primitive(mat)
 {
 	nfaces = nf;
@@ -20,6 +20,32 @@ TriangleMesh::TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
 	memcpy(n, N, nn * sizeof(Normal));
 
 	//material = mat;
+}
+
+TriangleMesh::TriangleMesh(int nf, vector<Vertex>& topo, vector<Point>& P, vector<Normal>& N, Reference<Material>& mat)
+	: Primitive(mat)
+{
+	nfaces = nf;
+	nverts = P.size();
+	nnorms = N.size();
+
+	topology = new Vertex[topo.size()];
+	for (uint32_t i = 0; i < topo.size(); i++)
+	{
+		topology[i] = topo[i];
+	}
+
+	p = new Point[nverts];
+	for (uint32_t i = 0; i < nverts; i++)
+	{
+		p[i] = P[i];
+	}
+
+	n = new Normal[nnorms];
+	for (uint32_t i = 0; i < nnorms; i++)
+	{
+		n[i] = N[i];
+	}
 }
 
 TriangleMesh::~TriangleMesh()
@@ -53,6 +79,7 @@ Triangle::Triangle(TriangleMesh* m, int n)
 		: Primitive(m->material)
 {
 	mesh = m;
+	mesh->count++;
 	v = &mesh->topology[3 * n];
 	STATS_ADD_TRIANGLE();
 }
@@ -65,9 +92,9 @@ bool Triangle::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 {
 	STATS_ADD_RAY_TRIANGLE();
 
-	const Point &p0 = mesh->p[v[0].p];
-	const Point &p1 = mesh->p[v[1].p];
-	const Point &p2 = mesh->p[v[2].p];
+	const Point &p0 = this->mesh->p[v[0].p];
+	const Point &p1 = this->mesh->p[v[1].p];
+	const Point &p2 = this->mesh->p[v[2].p];
 
 	Vector e1 = p1 - p0;
 	Vector e2 = p2 - p0;
@@ -145,9 +172,9 @@ Normal Triangle::InterpolateNormal(float beta, float gamma)
 
 BBox Triangle::Bounds() const
 {
-	const Point &p0 = mesh->p[v[0].p];
-	const Point &p1 = mesh->p[v[1].p];
-	const Point &p2 = mesh->p[v[2].p];
+	Point &p0 = this->mesh->p[v[0].p];
+	Point &p1 = mesh->p[v[1].p];
+	Point &p2 = mesh->p[v[2].p];
 
 	BBox b(p0, p1);
 	return Union(b, p2);

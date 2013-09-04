@@ -78,7 +78,7 @@ Grid::~Grid()
 	// TODO Auto-generated destructor stub
 }
 
-bool Grid::Intersect(const Ray &ray, float &tmin, Intersection &sr) const
+bool Grid::Intersect(const Ray &ray, Intersection &sr) const
 {
 	//Kontrola jestli je paprsek uvnitr, pripadne jestli protne BBox sceny
 	float rayT = 0.f;

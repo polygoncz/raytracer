@@ -16,7 +16,7 @@ public:
 	Agreggate();
 	virtual ~Agreggate();
 
-	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr) const = 0;
+	virtual bool Intersect(const Ray& ray, Intersection& sr) const = 0;
 	virtual bool IntersectP(const Ray& ray) const = 0;
 	virtual BBox Bounds() const = 0;
 };
