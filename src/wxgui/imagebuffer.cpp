@@ -29,6 +29,8 @@ bool ImageBufferApp::OnInit()
 	frame->Center();
 	frame->Show(true);
 	SetTopWindow(frame);
+	wxLocale* locale = new wxLocale(wxLANGUAGE_ENGLISH);
+	long language = wxLANGUAGE_ENGLISH;
 	return true;
 }
 
