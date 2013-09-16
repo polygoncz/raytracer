@@ -57,7 +57,7 @@ BBox Scene::Bounds() const
 	BBox b;
 	for (unsigned int i = 0; i < objects.size(); i++)
 	{
-		Reference<Primitive> p = objects[i];
+		Reference<GeometricPrimitive> p = objects[i];
 		b = Union(b, p->Bounds());
 	}
 	return b;
@@ -68,7 +68,7 @@ void Scene::AddLight(Light* light)
 	lights.push_back(light);
 }
 
-void Scene::AddObject(Primitive* obj)
+void Scene::AddObject(GeometricPrimitive* obj)
 {
 	objects.push_back(obj);
 }
@@ -205,14 +205,14 @@ void Scene::Build()
 	AddLight(main);
 	//AddLight(back);
 
-	vector<Reference<Primitive> > p;
+	vector<Reference<GeometricPrimitive> > p;
 
 	ObjImporter imp;
-	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/vopice.obj");
+	Reference<GeometricPrimitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/vopice.obj");
 	Reference<Material> greenMat(new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
 	mesh->SetMaterial(greenMat);
 
-	Reference<Primitive> sphere(new Sphere(Point(0.f, 0.f, 0.f), 2.f, greenMat));
+	Reference<GeometricPrimitive> sphere(new Sphere(Point(0.f, 0.f, 0.f), 2.f, greenMat));
 
 	p.push_back(mesh);
 	//p.push_back(sphere);

@@ -1,43 +1,43 @@
 #include "primitive.h"
 #include <cstdlib>
 
-Primitive::Primitive(const Reference<Material>& _mat)
+GeometricPrimitive::GeometricPrimitive(const Reference<Material>& _mat)
 	: material(_mat)
 { }
 
-Primitive::Primitive(const Primitive& prm)
+GeometricPrimitive::GeometricPrimitive(const GeometricPrimitive& prm)
 {
 	material = prm.material;
 }
 
-Primitive::~Primitive(void)
+GeometricPrimitive::~GeometricPrimitive(void)
 {
 }
 
-Material* Primitive::GetMaterial() const
+Material* GeometricPrimitive::GetMaterial() const
 {
 	return &material;
 }
 
-void Primitive::SetMaterial(const Reference<Material>& _material)
+void GeometricPrimitive::SetMaterial(const Reference<Material>& _material)
 {
 	material = _material;
 }
 
-bool Primitive::CanIntersect() const
+bool GeometricPrimitive::CanIntersect() const
 {
 	return true;
 }
 
-void Primitive::Refine(vector<Reference<Primitive> > &refined)
+void GeometricPrimitive::Refine(vector<Reference<GeometricPrimitive> > &refined)
 { }
 
-bool Primitive::Intersect(const Ray& ray, float& tmin, Intersection& sr)
+bool GeometricPrimitive::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 {
 	return false;
 }
 
-bool Primitive::IntersectP(const Ray& ray)
+bool GeometricPrimitive::IntersectP(const Ray& ray)
 {
 	return false;
 }

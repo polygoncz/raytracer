@@ -14,7 +14,7 @@ using namespace std;
 class BruteForce : public Agreggate
 {
 public:
-	BruteForce(vector<Reference<Primitive> > &p);
+	BruteForce(vector<Reference<GeometricPrimitive> > &p);
 	virtual ~BruteForce();
 
 	virtual bool Intersect(const Ray& ray, Intersection& sr) const;
@@ -22,7 +22,7 @@ public:
 	virtual BBox Bounds() const;
 
 private:
-	mutable vector<Reference<Primitive> > primitives;
+	mutable vector<Reference<GeometricPrimitive> > primitives;
 };
 
 #endif

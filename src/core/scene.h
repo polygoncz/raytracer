@@ -29,14 +29,14 @@ public:
 	BBox Bounds() const;
 
 private:
-	void AddObject(Primitive* obj);
+	void AddObject(GeometricPrimitive* obj);
 	void AddLight(Light* light);
 
 public:
 	RGBColor background;
 	Light* ambient;
 	vector<Light*> lights;
-	vector<Reference<Primitive> > objects;
+	vector<Reference<GeometricPrimitive> > objects;
 	Film* film;
 	Camera* cam;
 	Agreggate* agr;

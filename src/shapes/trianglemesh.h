@@ -10,7 +10,7 @@ struct Vertex
 	int n; //Index of normal
 };
 
-class TriangleMesh: public Primitive
+class TriangleMesh: public GeometricPrimitive
 {
 public:
 	TriangleMesh(int nf, int nv, int nn, const Vertex *topo, Point *P,
@@ -19,7 +19,7 @@ public:
 	virtual ~TriangleMesh();
 	bool CanIntersect() const;
 	virtual BBox Bounds() const;
-	virtual void Refine(vector<Reference<Primitive> > &refined);
+	virtual void Refine(vector<Reference<GeometricPrimitive> > &refined);
 	friend class Triangle;
 public:
 	int nfaces, nverts, nnorms;
@@ -28,7 +28,7 @@ public:
 	Normal *n;
 };
 
-class Triangle: public Primitive
+class Triangle: public GeometricPrimitive
 {
 public:
 	Triangle(TriangleMesh* m, int n);

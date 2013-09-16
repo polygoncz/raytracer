@@ -4,12 +4,12 @@
 #include "core/core.h"
 #include "core/geometry.h"
 Plane::Plane(const Point& p, const Normal& n, Reference<Material> _material)
-		: Primitive(_material), p(p), n(n)
+		: GeometricPrimitive(_material), p(p), n(n)
 {
 }
 
 Plane::Plane(const Plane& pl)
-		: Primitive(pl.material), p(pl.p), n(pl.n)
+		: GeometricPrimitive(pl.material), p(pl.p), n(pl.n)
 {
 }
 

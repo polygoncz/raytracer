@@ -21,12 +21,12 @@ using namespace std;
 struct Voxel
 {
 	Voxel(void) { }
-	Voxel(Reference<Primitive> &p)
+	Voxel(Reference<GeometricPrimitive> &p)
 	{
 		primitives.push_back(p);
 	}
 
-	void AddPrimitive(Reference<Primitive> &p)
+	void AddPrimitive(Reference<GeometricPrimitive> &p)
 	{
 		primitives.push_back(p);
 	}
@@ -35,13 +35,13 @@ struct Voxel
 	bool IntersectP(const Ray &ray) const;
 
 private:
-	vector<Reference<Primitive> > primitives;
+	vector<Reference<GeometricPrimitive> > primitives;
 };
 
 class Grid: public Agreggate
 {
 public:
-	Grid(vector<Reference<Primitive> > &p);
+	Grid(vector<Reference<GeometricPrimitive> > &p);
 	virtual ~Grid();
 
 	virtual bool Intersect(const Ray& ray, Intersection& sr) const;
@@ -67,7 +67,7 @@ private:
 	Vector invWidth;
 	Voxel** voxels;
 	BBox bounds;
-	vector<Reference<Primitive> > primitives;
+	vector<Reference<GeometricPrimitive> > primitives;
 };
 
 #endif /* GRID_H_ */

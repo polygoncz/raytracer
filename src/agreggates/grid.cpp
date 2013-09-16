@@ -7,7 +7,7 @@
 
 #include "agreggates/grid.h"
 
-Grid::Grid(vector<Reference<Primitive>> &p)
+Grid::Grid(vector<Reference<GeometricPrimitive>> &p)
 {
 	//Refine primitives
 	for (uint32_t i = 0; i < p.size(); i++)
@@ -204,7 +204,7 @@ bool Voxel::Intersect(const Ray &ray, Intersection &inter) const
 
 	for (size_t i = 0; i < primitives.size(); i++)
 	{
-		Reference<Primitive> p = primitives[i];
+		Reference<GeometricPrimitive> p = primitives[i];
 		if (p->Intersect(ray, t, inter) && (t < tmin))
 		{
 			inter.hitObject = true;
@@ -222,7 +222,7 @@ bool Voxel::IntersectP(const Ray &ray) const
 {
 	for (size_t i = 0; i < primitives.size(); i++)
 	{
-		Reference<Primitive> p = primitives[i];
+		Reference<GeometricPrimitive> p = primitives[i];
 		if (p->IntersectP(ray))
 			return true;
 	}

@@ -4,7 +4,7 @@
 #include "core/geometry.h"
 #include "core/primitive.h"
 
-class Sphere: public Primitive
+class Sphere: public GeometricPrimitive
 {
 public:
 	Sphere(const Point& _center, float _radius, const Reference<Material>& _material);
