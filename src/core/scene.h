@@ -12,7 +12,6 @@
 #include "intersection.h"
 #include "reference.h"
 #include "primitive.h"
-#include "agreggate.h"
 
 using namespace std;
 
@@ -39,5 +38,5 @@ public:
 	vector<Reference<GeometricPrimitive> > objects;
 	Film* film;
 	Camera* cam;
-	Agreggate* agr;
+	Primitive* agr;
 };

@@ -23,11 +23,8 @@ BBox BruteForce::Bounds() const
 	return b;
 }
 
-bool BruteForce::Intersect(const Ray& ray, Intersection& sr) const
+bool BruteForce::Intersect(const Ray& ray, Intersection& sr)
 {
-	float tmin = INFINITY;
-	float t = 0.f;
-
 	for (size_t i = 0; i < primitives.size(); i++)
 	{
 		Reference<GeometricPrimitive> p = primitives[i];
@@ -37,7 +34,7 @@ bool BruteForce::Intersect(const Ray& ray, Intersection& sr) const
 	return sr.hitObject;
 }
 
-bool BruteForce::IntersectP(const Ray& ray) const
+bool BruteForce::IntersectP(const Ray& ray)
 {
 	for (unsigned int i = 0; i < primitives.size(); i++)
 		if (primitives[i]->IntersectP(ray))

@@ -3,7 +3,6 @@
 #ifndef BRUTE_FORCE_H_
 #define BRUTE_FORCE_H_
 
-#include "core/agreggate.h"
 #include "core/reference.h"
 #include "core/primitive.h"
 
@@ -17,8 +16,8 @@ public:
 	BruteForce(vector<Reference<GeometricPrimitive> > &p);
 	virtual ~BruteForce();
 
-	virtual bool Intersect(const Ray& ray, Intersection& sr) const;
-	virtual bool IntersectP(const Ray& ray) const;
+	virtual bool Intersect(const Ray& ray, Intersection& sr);
+	virtual bool IntersectP(const Ray& ray);
 	virtual BBox Bounds() const;
 
 private:

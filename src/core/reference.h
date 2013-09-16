@@ -23,7 +23,10 @@ class Reference
 public:
 	Reference(T *_ptr = NULL)
 		: ptr(_ptr)
-	{ ptr->count++;	}
+	{
+		if (ptr)
+			ptr->count++;
+	}
 
 	Reference(const Reference<T>& orig)
 	{
@@ -86,10 +89,13 @@ public:
 private:
 	void decrementCount()
 	{
-		if (--ptr->count == 0 && ptr)
+		if (ptr)
 		{
-			delete ptr;
-			ptr = NULL;
+			if (--ptr->count == 0 && ptr)
+			{
+				delete ptr;
+				ptr = NULL;
+			}
 		}
 	}
 

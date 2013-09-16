@@ -41,3 +41,11 @@ public:
 protected:
 	mutable Reference<Material> material;
 };
+
+class Agreggate : public Primitive
+{
+public:
+	virtual bool CanIntersect() const { return true; }
+	virtual void Refine(vector<Reference<GeometricPrimitive> > &refined)
+	{ return; }
+};
