@@ -116,7 +116,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\agreggates\bruteforce.cpp" />
-    <ClCompile Include="..\..\..\src\agreggates\grid.cpp" />
     <ClCompile Include="..\..\..\src\brdf\lambert.cpp" />
     <ClCompile Include="..\..\..\src\brdf\specular.cpp" />
     <ClCompile Include="..\..\..\src\cameras\perspective.cpp" />
@@ -136,14 +135,12 @@
     <ClCompile Include="..\..\..\src\materials\matte.cpp" />
     <ClCompile Include="..\..\..\src\materials\phong.cpp" />
     <ClCompile Include="..\..\..\src\renderers\raytracer.cpp" />
-    <ClCompile Include="..\..\..\src\shapes\plane.cpp" />
     <ClCompile Include="..\..\..\src\shapes\sphere.cpp" />
     <ClCompile Include="..\..\..\src\shapes\trianglemesh.cpp" />
     <ClCompile Include="..\..\..\src\wxgui\imagebuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\agreggates\bruteforce.h" />
-    <ClInclude Include="..\..\..\src\agreggates\grid.h" />
     <ClInclude Include="..\..\..\src\brdf\lambert.h" />
     <ClInclude Include="..\..\..\src\brdf\specular.h" />
     <ClInclude Include="..\..\..\src\cameras\perspective.h" />
@@ -171,7 +168,6 @@
     <ClInclude Include="..\..\..\src\materials\matte.h" />
     <ClInclude Include="..\..\..\src\materials\phong.h" />
     <ClInclude Include="..\..\..\src\renderers\raytracer.h" />
-    <ClInclude Include="..\..\..\src\shapes\plane.h" />
     <ClInclude Include="..\..\..\src\shapes\sphere.h" />
     <ClInclude Include="..\..\..\src\shapes\trianglemesh.h" />
     <ClInclude Include="..\..\..\src\wxgui\imagebuffer.h" />

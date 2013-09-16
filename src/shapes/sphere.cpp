@@ -38,7 +38,7 @@ bool Sphere::IntersectP(const Ray& ray)
 	return false;
 }
 
-bool Sphere::Intersect(const Ray& ray, float& tmin, Intersection& sr)
+bool Sphere::Intersect(const Ray& ray, Intersection& sr)
 {
 	Vector temp = ray.o - center;
 	float a = Dot(ray.d, ray.d);
@@ -57,8 +57,13 @@ bool Sphere::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 
 		if (t > EPSILON && t < sr.t)
 		{
-			tmin = t;
+			ray.rayEpsilon = 1e-3f * t;
 			sr.normal = (temp + ray.d * t) / radius;
+			sr.ray = ray;
+			sr.t = t;
+			sr.hitPoint = ray(t);
+			sr.hitObject = true;
+			sr.material = GetMaterial();
 			return true;
 		}
 	}

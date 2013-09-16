@@ -88,7 +88,7 @@ Triangle::~Triangle()
 {
 }
 
-bool Triangle::Intersect(const Ray& ray, float& tmin, Intersection& sr)
+bool Triangle::Intersect(const Ray& ray, Intersection& sr)
 {
 	STATS_ADD_RAY_TRIANGLE();
 
@@ -120,9 +120,14 @@ bool Triangle::Intersect(const Ray& ray, float& tmin, Intersection& sr)
 
 	if (t < sr.t)
 	{
-		tmin = t;
-		sr.normal = InterpolateNormal(b1, b2);
 		ray.rayEpsilon = 1e-3f * t;
+		sr.normal = InterpolateNormal(b1, b2);
+		sr.ray = ray;
+		sr.t = t;
+		sr.hitPoint = ray(t);
+		sr.hitObject = true;
+		sr.material = GetMaterial();
+
 		return true;
 	}
 

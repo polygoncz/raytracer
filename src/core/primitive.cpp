@@ -32,7 +32,7 @@ bool GeometricPrimitive::CanIntersect() const
 void GeometricPrimitive::Refine(vector<Reference<GeometricPrimitive> > &refined)
 { }
 
-bool GeometricPrimitive::Intersect(const Ray& ray, float& tmin, Intersection& sr)
+bool GeometricPrimitive::Intersect(const Ray& ray, Intersection& sr)
 {
 	return false;
 }

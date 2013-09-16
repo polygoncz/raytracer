@@ -15,7 +15,7 @@ public:
 	Primitive() {}
 	virtual ~Primitive() {}
 
-	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr) = 0;
+	virtual bool Intersect(const Ray& ray, Intersection& sr) = 0;
 	virtual bool IntersectP(const Ray& ray) = 0;
 	virtual bool CanIntersect() const = 0;
 	virtual void Refine(vector<Reference<GeometricPrimitive> > &refined) = 0;
@@ -30,7 +30,7 @@ public:
 
 	virtual ~GeometricPrimitive();
 
-	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr);
+	virtual bool Intersect(const Ray& ray, Intersection& sr);
 	virtual bool IntersectP(const Ray& ray);
 	virtual bool CanIntersect() const;
 	virtual void Refine(vector<Reference<GeometricPrimitive> > &refined);

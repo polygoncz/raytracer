@@ -11,7 +11,7 @@ public:
 	Sphere(const Sphere& sphere);
 	virtual ~Sphere(void);
 
-	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr);
+	virtual bool Intersect(const Ray& ray, Intersection& sr);
 	virtual bool IntersectP(const Ray& ray);
 	virtual BBox Bounds() const;
 

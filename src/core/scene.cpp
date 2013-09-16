@@ -6,10 +6,7 @@
 #include "ligths/ambient.h"
 #include "ligths/point.h"
 
-#include "agreggates/grid.h"
-
 #include "shapes/sphere.h"
-#include "shapes/plane.h"
 #include "shapes/trianglemesh.h"
 
 #include "materials/phong.h"

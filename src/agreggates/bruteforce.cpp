@@ -31,14 +31,7 @@ bool BruteForce::Intersect(const Ray& ray, Intersection& sr) const
 	for (size_t i = 0; i < primitives.size(); i++)
 	{
 		Reference<GeometricPrimitive> p = primitives[i];
-		if (p->Intersect(ray, t, sr) && (t < tmin))
-		{
-			sr.hitObject = true;
-			tmin = t;
-			sr.material = p->GetMaterial();
-			sr.hitPoint = ray(tmin);
-			sr.t = tmin;
-		}
+		p->Intersect(ray, sr);
 	}
 
 	return sr.hitObject;

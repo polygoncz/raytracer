@@ -34,7 +34,7 @@ public:
 	Triangle(TriangleMesh* m, int n);
 	virtual ~Triangle();
 
-	virtual bool Intersect(const Ray& ray, float& tmin, Intersection& sr);
+	virtual bool Intersect(const Ray& ray, Intersection& sr);
 	virtual bool IntersectP(const Ray& ray);
 	virtual BBox Bounds() const;
 private:
