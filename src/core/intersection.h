@@ -25,7 +25,7 @@ public:
 	Point hitPoint;             //Hitpoint in world coordinates
 	Normal normal;              //Surface normal in hit point
 	Ray ray;                    //Ray for computing specular highlights
-	Material* material;        //Pointer to material of hitted object
+	Reference<Material> material;        //Pointer to material of hitted object
 	int depth;                  //Depth of recursion
 	float t;                    //tmin
 };
