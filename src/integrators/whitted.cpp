@@ -23,8 +23,6 @@ WhittedTracer::~WhittedTracer(void)
 RGBColor WhittedTracer::L(const Ray& ray) const
 {
 	Intersection inter;
-//	float tMin = INFINITY;
-//	float t = 0.f;
 
 	if (scene->Intersect(ray, inter))
 	{
