@@ -791,6 +791,11 @@ public:
 			return 2;
 	}
 
+	Point Centroid() const
+	{
+		return (pMin + pMax) / 2.f;
+	}
+
 	friend BBox Union(const BBox& b, const Point& p);
 	friend BBox Union(const BBox& b, const BBox& b2);
 
