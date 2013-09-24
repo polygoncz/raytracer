@@ -150,6 +150,9 @@
     <ClCompile Include="..\..\..\src\agreggates\bvh.cpp">
       <Filter>Source Files\Agreggates</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\agreggates\grid.cpp">
+      <Filter>Source Files\Agreggates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\brdf\lambert.h">
@@ -243,6 +246,9 @@
       <Filter>Header Files\Agreggates</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\agreggates\bvh.h">
+      <Filter>Header Files\Agreggates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\agreggates\grid.h">
       <Filter>Header Files\Agreggates</Filter>
     </ClInclude>
   </ItemGroup>

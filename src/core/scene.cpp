@@ -21,6 +21,7 @@
 
 #include "agreggates/bruteforce.h"
 #include "agreggates/bvh.h"
+#include "agreggates/grid.h"
 
 #include "reference.h"
 
@@ -193,7 +194,7 @@ bool Scene::IntersectP(const Ray& ray) const
 
 void Scene::Build()
 {
-	film = new Film(400, 400, 0.008f);
+	film = new Film(800, 800, 0.008f);
 
 	ambient = new AmbientLight(1.f, WHITE);
 
@@ -206,19 +207,15 @@ void Scene::Build()
 	vector<Reference<Primitive> > p;
 
 	ObjImporter imp;
-	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/bad.obj");
+	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/vopice.obj");
 
 	//Reference<Primitive> sphere(new Sphere(Point(0.f, 0.f, 0.f), 2.f, greenMat));
 
 	mesh->Refine(p);
 	//p.push_back(sphere);
 
-	//Reference<Material> matteMat(new Matte(GREY, 0.1f, 0.7f));
-	//Shape* plane = new Plane(Point(0.f, -1.0f, 0.f), Normal(0.f, 1.f, 0.f), matteMat);
-	//AddObject(plane);
+	cam = new PerspectiveCamera(Point(15.f, 6.5f, 15.f), Point(0.f, 0.f, 0.f),
+		Vector(0.f, 1.f, 0.f), film, 50.f);
 
-	cam = new PerspectiveCamera(Point(20.f, 15.f, 20.f), Point(-0.65f, 0.f, 0.f),
-			Vector(0.f, 1.f, 0.f), film, 50.f);
-
-	agr = new BVH(p);
+	agr = new Grid(p);
 }
