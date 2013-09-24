@@ -4,25 +4,18 @@
 
 static inline bool IntersectP(const BBox &bounds, const Ray &ray)
 {
-	Vector invDir(1.f/ray.d[0], 1.f/ray.d[1], 1.f/ray.d[2]);
-	uint32_t dirIsNeg[3] = {invDir[0] < 0.f, invDir[1] < 0.f, invDir[2] < 0.f};
+	float t0 = ray.mint, t1 = ray.maxt;
+	for (int i = 0; i < 3; ++i) {
+		float invRayDir = 1.f / ray.d[i];
+		float tNear = (bounds.pMin[i] - ray.o[i]) * invRayDir;
+		float tFar = (bounds.pMax[i] - ray.o[i]) * invRayDir;
 
-	float tmin =  (bounds[    dirIsNeg[0]][0] - ray.o[0]) * invDir[0];
-	float tmax =  (bounds[1 - dirIsNeg[0]][0] - ray.o[0]) * invDir[0];
-	float tymin = (bounds[    dirIsNeg[1]][1] - ray.o[1]) * invDir[1];
-	float tymax = (bounds[1 - dirIsNeg[1]][1] - ray.o[1]) * invDir[1];
-	if (tmin > tymax || tymin > tmax)
-		return false;
-	if (tymin < tmin) tmin = tymin;
-	if (tymax > tmax) tmax = tymax;
-
-	float tzmin = (bounds[    dirIsNeg[2]][2] - ray.o[2]) * invDir[2];
-	float tzmax = (bounds[1 - dirIsNeg[2]][2] - ray.o[2]) * invDir[2];
-	if (tmin > tzmax || tzmin > tmax)
-		return false;
-	if (tzmin < tmin) tmin = tzmin;
-	if (tzmax > tmax) tmax = tzmax;
-	return (tmin < ray.maxt) && (tmax > ray.mint);
+		if (tNear > tFar) Swap(tNear, tFar);
+		t0 = tNear > t0 ? tNear : t0;
+		t1 = tFar < t1 ? tFar : t1;
+		if (t0 > t1) return false;
+	}
+	return true;
 }
 
 BVH::BVH(vector<Reference<Primitive> > &prims)
