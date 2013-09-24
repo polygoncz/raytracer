@@ -5,13 +5,13 @@
 BBox Union(const BBox& b, const Point& p)
 {
 	BBox ret = b;
-	ret.pMin.x = Min(ret.pMin.x, p.x);
-	ret.pMin.y = Min(ret.pMin.y, p.y);
-	ret.pMin.z = Min(ret.pMin.z, p.z);
-	ret.pMax.x = Max(ret.pMax.x, p.x);
-	ret.pMax.y = Max(ret.pMax.y, p.y);
-	ret.pMax.z = Max(ret.pMax.z, p.z);
-	return ret;
+    ret.pMin.x = Min(b.pMin.x, p.x);
+    ret.pMin.y = Min(b.pMin.y, p.y);
+    ret.pMin.z = Min(b.pMin.z, p.z);
+    ret.pMax.x = Max(b.pMax.x, p.x);
+    ret.pMax.y = Max(b.pMax.y, p.y);
+    ret.pMax.z = Max(b.pMax.z, p.z);
+    return ret;
 }
 
 BBox Union(const BBox& b, const BBox& b2)

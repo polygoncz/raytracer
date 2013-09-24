@@ -752,9 +752,11 @@ public:
 		: pMin(p), pMax(p)
 	{}
 
-	BBox(const Point& _pmin, const Point& _pmax)
-		: pMin(_pmin), pMax(_pmax)
-	{}
+	BBox(const Point& p1, const Point& p2)
+	{
+		pMin = Point(Min(p1.x, p2.x), Min(p1.y, p2.y), Min(p1.z, p2.z));
+		pMax = Point(Max(p1.x, p2.x), Max(p1.y, p2.y), Max(p1.z, p2.z));
+	}
 
 	BBox(const BBox& b)
 		: pMin(b.pMin), pMax(b.pMax)
