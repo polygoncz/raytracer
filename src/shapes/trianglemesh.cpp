@@ -181,6 +181,5 @@ BBox Triangle::Bounds() const
 	Point &p1 = mesh->p[v[1].p];
 	Point &p2 = mesh->p[v[2].p];
 
-	BBox b(p0, p1);
-	return Union(b, p2);
+	return Union(BBox(p0, p1), p2);
 }
