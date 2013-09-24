@@ -1,5 +1,7 @@
 #include "geometry.h"
 
+#include <cstdint>
+
 BBox Union(const BBox& b, const Point& p)
 {
 	BBox ret = b;
@@ -26,6 +28,7 @@ BBox Union(const BBox& b, const BBox& b2)
 
 bool BBox::IntersectP(const Ray& ray, float* hitt0, float* hitt1) const
 {
+	
 	float t0 = ray.mint, t1 = ray.maxt;
 	for (int i = 0; i < 3; i++)
 	{

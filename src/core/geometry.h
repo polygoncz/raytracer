@@ -808,6 +808,18 @@ public:
 				::Lerp(tz, pMin.z, pMax.z));
 	}
 
+	Point operator[](int i) const
+	{
+		assert(i >= 0 && i <= 1);
+		return (&pMin)[i];
+	}
+
+	Point& operator[](int i)
+	{
+		assert(i >= 0 && i <= 2);
+		return (&pMin)[i];
+	}
+
 	Point pMin;
 	Point pMax;
 };

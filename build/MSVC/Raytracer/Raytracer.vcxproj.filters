@@ -144,10 +144,10 @@
     <ClCompile Include="..\..\..\src\core\statistics.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core\agreggate.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\agreggates\bruteforce.cpp">
+      <Filter>Source Files\Agreggates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\agreggates\bvh.cpp">
       <Filter>Source Files\Agreggates</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,13 +236,13 @@
     <ClInclude Include="..\..\..\src\core\statistics.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\core\agreggate.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\core\reference.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\agreggates\bruteforce.h">
+      <Filter>Header Files\Agreggates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\agreggates\bvh.h">
       <Filter>Header Files\Agreggates</Filter>
     </ClInclude>
   </ItemGroup>

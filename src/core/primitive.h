@@ -18,7 +18,7 @@ public:
 	virtual bool Intersect(const Ray& ray, Intersection& sr) = 0;
 	virtual bool IntersectP(const Ray& ray) = 0;
 	virtual bool CanIntersect() const = 0;
-	virtual void Refine(vector<Reference<GeometricPrimitive> > &refined) = 0;
+	virtual void Refine(vector<Reference<Primitive> > &refined) = 0;
 	virtual BBox Bounds() const = 0;
 };
 
@@ -33,9 +33,9 @@ public:
 	virtual bool Intersect(const Ray& ray, Intersection& sr);
 	virtual bool IntersectP(const Ray& ray);
 	virtual bool CanIntersect() const;
-	virtual void Refine(vector<Reference<GeometricPrimitive> > &refined);
+	virtual void Refine(vector<Reference<Primitive> > &refined);
 
-	Material* GetMaterial(void) const;
+	Reference<Material> GetMaterial(void) const;
 	void SetMaterial(const Reference<Material> &_material);
 
 protected:
@@ -46,6 +46,6 @@ class Agreggate : public Primitive
 {
 public:
 	virtual bool CanIntersect() const { return true; }
-	virtual void Refine(vector<Reference<GeometricPrimitive> > &refined)
+	virtual void Refine(vector<Reference<Primitive> > &refined)
 	{ return; }
 };

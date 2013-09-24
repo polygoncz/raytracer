@@ -19,7 +19,7 @@ public:
 	virtual ~TriangleMesh();
 	bool CanIntersect() const;
 	virtual BBox Bounds() const;
-	virtual void Refine(vector<Reference<GeometricPrimitive> > &refined);
+	virtual void Refine(vector<Reference<Primitive> > &refined);
 	friend class Triangle;
 public:
 	int nfaces, nverts, nnorms;

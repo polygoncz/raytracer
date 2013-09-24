@@ -1,7 +1,7 @@
 #include "agreggates/bruteforce.h"
 #include "core/constants.h"
 
-BruteForce::BruteForce(vector<Reference<GeometricPrimitive> > &p)
+BruteForce::BruteForce(vector<Reference<Primitive> > &p)
 {
 	for (unsigned int i = 0; i < p.size(); i++)
 	{
@@ -27,7 +27,7 @@ bool BruteForce::Intersect(const Ray& ray, Intersection& sr)
 {
 	for (size_t i = 0; i < primitives.size(); i++)
 	{
-		Reference<GeometricPrimitive> p = primitives[i];
+		Reference<Primitive> p = primitives[i];
 		p->Intersect(ray, sr);
 	}
 

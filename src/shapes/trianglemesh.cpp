@@ -60,7 +60,7 @@ bool TriangleMesh::CanIntersect() const
 	return false;
 }
 
-void TriangleMesh::Refine(vector<Reference<GeometricPrimitive> > &refined)
+void TriangleMesh::Refine(vector<Reference<Primitive> > &refined)
 {
 	for (uint32_t i = 0; i < nfaces; i++)
 		refined.push_back(new Triangle(this, i));
@@ -177,7 +177,7 @@ Normal Triangle::InterpolateNormal(float beta, float gamma)
 
 BBox Triangle::Bounds() const
 {
-	Point &p0 = this->mesh->p[v[0].p];
+	Point &p0 = mesh->p[v[0].p];
 	Point &p1 = mesh->p[v[1].p];
 	Point &p2 = mesh->p[v[2].p];
 

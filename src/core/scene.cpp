@@ -20,6 +20,7 @@
 #include "import/objimporter.h"
 
 #include "agreggates/bruteforce.h"
+#include "agreggates/bvh.h"
 
 #include "reference.h"
 
@@ -192,7 +193,7 @@ bool Scene::IntersectP(const Ray& ray) const
 
 void Scene::Build()
 {
-	film = new Film(200, 200, 0.008f);
+	film = new Film(400, 400, 0.008f);
 
 	ambient = new AmbientLight(1.f, WHITE);
 
@@ -202,24 +203,22 @@ void Scene::Build()
 	AddLight(main);
 	//AddLight(back);
 
-	vector<Reference<GeometricPrimitive> > p;
+	vector<Reference<Primitive> > p;
 
 	ObjImporter imp;
-	Reference<GeometricPrimitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/vopice.obj");
-	Reference<Material> greenMat(new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
-	mesh->SetMaterial(greenMat);
+	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/bad.obj");
 
-	Reference<GeometricPrimitive> sphere(new Sphere(Point(0.f, 0.f, 0.f), 2.f, greenMat));
+	//Reference<Primitive> sphere(new Sphere(Point(0.f, 0.f, 0.f), 2.f, greenMat));
 
-	p.push_back(mesh);
+	mesh->Refine(p);
 	//p.push_back(sphere);
 
 	//Reference<Material> matteMat(new Matte(GREY, 0.1f, 0.7f));
 	//Shape* plane = new Plane(Point(0.f, -1.0f, 0.f), Normal(0.f, 1.f, 0.f), matteMat);
 	//AddObject(plane);
 
-	cam = new PerspectiveCamera(Point(10.f, 6.5f, 10.f), Point(0.f, 0.f, 0.f),
+	cam = new PerspectiveCamera(Point(20.f, 15.f, 20.f), Point(-0.65f, 0.f, 0.f),
 			Vector(0.f, 1.f, 0.f), film, 50.f);
 
-	agr = new BruteForce(p);
+	agr = new BVH(p);
 }

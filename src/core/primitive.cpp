@@ -14,9 +14,9 @@ GeometricPrimitive::~GeometricPrimitive(void)
 {
 }
 
-Material* GeometricPrimitive::GetMaterial() const
+Reference<Material> GeometricPrimitive::GetMaterial() const
 {
-	return &material;
+	return material;
 }
 
 void GeometricPrimitive::SetMaterial(const Reference<Material>& _material)
@@ -29,7 +29,7 @@ bool GeometricPrimitive::CanIntersect() const
 	return true;
 }
 
-void GeometricPrimitive::Refine(vector<Reference<GeometricPrimitive> > &refined)
+void GeometricPrimitive::Refine(vector<Reference<Primitive> > &refined)
 { }
 
 bool GeometricPrimitive::Intersect(const Ray& ray, Intersection& sr)

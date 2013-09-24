@@ -15,7 +15,7 @@ class ObjImporter
 {
 public:
 	ObjImporter();
-	Reference<GeometricPrimitive> LoadObj(const char* path) const;
+	Reference<Primitive> LoadObj(const char* path) const;
 private:
 
 };
