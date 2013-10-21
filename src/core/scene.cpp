@@ -11,6 +11,7 @@
 
 #include "materials/phong.h"
 #include "materials/matte.h"
+#include "materials/mirror.h"
 
 #include "integrators/whitted.h"
 
@@ -207,15 +208,76 @@ void Scene::Build()
 	vector<Reference<Primitive> > p;
 
 	ObjImporter imp;
-	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/vopice.obj");
-
-	//Reference<Primitive> sphere(new Sphere(Point(0.f, 0.f, 0.f), 2.f, greenMat));
+	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/demon.obj", new Matte(GREY, 0.2, 0.8));
 
 	mesh->Refine(p);
-	//p.push_back(sphere);
 
-	cam = new PerspectiveCamera(Point(15.f, 6.5f, 15.f), Point(0.f, 0.f, 0.f),
-		Vector(0.f, 1.f, 0.f), film, 50.f);
+	cam = new PerspectiveCamera(Point(20.f, 4.f, 27.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 50.f);
 
 	agr = new Grid(p);
 }
+
+/*void Scene::Build()
+ {
+	 film = new Film(800, 800, 0.008f);
+
+	 ambient = new AmbientLight(1.f, WHITE);
+
+	 Light* main = new PointLight(4.0, WHITE, Point(-10.f, 7.5f, 10.f));
+	 AddLight(main);
+
+	 vector<Reference<Primitive> > p;
+	 Reference<Material> mirror1(new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
+	 Reference<Material> mirror2(new Phong(RGBColor(0.0f, 0.8f, 0.5f), RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
+
+	 Reference<Primitive> sphere1(new Sphere(Point(-1.f, -1.f, -1.f), 1.f, mirror1));
+	 p.push_back(sphere1);
+
+	 Reference<Primitive> sphere2(new Sphere(Point(-1.f, 1.f, -1.f), 1.f, mirror2));
+	 p.push_back(sphere2);
+	 
+	 cam = new PerspectiveCamera(Point(15.f, 6.5f, 15.f), Point(0.f, 0.f, 0.f),
+		 Vector(0.f, 1.f, 0.f), film, 50.f);
+
+	 agr = new Grid(p);
+ }*/
+
+ /*void Scene::Build()
+ {
+	 film = new Film(800, 800, 0.008f);
+
+	 ambient = new AmbientLight(1.f, WHITE);
+
+	 Light* main = new PointLight(4.0, WHITE, Point(0.f, 1.95f, 0.f));
+	 AddLight(main);
+
+	 vector<Reference<Primitive> > p;
+
+	 ObjImporter imp;
+
+	 Reference<Primitive> sphere = imp.LoadObj("D:/_scenes/cornell/koule.obj");
+	 p.push_back(sphere);
+
+	 Reference<Primitive> box = imp.LoadObj("D:/_scenes/cornell/krychle.obj");
+	 p.push_back(box);
+
+	 Reference<Primitive> bottom = imp.LoadObj("D:/_scenes/cornell/stena_bottom.obj");
+	 p.push_back(bottom);
+
+	 Reference<Primitive> back = imp.LoadObj("D:/_scenes/cornell/stena_back.obj");
+	 p.push_back(back);
+
+	 Reference<Primitive> top = imp.LoadObj("D:/_scenes/cornell/stena_top.obj");
+	 p.push_back(top);
+
+	 Reference<Primitive> left = imp.LoadObj("D:/_scenes/cornell/stena_left.obj");
+	 p.push_back(left);
+
+	 Reference<Primitive> right = imp.LoadObj("D:/_scenes/cornell/stena_right.obj");
+	 p.push_back(right);
+
+	 cam = new PerspectiveCamera(Point(30.f, 2.f, 0.f), Point(10.f, 2.f, 0.f),
+		 Vector(0.f, 1.f, 0.f), film, 50.f);
+
+	 agr = new Grid(p);
+ }*/

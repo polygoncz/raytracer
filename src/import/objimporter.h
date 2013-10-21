@@ -15,7 +15,7 @@ class ObjImporter
 {
 public:
 	ObjImporter();
-	Reference<Primitive> LoadObj(const char* path) const;
+	Reference<Primitive> LoadObj(const char* path, Reference<Material> mat) const;
 private:
 
 };

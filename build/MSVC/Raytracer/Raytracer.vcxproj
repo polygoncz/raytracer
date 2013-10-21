@@ -104,6 +104,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OpenMPSupport>false</OpenMPSupport>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -121,6 +122,7 @@
     <ClCompile Include="..\..\..\src\brdf\lambert.cpp" />
     <ClCompile Include="..\..\..\src\brdf\specular.cpp" />
     <ClCompile Include="..\..\..\src\cameras\perspective.cpp" />
+    <ClCompile Include="..\..\..\src\core\brdf.cpp" />
     <ClCompile Include="..\..\..\src\core\camera.cpp" />
     <ClCompile Include="..\..\..\src\core\film.cpp" />
     <ClCompile Include="..\..\..\src\core\geometry.cpp" />
@@ -133,7 +135,9 @@
     <ClCompile Include="..\..\..\src\integrators\whitted.cpp" />
     <ClCompile Include="..\..\..\src\ligths\ambient.cpp" />
     <ClCompile Include="..\..\..\src\ligths\point.cpp" />
+    <ClCompile Include="..\..\..\src\materials\glass.cpp" />
     <ClCompile Include="..\..\..\src\materials\matte.cpp" />
+    <ClCompile Include="..\..\..\src\materials\mirror.cpp" />
     <ClCompile Include="..\..\..\src\materials\phong.cpp" />
     <ClCompile Include="..\..\..\src\renderers\raytracer.cpp" />
     <ClCompile Include="..\..\..\src\shapes\sphere.cpp" />
@@ -167,7 +171,9 @@
     <ClInclude Include="..\..\..\src\integrators\whitted.h" />
     <ClInclude Include="..\..\..\src\ligths\ambient.h" />
     <ClInclude Include="..\..\..\src\ligths\point.h" />
+    <ClInclude Include="..\..\..\src\materials\glass.h" />
     <ClInclude Include="..\..\..\src\materials\matte.h" />
+    <ClInclude Include="..\..\..\src\materials\mirror.h" />
     <ClInclude Include="..\..\..\src\materials\phong.h" />
     <ClInclude Include="..\..\..\src\renderers\raytracer.h" />
     <ClInclude Include="..\..\..\src\shapes\sphere.h" />

@@ -22,11 +22,12 @@ public:
 		const RGBColor& li) const;
 	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi,
 		const RGBColor& li) const;
+	virtual RGBColor Reflectivity() const { return GREY; }
 private:
 	Phong();
-	BRDF* ambientBRDF;
-	BRDF* diffuseBRDF;
-	BRDF* specularBRDF;
+	BxDF* ambientBRDF;
+	BxDF* diffuseBRDF;
+	BxDF* specularBRDF;
 };
 
 inline RGBColor Phong::Ambient(const Intersection& inter, const Vector& wi,
@@ -42,7 +43,8 @@ inline RGBColor Phong::L(const Intersection& inter, const Vector& wi,
 
 	Vector wo = -inter.ray.d;
 
-	if (ndotwi > 0.0) return (diffuseBRDF->F(wi, wo, inter.normal) * li * ndotwi)
+	if (ndotwi > 0.0)
+		return (diffuseBRDF->F(wi, wo, inter.normal) * li * ndotwi)
 			+ (specularBRDF->F(wi, wo, inter.normal) * li * ndotwi);
 
 	return BLACK;

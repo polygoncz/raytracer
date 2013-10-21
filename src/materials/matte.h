@@ -17,14 +17,13 @@ public:
 	virtual ~Matte(void);
 
 	virtual Material* Clone() const;
-	virtual RGBColor L(const Intersection& inter, const Vector& wi,
-		const RGBColor& li) const;
-	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi,
-		const RGBColor& li) const;
+	virtual RGBColor L(const Intersection& inter, const Vector& wi, const RGBColor& li) const;
+	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi, const RGBColor& li) const;
+
 private:
 	Matte();
-	BRDF* ambientBRDF;
-	BRDF* diffuseBRDF;
+	BxDF* ambientBRDF;
+	BxDF* diffuseBRDF;
 };
 
 inline RGBColor Matte::Ambient(const Intersection& inter, const Vector& wi,

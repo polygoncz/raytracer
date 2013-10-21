@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef MATERIAL_H
+#define MATERIAL_H
+
+
 #include "color.h"
 #include "core.h"
 #include "intersection.h"
@@ -23,8 +27,10 @@ public:
 
 	virtual Material* Clone() const = 0;
 
-	virtual RGBColor L(const Intersection& inter, const Vector& wi,
-		const RGBColor& li) const = 0;
-	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi,
-		const RGBColor& li) const = 0;
+	virtual RGBColor L(const Intersection& inter, const Vector& wi, const RGBColor& li) const = 0;
+	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi, const RGBColor& li) const = 0;
+	virtual RGBColor Reflectivity() const { return BLACK; }
+	virtual RGBColor Transmitance() const { return BLACK; }
 };
+
+#endif

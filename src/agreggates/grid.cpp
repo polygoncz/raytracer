@@ -79,7 +79,7 @@ Grid::~Grid()
 bool Grid::Intersect(const Ray &ray, Intersection &sr)
 {
 	//Kontrola jestli je paprsek uvnitr, pripadne jestli protne BBox sceny
-	float rayT;
+	float rayT = 0.f;
 	if (bounds.IsInside(ray(ray.mint)))
 	{
 		rayT = ray.mint;
@@ -87,7 +87,7 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 	else if (!bounds.IntersectP(ray, NULL, NULL))
 	{
 		return false;
-		}
+	}
 	Point gridIntersect = ray(rayT);
 
 	// Set up 3D DDA for ray
@@ -124,9 +124,7 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 		if (voxel != NULL)
 			hitSomething |= voxel->Intersect(ray, sr);
 
-		// Advance to next voxel
-
-		// Find _stepAxis_ for stepping to next voxel
+		// Find stepAxis for stepping to next voxel
 		int bits = ((nextCrossingT[0] < nextCrossingT[1]) << 2) +
 		           ((nextCrossingT[0] < nextCrossingT[2]) << 1) +
 		           ((nextCrossingT[1] < nextCrossingT[2]));
@@ -139,12 +137,13 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 			break;
 		nextCrossingT[stepAxis] += deltaT[stepAxis];
 	}
+
 	return hitSomething;
 }
 
 bool Grid::IntersectP(const Ray &ray)
 {
-	float rayT;
+	float rayT = 0.f;
 	if (bounds.IsInside(ray(ray.mint)))
 		rayT = ray.mint;
 	else if (!bounds.IntersectP(ray, NULL, NULL))
@@ -185,7 +184,6 @@ bool Grid::IntersectP(const Ray &ray)
 		Voxel *voxel = voxels[o];
 		if (voxel && voxel->IntersectP(ray))
 			return true;
-		// Advance to next voxel
 
 		// Find _stepAxis_ for stepping to next voxel
 		int bits = ((nextCrossingT[0] < nextCrossingT[1]) << 2) +
@@ -200,6 +198,7 @@ bool Grid::IntersectP(const Ray &ray)
 			break;
 		nextCrossingT[stepAxis] += deltaT[stepAxis];
 	}
+
 	return false;
 }
 

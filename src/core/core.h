@@ -1,10 +1,11 @@
 #pragma once
 
 #include <cmath>
+#include <stdlib.h>
 //#include <mmintrin.h>
 //#include <xmmintrin.h>
 
-class BRDF;
+class BxDF;
 class Light;
 class Material;
 class Point;
@@ -90,4 +91,9 @@ inline bool Quadratic(float a, float b, float c, float* t0, float* t1)
 inline int Round2Int(float f)
 {
 	return (int) (f + 0.5f);
+}
+
+inline float RandomFloat()
+{
+	return (float)rand()/(float)RAND_MAX;
 }

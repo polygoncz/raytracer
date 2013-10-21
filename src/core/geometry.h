@@ -736,7 +736,7 @@ public:
 	mutable float mint; ///< minimalni hodnota parametru t
 	mutable float maxt; ///< maximalni hodnota parametru t
 	mutable float rayEpsilon; ///< vypocitane epsilon (zamezuje vzniku artefaktu)
-	int depth; ///< hloubka rekurze
+	mutable int depth; ///< hloubka rekurze
 };
 
 class BBox

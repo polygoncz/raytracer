@@ -6,12 +6,9 @@
 class Integrator
 {
 public:
-	Integrator(Scene* scene);
+	Integrator();
 	Integrator(const Integrator& tr);
 	virtual ~Integrator();
 
-	virtual RGBColor L(const Ray& ray) const = 0;
-
-protected:
-	Scene* scene;
+	virtual RGBColor L(const Ray& ray, const Scene& scene, Intersection& inter) const = 0;
 };

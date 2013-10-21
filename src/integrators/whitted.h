@@ -10,8 +10,11 @@
 class WhittedTracer: public Integrator
 {
 public:
-	WhittedTracer(Scene* scene);
+	WhittedTracer(int _maxDepth = 5);
 	virtual ~WhittedTracer(void);
 
-	virtual RGBColor L(const Ray& ray) const;
+	virtual RGBColor L(const Ray& ray, const Scene& scene, Intersection& inter) const;
+
+private:
+	int maxDepth;
 };

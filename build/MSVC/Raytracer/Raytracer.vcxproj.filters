@@ -153,6 +153,15 @@
     <ClCompile Include="..\..\..\src\agreggates\grid.cpp">
       <Filter>Source Files\Agreggates</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\materials\mirror.cpp">
+      <Filter>Source Files\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\materials\glass.cpp">
+      <Filter>Source Files\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\brdf.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\brdf\lambert.h">
@@ -250,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\agreggates\grid.h">
       <Filter>Header Files\Agreggates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\materials\mirror.h">
+      <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\materials\glass.h">
+      <Filter>Header Files\Materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
