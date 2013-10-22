@@ -12,40 +12,12 @@
 class Phong: public Material
 {
 public:
-	Phong(const Phong& mat);
-	Phong(const RGBColor& baseColor, const RGBColor& specularColor, float ca,
-		float cd, float exp);
+	Phong(const RGBColor& baseColor, const RGBColor& specularColor, float ca, float cd, float exp);
 	virtual ~Phong(void);
 
-	virtual Material* Clone() const;
-	virtual RGBColor L(const Intersection& inter, const Vector& wi,
-		const RGBColor& li) const;
-	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi,
-		const RGBColor& li) const;
-	virtual RGBColor Reflectivity() const { return GREY; }
+	virtual BSDF* GetBSDF() const;
 private:
-	Phong();
-	BxDF* ambientBRDF;
-	BxDF* diffuseBRDF;
-	BxDF* specularBRDF;
+	RGBColor baseColor, specularColor;
+	float exp;
+	float ca, cd;
 };
-
-inline RGBColor Phong::Ambient(const Intersection& inter, const Vector& wi,
-	const RGBColor& li) const
-{
-	return ambientBRDF->Rho(wi, -inter.ray.d, inter.normal) * li;
-}
-
-inline RGBColor Phong::L(const Intersection& inter, const Vector& wi,
-	const RGBColor& li) const
-{
-	float ndotwi = Dot(inter.normal, wi);
-
-	Vector wo = -inter.ray.d;
-
-	if (ndotwi > 0.0)
-		return (diffuseBRDF->F(wi, wo, inter.normal) * li * ndotwi)
-			+ (specularBRDF->F(wi, wo, inter.normal) * li * ndotwi);
-
-	return BLACK;
-}

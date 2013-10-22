@@ -208,7 +208,7 @@ void Scene::Build()
 	vector<Reference<Primitive> > p;
 
 	ObjImporter imp;
-	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/demon.obj", new Matte(GREY, 0.2, 0.8));
+	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/demon.obj", new Phong(GREEN, WHITE, 0.2, 0.8, 1000.f));
 
 	mesh->Refine(p);
 

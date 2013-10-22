@@ -1,51 +1,24 @@
 #include "phong.h"
 #include "brdf/lambert.h"
 #include "brdf/specular.h"
-
-Phong::Phong()
-		: Material(), ambientBRDF(NULL), diffuseBRDF(NULL), specularBRDF(NULL)
-{
-}
+#include "brdf/flat.h"
 
 Phong::Phong(const RGBColor& baseColor, const RGBColor& specularColor, float ca,
 	float cd, float exp)
-		: Material()
-{
-	ambientBRDF = new Lambert(ca, baseColor);
-	diffuseBRDF = new Lambert(cd, baseColor);
-	specularBRDF = new Specular(exp, specularColor);
-}
-
-Phong::Phong(const Phong& mat)
-		: Material(mat)
-{
-	if (mat.ambientBRDF) ambientBRDF = mat.ambientBRDF->Clone();
-	if (mat.diffuseBRDF) diffuseBRDF = mat.diffuseBRDF->Clone();
-	if (mat.specularBRDF) specularBRDF = mat.specularBRDF->Clone();
-}
+		: baseColor(baseColor), specularColor(specularColor),
+		ca(ca), cd(cd), exp(exp), Material()
+{}
 
 Phong::~Phong(void)
+{}
+
+BSDF* Phong::GetBSDF() const
 {
-	if (ambientBRDF != NULL)
-	{
-		delete ambientBRDF;
-		ambientBRDF = NULL;
-	}
+	BSDF* bsdf = new BSDF();
 
-	if (diffuseBRDF != NULL)
-	{
-		delete diffuseBRDF;
-		diffuseBRDF = NULL;
-	}
+	bsdf->Add(new Ambient(baseColor * ca));
+	bsdf->Add(new Lambert(cd, baseColor));
+	bsdf->Add(new Specular(exp, specularColor));
 
-	if (specularBRDF != NULL)
-	{
-		delete specularBRDF;
-		specularBRDF = NULL;
-	}
-}
-
-Material* Phong::Clone() const
-{
-	return new Phong(*this);
+	return bsdf;
 }

@@ -6,7 +6,7 @@
 #include "core/primitive.h"
 #include <stdint.h>
 
-#define MAX_VOXELS 64
+#define MAX_VOXELS 128
 
 using namespace std;
 

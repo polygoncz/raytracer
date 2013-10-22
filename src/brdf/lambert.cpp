@@ -13,11 +13,6 @@ Lambert::Lambert(float _kd, const RGBColor& _cd)
 Lambert::~Lambert(void)
 {}
 
-BxDF* Lambert::Clone() const
-{
-	return new Lambert(*this);
-}
-
 RGBColor Lambert::F(const Vector& wi, const Vector& wo, const Normal& n) const
 {
 	return (kd * cd) * INV_PI;

@@ -8,17 +8,10 @@ Specular::Specular(float exp, const RGBColor& ks)
 Specular::Specular(const Specular& spec)
 		: exp(spec.exp), ks(spec.ks),
 		BxDF(BSDF_SPECULAR)
-{
-}
+{}
 
 Specular::~Specular(void)
-{
-}
-
-BxDF* Specular::Clone() const
-{
-	return new Specular(*this);
-}
+{}
 
 RGBColor Specular::F(const Vector& wi, const Vector& wo, const Normal& n) const
 {

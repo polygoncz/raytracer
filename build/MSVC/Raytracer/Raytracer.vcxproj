@@ -119,6 +119,7 @@
     <ClCompile Include="..\..\..\src\agreggates\bruteforce.cpp" />
     <ClCompile Include="..\..\..\src\agreggates\bvh.cpp" />
     <ClCompile Include="..\..\..\src\agreggates\grid.cpp" />
+    <ClCompile Include="..\..\..\src\brdf\flat.cpp" />
     <ClCompile Include="..\..\..\src\brdf\lambert.cpp" />
     <ClCompile Include="..\..\..\src\brdf\specular.cpp" />
     <ClCompile Include="..\..\..\src\cameras\perspective.cpp" />
@@ -127,6 +128,7 @@
     <ClCompile Include="..\..\..\src\core\film.cpp" />
     <ClCompile Include="..\..\..\src\core\geometry.cpp" />
     <ClCompile Include="..\..\..\src\core\integrator.cpp" />
+    <ClCompile Include="..\..\..\src\core\material.cpp" />
     <ClCompile Include="..\..\..\src\core\primitive.cpp" />
     <ClCompile Include="..\..\..\src\core\renderer.cpp" />
     <ClCompile Include="..\..\..\src\core\scene.cpp" />
@@ -148,6 +150,7 @@
     <ClInclude Include="..\..\..\src\agreggates\bruteforce.h" />
     <ClInclude Include="..\..\..\src\agreggates\bvh.h" />
     <ClInclude Include="..\..\..\src\agreggates\grid.h" />
+    <ClInclude Include="..\..\..\src\brdf\flat.h" />
     <ClInclude Include="..\..\..\src\brdf\lambert.h" />
     <ClInclude Include="..\..\..\src\brdf\specular.h" />
     <ClInclude Include="..\..\..\src\cameras\perspective.h" />

@@ -16,6 +16,7 @@ public:
 	virtual RGBColor L(const Intersection& inter, const Vector& wi, const RGBColor& li) const;
 	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi, const RGBColor& li) const;
 	virtual RGBColor Transmitance() const { return WHITE; };
+	virtual BSDF* GetBSDF() const {return NULL;}
 
 private:
 	float ior;

@@ -162,6 +162,12 @@
     <ClCompile Include="..\..\..\src\core\brdf.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\core\material.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\brdf\flat.cpp">
+      <Filter>Source Files\BRDF</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\brdf\lambert.h">
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\materials\glass.h">
       <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\brdf\flat.h">
+      <Filter>Header Files\BRDF</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
