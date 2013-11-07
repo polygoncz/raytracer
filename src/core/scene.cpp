@@ -193,7 +193,7 @@ bool Scene::IntersectP(const Ray& ray) const
  tracer = new WhittedTracer(this);
  }*/
 
-void Scene::Build()
+/*void Scene::Build()
 {
 	film = new Film(800, 800, 0.008f);
 
@@ -215,7 +215,7 @@ void Scene::Build()
 	cam = new PerspectiveCamera(Point(20.f, 4.f, 27.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 50.f);
 
 	agr = new Grid(p);
-}
+}*/
 
 /*void Scene::Build()
  {
@@ -227,8 +227,8 @@ void Scene::Build()
 	 AddLight(main);
 
 	 vector<Reference<Primitive> > p;
-	 Reference<Material> mirror1(new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
-	 Reference<Material> mirror2(new Phong(RGBColor(0.0f, 0.8f, 0.5f), RGBColor(0.7f, 0.7f, 0.7f), 0.1f, 0.7f, 100.f));
+	 Reference<Material> mirror1(new Phong(RGBColor(0.05f, 0.9f, 0.05f), RGBColor(0.7f, 0.7f, 0.7f), BLACK, WHITE, 0.1f, 0.7f, 100.f, 1.33f));
+	 Reference<Material> mirror2(new Phong(RGBColor(0.0f, 0.8f, 0.5f), RGBColor(0.7f, 0.7f, 0.7f), WHITE, BLACK, 0.1f, 0.7f, 100.f, 1.f));
 
 	 Reference<Primitive> sphere1(new Sphere(Point(-1.f, -1.f, -1.f), 1.f, mirror1));
 	 p.push_back(sphere1);
@@ -281,3 +281,28 @@ void Scene::Build()
 
 	 agr = new Grid(p);
  }*/
+
+void Scene::Build()
+{
+	film = new Film(800, 800, 0.008f);
+
+	ambient = new AmbientLight(0.f, WHITE);
+
+	Light* main = new PointLight(4.0, WHITE, Point(-10.f, 7.5f, 10.f));
+	AddLight(main);
+
+	vector<Reference<Primitive> > p;
+	Reference<Material> glass(new Phong(BLACK, RGBColor(0.7f, 0.7f, 0.7f), GREY, BLACK, 0.1f, 0.7f, 100.f, 1.2f));
+	Reference<Material> matte(new Matte(GREY, 0.2f, 0.8f));
+
+	ObjImporter imp;
+	Reference<Primitive> plane = imp.LoadObj("D:/_scenes/glass/plane.obj", matte);
+	Reference<Primitive> sphere = imp.LoadObj("D:/_scenes/glass/sphere.obj", glass);
+	p.push_back(plane);
+	p.push_back(sphere);
+
+	cam = new PerspectiveCamera(Point(20.f, 6.5f, 20.f), Point(0.f, 1.f, 0.f),
+		Vector(0.f, 1.f, 0.f), film, 50.f);
+
+	agr = new Grid(p);
+}

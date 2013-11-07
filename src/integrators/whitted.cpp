@@ -24,7 +24,7 @@ WhittedTracer::~WhittedTracer(void)
 RGBColor WhittedTracer::L(const Ray& ray, const Scene& scene, Intersection& inter) const
 {
 	if (ray.depth == maxDepth)
-		return BLACK;
+		return scene.background;
 
 	RGBColor l;
 
@@ -53,63 +53,22 @@ RGBColor WhittedTracer::L(const Ray& ray, const Scene& scene, Intersection& inte
 				}
 			}
 		}
-		else if (bxdf->MatchesType(BSDF_REFLECTION))
+		else if (bxdf->MatchesType(BSDF_REFLECTION) || bxdf->MatchesType(BSDF_TRANSMISSION))
 		{
 			Vector wo;
-			const Vector& wi = inter.ray.d;
-			RGBColor reflectivity = bxdf->SampleF(wi, wo, inter.normal);
-			Intersection intRefl;
-			Ray newRay(inter.hitPoint, wo, 0.0f, INFINITY, EPSILON, ray.depth + 1);
+			const Vector wi = inter.ray.d;
+			RGBColor fL = bxdf->SampleF(wi, wo, inter.normal);
+			Intersection newInter;
+			Ray newRay(inter.hitPoint + inter.normal * inter.ray.rayEpsilon, wo, 0.0f, INFINITY, EPSILON, ray.depth + 1);
 			
-			if (scene.Intersect(newRay, intRefl))
-				l += reflectivity * L(newRay, scene, intRefl);
-		}
-		else if (bxdf->MatchesType(BSDF_TRANSMISSION))
-		{
-			//transmission
+			if (scene.Intersect(newRay, newInter))
+				l += fL * L(newRay, scene, newInter);
+			else
+				l += fL * scene.background;
 		}
 	}
 
 	delete bsdf;
-
-	/*l += mat->Ambient(inter, scene.ambient->GetDirection(inter), scene.ambient->L(inter));
-
-	for (uint32_t i = 0; i < scene.lights.size(); i++)
-	{
-		Light* light = scene.lights[i];
-		Vector shDir = light->GetDirection(inter);
-		STATS_ADD_SHADOW_RAY();
-		Ray shadowRay(inter.hitPoint + inter.normal * inter.ray.rayEpsilon,	shDir, 0.f, INFINITY, inter.ray.rayEpsilon);
-		if (!scene.IntersectP(shadowRay))
-		{
-			l += mat->L(inter, light->GetDirection(inter), light->L(inter));
-		}
-	}
-
-	if (mat->Reflectivity() != BLACK)
-	{
-		Vector newDir = ray.d - 2 * Dot(inter.normal, ray.d) * inter.normal;
-		newDir.Normalize();
-
-		Ray newRay(inter.hitPoint + inter.normal * inter.ray.rayEpsilon, newDir, 0.0f, INFINITY, EPSILON, ray.depth + 1);
-
-		Intersection intRefl;
-		if (scene.Intersect(newRay, intRefl))
-			l += mat->Reflectivity() * L(newRay, scene, intRefl);
-	}*/
-
-	//Piece of shit :D:D:D
-	/*if (mat->Transmitance() != BLACK)
-	{
-		Vector wo = -ray.d;
-		Normal n = inter.normal;
-
-		float nDotWo = Dot(inter.normal, wo);
-		if (nDotWo < 0.0f) //Uhel je ostry
-		{
-
-		}
-	}*/
 
 	return l;
 }

@@ -168,6 +168,12 @@
     <ClCompile Include="..\..\..\src\brdf\flat.cpp">
       <Filter>Source Files\BRDF</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\brdf\reflection.cpp">
+      <Filter>Source Files\BRDF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\brdf\transmittance.cpp">
+      <Filter>Source Files\BRDF</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\brdf\lambert.h">
@@ -273,6 +279,12 @@
       <Filter>Header Files\Materials</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\brdf\flat.h">
+      <Filter>Header Files\BRDF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\brdf\reflection.h">
+      <Filter>Header Files\BRDF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\brdf\transmittance.h">
       <Filter>Header Files\BRDF</Filter>
     </ClInclude>
   </ItemGroup>

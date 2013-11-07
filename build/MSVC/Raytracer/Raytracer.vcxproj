@@ -82,6 +82,7 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WholeProgramOptimization>true</WholeProgramOptimization>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -105,6 +106,8 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OpenMPSupport>false</OpenMPSupport>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -121,7 +124,9 @@
     <ClCompile Include="..\..\..\src\agreggates\grid.cpp" />
     <ClCompile Include="..\..\..\src\brdf\flat.cpp" />
     <ClCompile Include="..\..\..\src\brdf\lambert.cpp" />
+    <ClCompile Include="..\..\..\src\brdf\reflection.cpp" />
     <ClCompile Include="..\..\..\src\brdf\specular.cpp" />
+    <ClCompile Include="..\..\..\src\brdf\transmittance.cpp" />
     <ClCompile Include="..\..\..\src\cameras\perspective.cpp" />
     <ClCompile Include="..\..\..\src\core\brdf.cpp" />
     <ClCompile Include="..\..\..\src\core\camera.cpp" />
@@ -152,7 +157,9 @@
     <ClInclude Include="..\..\..\src\agreggates\grid.h" />
     <ClInclude Include="..\..\..\src\brdf\flat.h" />
     <ClInclude Include="..\..\..\src\brdf\lambert.h" />
+    <ClInclude Include="..\..\..\src\brdf\reflection.h" />
     <ClInclude Include="..\..\..\src\brdf\specular.h" />
+    <ClInclude Include="..\..\..\src\brdf\transmittance.h" />
     <ClInclude Include="..\..\..\src\cameras\perspective.h" />
     <ClInclude Include="..\..\..\src\core\brdf.h" />
     <ClInclude Include="..\..\..\src\core\camera.h" />
