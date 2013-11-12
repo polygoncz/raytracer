@@ -122,7 +122,10 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 		// Check for intersection in current voxel and advance to next
 		Voxel *voxel = voxels[offset(pos[0], pos[1], pos[2])];
 		if (voxel != NULL)
+		{
 			hitSomething |= voxel->Intersect(ray, sr);
+			if (hitSomething) return hitSomething; //Neni treba hledat dale pokud jsme nasli prusecik
+		}
 
 		// Find stepAxis for stepping to next voxel
 		int bits = ((nextCrossingT[0] < nextCrossingT[1]) << 2) +
