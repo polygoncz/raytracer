@@ -111,13 +111,16 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 		}
 	}
 
+	bool hitSomething = false;
 	//Cyklus pro pruchod strukturou
 	while(true)
 	{
 		Voxel *voxel = voxels[offset(pos[0], pos[1], pos[2])];
 		if (voxel != NULL)
-			if (voxel->Intersect(ray, sr))
-				return true;
+		{
+			hitSomething |= voxel->Intersect(ray, sr);
+			if (hitSomething) return hitSomething; //Neni treba hledat dale pokud jsme nasli prusecik
+		}
 
 		//Hledani osy pro kterou je treba preskocit do dalsiho voxelu
 		int bits = ((nextCrossingT[0] < nextCrossingT[1]) << 2) +
