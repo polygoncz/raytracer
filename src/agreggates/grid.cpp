@@ -81,25 +81,21 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 	//Kontrola jestli je paprsek uvnitr, pripadne jestli protne BBox sceny
 	float rayT = 0.f;
 	if (bounds.IsInside(ray(ray.mint)))
-	{
 		rayT = ray.mint;
-	}
-	else if (!bounds.IntersectP(ray, NULL, NULL))
-	{
+	else if (!bounds.IntersectP(ray, &rayT, NULL))
 		return false;
-	}
 	Point gridIntersect = ray(rayT);
 
-	// Set up 3D DDA for ray
+	// Pocatecni nastaveni 3D DDA
 	float nextCrossingT[3], deltaT[3];
 	int step[3], out[3], pos[3];
 	for (int axis = 0; axis < 3; ++axis)
 	{
-		// Compute current voxel for axis
+		//Zjisti prvni voxel od ktereho bude pocitat pro dany smer
 		pos[axis] = PosToVoxel(gridIntersect, axis);
 		if (ray.d[axis] >= 0)
 		{
-			// Handle ray with positive direction for voxel stepping
+			// Vypocet hodnot pro kladny smer
 			nextCrossingT[axis] = rayT + (VoxelToPos(pos[axis]+1, axis) - gridIntersect[axis]) / ray.d[axis];
 			deltaT[axis] = width[axis] / ray.d[axis];
 			step[axis] = 1;
@@ -107,7 +103,7 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 		}
 		else
 		{
-			// Handle ray with negative direction for voxel stepping
+			// Vypocet hodnot pro zaporny smer
 			nextCrossingT[axis] = rayT + (VoxelToPos(pos[axis], axis) - gridIntersect[axis]) / ray.d[axis];
 			deltaT[axis] = -width[axis] / ray.d[axis];
 			step[axis] = -1;
@@ -115,16 +111,15 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 		}
 	}
 
-	// Walk ray through voxel grid
-	bool hitSomething = false;
+	//Cyklus pro pruchod strukturou
 	while(true)
 	{
-		// Check for intersection in current voxel and advance to next
 		Voxel *voxel = voxels[offset(pos[0], pos[1], pos[2])];
 		if (voxel != NULL)
-			hitSomething |= voxel->Intersect(ray, sr);
+			if (voxel->Intersect(ray, sr))
+				return true;
 
-		// Find stepAxis for stepping to next voxel
+		//Hledani osy pro kterou je treba preskocit do dalsiho voxelu
 		int bits = ((nextCrossingT[0] < nextCrossingT[1]) << 2) +
 		           ((nextCrossingT[0] < nextCrossingT[2]) << 1) +
 		           ((nextCrossingT[1] < nextCrossingT[2]));
@@ -138,30 +133,29 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 		nextCrossingT[stepAxis] += deltaT[stepAxis];
 	}
 
-	return hitSomething;
+	return false;
 }
 
 bool Grid::IntersectP(const Ray &ray)
 {
+	//Kontrola jestli je paprsek uvnitr, pripadne jestli protne BBox sceny
 	float rayT = 0.f;
 	if (bounds.IsInside(ray(ray.mint)))
 		rayT = ray.mint;
-	else if (!bounds.IntersectP(ray, NULL, NULL))
-	{
+	else if (!bounds.IntersectP(ray, &rayT, NULL))
 		return false;
-	}
 	Point gridIntersect = ray(rayT);
 
-	// Set up 3D DDA for ray
+	// Pocatecni nastaveni 3D DDA
 	float nextCrossingT[3], deltaT[3];
 	int step[3], out[3], pos[3];
 	for (int axis = 0; axis < 3; ++axis)
 	{
-		// Compute current voxel for axis
+		//Zjisti prvni voxel od ktereho bude pocitat pro dany smer
 		pos[axis] = PosToVoxel(gridIntersect, axis);
 		if (ray.d[axis] >= 0)
 		{
-			// Handle ray with positive direction for voxel stepping
+			// Vypocet hodnot pro kladny smer
 			nextCrossingT[axis] = rayT + (VoxelToPos(pos[axis]+1, axis) - gridIntersect[axis]) / ray.d[axis];
 			deltaT[axis] = width[axis] / ray.d[axis];
 			step[axis] = 1;
@@ -169,7 +163,7 @@ bool Grid::IntersectP(const Ray &ray)
 		}
 		else
 		{
-			// Handle ray with negative direction for voxel stepping
+			// Vypocet hodnot pro zaporny smer
 			nextCrossingT[axis] = rayT + (VoxelToPos(pos[axis], axis) - gridIntersect[axis]) / ray.d[axis];
 			deltaT[axis] = -width[axis] / ray.d[axis];
 			step[axis] = -1;
@@ -177,7 +171,7 @@ bool Grid::IntersectP(const Ray &ray)
 		}
 	}
 
-	// Walk grid for shadow ray
+	//Cyklus pro pruchod strukturou
 	while(true)
 	{
 		int o = offset(pos[0], pos[1], pos[2]);
@@ -185,7 +179,7 @@ bool Grid::IntersectP(const Ray &ray)
 		if (voxel && voxel->IntersectP(ray))
 			return true;
 
-		// Find _stepAxis_ for stepping to next voxel
+		//Hledani osy pro kterou je treba preskocit do dalsiho voxelu
 		int bits = ((nextCrossingT[0] < nextCrossingT[1]) << 2) +
 		    ((nextCrossingT[0] < nextCrossingT[2]) << 1) +
 		    ((nextCrossingT[1] < nextCrossingT[2]));

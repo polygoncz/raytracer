@@ -193,7 +193,7 @@ bool Scene::IntersectP(const Ray& ray) const
  tracer = new WhittedTracer(this);
  }*/
 
-/*void Scene::Build()
+void Scene::Build()
 {
 	film = new Film(800, 800, 0.008f);
 
@@ -208,14 +208,14 @@ bool Scene::IntersectP(const Ray& ray) const
 	vector<Reference<Primitive> > p;
 
 	ObjImporter imp;
-	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/demon.obj", new Phong(GREEN, WHITE, 0.2, 0.8, 1000.f));
+	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/demon.obj", new Matte(GREY, 0.1f, 0.9f));
 
 	mesh->Refine(p);
 
-	cam = new PerspectiveCamera(Point(20.f, 4.f, 27.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 50.f);
+	cam = new PerspectiveCamera(Point(-20.f, 4.f, 27.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 50.f);
 
 	agr = new Grid(p);
-}*/
+}
 
 /*void Scene::Build()
  {
@@ -282,7 +282,7 @@ bool Scene::IntersectP(const Ray& ray) const
 	 agr = new Grid(p);
  }*/
 
-void Scene::Build()
+/*void Scene::Build()
 {
 	film = new Film(800, 800, 0.008f);
 
@@ -305,4 +305,4 @@ void Scene::Build()
 		Vector(0.f, 1.f, 0.f), film, 50.f);
 
 	agr = new Grid(p);
-}
+}*/
