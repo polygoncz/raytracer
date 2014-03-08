@@ -383,36 +383,52 @@ void RenderCanvas::OnTimerUpdate(wxTimerEvent& event)
 
 void RenderCanvas::renderStart(void)
 {
-	wxGetApp().SetStatusText("Building...");
-	scene = new Scene();
-	scene->Build();
+	wxString caption = "Choose a File";
 
-	renderer = new Raytracer(scene, thread);
-	wxGetApp().SetStatusText("Rendering...");
+	wxString wildcard = "XML scene files (*.xml)|*.xml|";
+	wxString filePath;
 
-	pixelsRendered = 0;
-	pixelsToRender = scene->film->width * scene->film->height;
+	wxString defaultDir = wxEmptyString;
+	wxString defaultFileName = wxEmptyString;
 
-	wxBitmap bitmap(scene->film->width, scene->film->height, -1);
-	wxMemoryDC dc;
-	dc.SelectObject(bitmap);
-	dc.SetBackground(*wxGREY_BRUSH);
-	dc.Clear();
+	wxFileDialog dialog(this, caption, defaultDir, defaultFileName, wildcard,
+		wxFD_OPEN | wxFD_FILE_MUST_EXIST);
 
-	dc.SelectObject(wxNullBitmap);
+	if (dialog.ShowModal() == wxID_OK)
+	{
+		filePath = dialog.GetPath();
 
-	wxImage temp = bitmap.ConvertToImage();
-	SetImage(temp);
+		wxGetApp().SetStatusText("Building...");
+		scene = new Scene();
+		scene->Build(filePath);
 
-	updateTimer.Start(250);
+		renderer = new Raytracer(scene, thread);
+		wxGetApp().SetStatusText("Rendering...");
 
-	timer = new wxStopWatch();
+		pixelsRendered = 0;
+		pixelsToRender = scene->film->width * scene->film->height;
 
-	thread = new RenderThread(this, renderer);
-	thread->Create();
-	renderer->SetPixelArea(thread);
-	thread->SetPriority(20);
-	thread->Run();
+		wxBitmap bitmap(scene->film->width, scene->film->height, -1);
+		wxMemoryDC dc;
+		dc.SelectObject(bitmap);
+		dc.SetBackground(*wxGREY_BRUSH);
+		dc.Clear();
+
+		dc.SelectObject(wxNullBitmap);
+
+		wxImage temp = bitmap.ConvertToImage();
+		SetImage(temp);
+
+		updateTimer.Start(250);
+
+		timer = new wxStopWatch();
+
+		thread = new RenderThread(this, renderer);
+		thread->Create();
+		renderer->SetPixelArea(thread);
+		thread->SetPriority(20);
+		thread->Run();
+	}
 }
 
 /************************************************************************/

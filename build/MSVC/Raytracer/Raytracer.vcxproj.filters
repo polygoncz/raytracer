@@ -174,6 +174,9 @@
     <ClCompile Include="..\..\..\src\brdf\transmittance.cpp">
       <Filter>Source Files\BRDF</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\import\xmlsceneimporter.cpp">
+      <Filter>Source Files\Import</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\brdf\lambert.h">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\brdf\transmittance.h">
       <Filter>Header Files\BRDF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\import\xmlsceneimporter.h">
+      <Filter>Header Files\Import</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

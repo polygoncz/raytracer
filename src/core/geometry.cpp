@@ -30,11 +30,11 @@ bool BBox::IntersectP(const Ray& ray, float* hitt0, float* hitt1) const
 {
 	
 	float t0 = ray.mint, t1 = ray.maxt;
-	for (int i = 0; i < 3; i++)
+	for (int axis = 0; axis < 3; ++axis)
 	{
-		float invRayDir = 1.f / ray.d[i];
-		float tNear = (pMin[i] - ray.o[i]) * invRayDir;
-		float tFar = (pMax[i] - ray.o[i]) * invRayDir;
+		float invRayDir = 1.f / ray.d[axis];
+		float tNear = (pMin[axis] - ray.o[axis]) * invRayDir;
+		float tFar = (pMax[axis] - ray.o[axis]) * invRayDir;
 
 		if (tNear > tFar) Swap(tNear, tFar);
 		t0 = tNear > t0 ? tNear : t0;

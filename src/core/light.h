@@ -7,7 +7,7 @@
 class Vector;
 class RGBColor;
 
-class Light
+class Light 
 {
 public:
 	Light(void)

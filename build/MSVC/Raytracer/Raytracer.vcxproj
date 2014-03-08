@@ -61,7 +61,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEV_Release|x64'" Label="Configuration">
@@ -93,7 +93,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEV_Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -181,7 +183,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <AdditionalIncludeDirectories>.\..\..\..\wxwidgets\include\msvc;.\..\..\..\wxwidgets\include;D:\_dev\Raytracer\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;WINVER=0x0400;__WXMSW__;wxUSE_GUI=1;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;WXUSINGDLL;_WINDOWS;WINVER=0x0400;__WXMSW__;wxUSE_GUI=1;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
@@ -189,6 +191,9 @@
       <OpenMPSupport>false</OpenMPSupport>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>wx/wxprec.h</PrecompiledHeaderFile>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -196,7 +201,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>wxmsw29u_core.lib;wxbase29u.lib;comctl32.lib;rpcrt4.lib;winmm.lib;advapi32.lib;wsock32.lib;wxpng.lib;wxzlib.lib;wxjpeg.lib;wxtiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>.\..\..\..\wxwidgets\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\..\..\..\wxwidgets\lib\vc_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DEV_Release|x64'">
@@ -245,6 +251,7 @@
     <ClCompile Include="..\..\..\src\core\scene.cpp" />
     <ClCompile Include="..\..\..\src\core\statistics.cpp" />
     <ClCompile Include="..\..\..\src\import\objimporter.cpp" />
+    <ClCompile Include="..\..\..\src\import\xmlsceneimporter.cpp" />
     <ClCompile Include="..\..\..\src\integrators\whitted.cpp" />
     <ClCompile Include="..\..\..\src\ligths\ambient.cpp" />
     <ClCompile Include="..\..\..\src\ligths\point.cpp" />
@@ -255,7 +262,9 @@
     <ClCompile Include="..\..\..\src\renderers\raytracer.cpp" />
     <ClCompile Include="..\..\..\src\shapes\sphere.cpp" />
     <ClCompile Include="..\..\..\src\shapes\trianglemesh.cpp" />
-    <ClCompile Include="..\..\..\src\wxgui\imagebuffer.cpp" />
+    <ClCompile Include="..\..\..\src\wxgui\imagebuffer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DEV_Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\agreggates\bruteforce.h" />
@@ -284,6 +293,7 @@
     <ClInclude Include="..\..\..\src\core\scene.h" />
     <ClInclude Include="..\..\..\src\core\statistics.h" />
     <ClInclude Include="..\..\..\src\import\objimporter.h" />
+    <ClInclude Include="..\..\..\src\import\xmlsceneimporter.h" />
     <ClInclude Include="..\..\..\src\integrators\whitted.h" />
     <ClInclude Include="..\..\..\src\ligths\ambient.h" />
     <ClInclude Include="..\..\..\src\ligths\point.h" />

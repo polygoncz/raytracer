@@ -21,7 +21,7 @@ public:
 	Scene();
 	~Scene();
 
-	void Build();
+	void Build(const char* file);
 	void Render();
 	bool Intersect(const Ray& ray, Intersection& inter) const;
 	bool IntersectP(const Ray& ray) const;
@@ -38,5 +38,5 @@ public:
 	vector<Reference<GeometricPrimitive> > objects;
 	Film* film;
 	Camera* cam;
-	Primitive* agr;
+	Primitive* aggregator;
 };

@@ -28,6 +28,8 @@
 
 #include <vector>
 
+#include "import/xmlsceneimporter.h"
+
 using namespace std;
 
 Scene::Scene()
@@ -49,7 +51,7 @@ Scene::~Scene()
 
 	if (cam != NULL) delete cam;
 
-	if (agr != NULL) delete agr;
+	if (aggregator != NULL) delete aggregator;
 }
 
 BBox Scene::Bounds() const
@@ -75,12 +77,12 @@ void Scene::AddObject(GeometricPrimitive* obj)
 
 bool Scene::Intersect(const Ray& ray, Intersection& inter) const
 {
-	return agr->Intersect(ray, inter);
+	return aggregator->Intersect(ray, inter);
 }
 
 bool Scene::IntersectP(const Ray& ray) const
 {
-	return agr->IntersectP(ray);
+	return aggregator->IntersectP(ray);
 }
 
 /* SCENA 01
@@ -193,9 +195,9 @@ bool Scene::IntersectP(const Ray& ray) const
  tracer = new WhittedTracer(this);
  }*/
 
-void Scene::Build()
+void Scene::Build(const char* file)
 {
-	film = new Film(800, 800, 0.008f);
+	/*film = new Film(800, 800, 0.008f);
 
 	ambient = new AmbientLight(1.f, WHITE);
 
@@ -208,13 +210,27 @@ void Scene::Build()
 	vector<Reference<Primitive> > p;
 
 	ObjImporter imp;
-	Reference<Primitive> mesh = imp.LoadObj("C:/Users/Pavel Lokvenc/Documents/demon.obj", new Matte(GREY, 0.1f, 0.9f));
-
+	Reference<Primitive> mesh = imp.LoadObj("D:/_scenes/demon/demon.obj", new Matte(GREY, 0.1f, 0.9f));
+	
 	mesh->Refine(p);
-
+	
 	cam = new PerspectiveCamera(Point(-20.f, 4.f, 27.f), Point(0.f, 0.f, 0.f), Vector(0.f, 1.f, 0.f), film, 50.f);
 
-	agr = new Grid(p);
+	aggregator = new Grid(p);*/
+
+	XmlSceneImporter imp(file);
+	background = imp.loadBackground();
+	int u = 5;
+	ambient = imp.loadAmbient();
+	imp.loadLights(lights);
+
+	vector<Reference<Primitive> > p;
+	imp.loadModels(p);
+
+	film = imp.loadFilm();
+	cam = imp.loadCamera(film);
+
+	aggregator = imp.loadAggregate(p);
 }
 
 /*void Scene::Build()
