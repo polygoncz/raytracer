@@ -10,6 +10,7 @@
 #include "materials/matte.h"
 #include <cstdlib>
 #include <cstdio>
+#include <iostream>
 
 ObjImporter::ObjImporter()
 {
@@ -20,7 +21,7 @@ Reference<Primitive> ObjImporter::LoadObj(const char* path, Reference<Material> 
 	FILE* f = fopen(path, "r");
 	if (f == NULL)
 	{
-		cout << "Cannot open file." << endl;
+		//cout << "Cannot open file." << endl;
 		return NULL;
 	}
 

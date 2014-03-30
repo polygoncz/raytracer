@@ -12,6 +12,7 @@
 #include "core/renderer.h"
 #include "renderers/raytracer.h"
 #include "core/statistics.h"
+#include "import/xmlsceneimporter.h"
 
 /************************************************************************/
 /* ImageBufferApp                                                       */
@@ -396,11 +397,12 @@ void RenderCanvas::renderStart(void)
 	{
 		filePath = dialog.GetPath();
 
+		XmlSceneImporter imp(filePath);
 		wxGetApp().SetStatusText("Building...");
 		scene = new Scene();
 		scene->Build(filePath);
 
-		renderer = new Raytracer(scene, thread);
+		renderer = new Raytracer(scene, thread, imp.LoadPerPixelSamples(), imp.LoadNumberOfThreads());
 		wxGetApp().SetStatusText("Rendering...");
 
 		pixelsRendered = 0;

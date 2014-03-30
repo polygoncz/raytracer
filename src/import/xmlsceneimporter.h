@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef XMLSCENEIMOPRTER_H
 #define XMLSCENEIMOPRTER_H
 
@@ -28,23 +30,28 @@ public:
 	XmlSceneImporter(const char* path);
 	~XmlSceneImporter();
 
-	void loadLights(vector<Light*>& lights);
-	void loadModels(vector<Reference<Primitive> >& models);
-	RGBColor loadBackground(void);
-	Light* loadAmbient(void);
-	Film* loadFilm(void);
-	Camera* loadCamera(Film* f);
-	Agreggate* loadAggregate(vector<Reference<Primitive> >& models);
+	void LoadLights(vector<Light*>& lights);
+	void LoadModels(vector<Reference<Primitive> >& models);
+	RGBColor LoadBackground(void);
+	Light* LoadAmbient(void);
+	Film* LoadFilm(void);
+	Camera* LoadCamera(Film* f);
+	Agreggate* LoadAggregate(vector<Reference<Primitive> >& models);
+	int LoadPerPixelSamples();
+	int LoadNumberOfThreads();
 
 private:
-	wxXmlNode* findNode(const wxXmlNode* parent, const char* name);
-	RGBColor getRGBFromNode(const wxXmlNode* node);
+	wxXmlNode* FindNode(const wxXmlNode* parent, const char* name);
+	RGBColor GetRGBFromNode(const wxXmlNode* node);
 
 	template<typename T>
-	T getVectorTypeFromNode(const wxXmlNode* node);
+	T GetVectorTypeFromNode(const wxXmlNode* node);
 
-	int getIntAttrFromNode(const wxXmlNode* node, const char* attr, int def_val = 0);
-	float getFloatAttrFromNode(const wxXmlNode* node, const char* attr, float def_val = 0.f);
+	int GetIntAttrFromNode(const wxXmlNode* node, const char* attr, int def_val = 0);
+	float GetFloatAttrFromNode(const wxXmlNode* node, const char* attr, float def_val = 0.f);
+	Reference<Material> LoadMatte(const wxXmlNode* node);
+	Reference<Material> LoadMaterial(const wxXmlNode* parent);
+	Reference<Material> LoadPhong(const wxXmlNode* node);	
 
 private:
 	wxXmlDocument doc;

@@ -10,7 +10,7 @@ class PointLight: public Light
 public:
 	PointLight(void);
 	PointLight(const PointLight& light);
-	PointLight(double _ls, const RGBColor& _c, const Point& _loc);
+	PointLight(float _ls, const RGBColor& _c, const Point& _loc);
 	virtual ~PointLight(void);
 
 	virtual Vector GetDirection(const Intersection& sr) const;
@@ -18,7 +18,7 @@ public:
 
 private:
 	Point location; //position
-	double ls; //intensity
+	float ls; //intensity
 	RGBColor c; //color
 };
 

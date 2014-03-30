@@ -89,16 +89,16 @@ bool Scene::IntersectP(const Ray& ray) const
 void Scene::Build(const char* file)
 {
 	XmlSceneImporter imp(file);
-	background = imp.loadBackground();
+	background = imp.LoadBackground();
 	int u = 5;
-	ambient = imp.loadAmbient();
-	imp.loadLights(lights);
+	ambient = imp.LoadAmbient();
+	imp.LoadLights(lights);
 
 	vector<Reference<Primitive> > p;
-	imp.loadModels(p);
+	imp.LoadModels(p);
 
-	film = imp.loadFilm();
-	cam = imp.loadCamera(film);
+	film = imp.LoadFilm();
+	cam = imp.LoadCamera(film);
 
-	aggregator = imp.loadAggregate(p);
+	aggregator = imp.LoadAggregate(p);
 }

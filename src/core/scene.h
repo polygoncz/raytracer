@@ -1,7 +1,6 @@
 #pragma once
 
 #include "core.h"
-#include "wxgui/imagebuffer.h"
 #include <vector>
 
 #include "light.h"
@@ -22,6 +21,7 @@ public:
 	~Scene();
 
 	void Build(const char* file);
+	//void Build(XmlSceneImporter& imp);
 	void Render();
 	bool Intersect(const Ray& ray, Intersection& inter) const;
 	bool IntersectP(const Ray& ray) const;
