@@ -73,7 +73,14 @@ Grid::Grid(vector<Reference<Primitive>> &p)
 
 Grid::~Grid()
 {
-	// TODO Auto-generated destructor stub
+	/*if (voxels)
+	{
+		for (int i = 0; i < nv; ++i)
+			if (voxels[i])
+				delete [] voxels[i];
+
+		delete [] voxels;
+	}*/
 }
 
 bool Grid::Intersect(const Ray &ray, Intersection &sr)

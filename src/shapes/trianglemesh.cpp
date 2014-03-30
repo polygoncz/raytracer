@@ -63,7 +63,7 @@ bool TriangleMesh::CanIntersect() const
 void TriangleMesh::Refine(vector<Reference<Primitive> > &refined)
 {
 	for (uint32_t i = 0; i < nfaces; i++)
-		refined.push_back(new Triangle(this, i));
+		refined.push_back(new Triangle(Reference<TriangleMesh>(this), i));
 }
 
 BBox TriangleMesh::Bounds() const
@@ -75,18 +75,16 @@ BBox TriangleMesh::Bounds() const
 }
 
 ////////////////Triangle////////////////////
-Triangle::Triangle(TriangleMesh* m, int n)
-		: GeometricPrimitive(m->material)
+Triangle::Triangle(Reference<TriangleMesh>& m, int n)
+		: mesh(m), GeometricPrimitive(m->material)
 {
-	mesh = m;
-	mesh->count++;
+	//mesh->count++;
 	v = &mesh->topology[3 * n];
 	STATS_ADD_TRIANGLE();
 }
 
 Triangle::~Triangle()
-{
-}
+{ }
 
 bool Triangle::Intersect(const Ray& ray, Intersection& sr)
 {
@@ -177,9 +175,9 @@ Normal Triangle::InterpolateNormal(float beta, float gamma)
 
 BBox Triangle::Bounds() const
 {
-	Point &p0 = mesh->p[v[0].p];
-	Point &p1 = mesh->p[v[1].p];
-	Point &p2 = mesh->p[v[2].p];
+	const Point &p0 = mesh->p[v[0].p];
+	const Point &p1 = mesh->p[v[1].p];
+	const Point &p2 = mesh->p[v[2].p];
 
 	return Union(BBox(p0, p1), p2);
 }

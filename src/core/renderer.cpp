@@ -10,7 +10,11 @@ Renderer::Renderer(Scene* sc, RenderThread* thread)
 
 Renderer::~Renderer()
 {
-	if (scene != NULL) delete scene;
+	if (scene != NULL)
+	{
+		delete scene;
+		scene = NULL;
+	}
 }
 
 void Renderer::DisplayPixel(int x, int y, RGBColor& in) const

@@ -13,14 +13,12 @@ class Phong: public Material
 {
 public:
 	Phong(const RGBColor& baseColor, const RGBColor& specularColor,
-		  const RGBColor& reflectionColor, const RGBColor& refractionColor,
-		  float ca, float cd, float exp, float ior);
+		  float ca, float cd, float exp);
 	virtual ~Phong(void);
 
 	virtual BSDF* GetBSDF() const;
 private:
-	RGBColor baseColor, specularColor, reflectionColor, refractionColor;
+	RGBColor baseColor, specularColor;
 	float exp;
 	float ca, cd;
-	float ior;
 };

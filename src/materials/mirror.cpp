@@ -1,16 +1,17 @@
 #include "materials/mirror.h"
 
+#include "brdf/reflection.h"
+
 Material* Mirror::Clone() const
 {
 	return new Mirror(*this);
 }
 
-RGBColor Mirror::Ambient(const Intersection& inter, const Vector& wi, const RGBColor& li) const
+BSDF* Mirror::GetBSDF() const
 {
-	return BLACK;
-}
+	BSDF* bsdf = new BSDF();
 
-RGBColor Mirror::L(const Intersection& inter, const Vector& wi, const RGBColor& li) const
-{
-	return BLACK;
+	bsdf->Add(new Reflection(WHITE));
+
+	return bsdf;
 }

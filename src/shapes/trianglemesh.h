@@ -31,7 +31,7 @@ public:
 class Triangle: public GeometricPrimitive
 {
 public:
-	Triangle(TriangleMesh* m, int n);
+	Triangle(Reference<TriangleMesh>& m, int n);
 	virtual ~Triangle();
 
 	virtual bool Intersect(const Ray& ray, Intersection& sr);
@@ -40,6 +40,6 @@ public:
 private:
 	Normal InterpolateNormal(const float beta, const float gamma);
 private:
-	TriangleMesh* mesh;
+	mutable Reference<TriangleMesh> mesh;
 	Vertex *v;
 };

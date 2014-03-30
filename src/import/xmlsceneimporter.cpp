@@ -1,5 +1,7 @@
 #include "import/xmlsceneimporter.h"
 
+#include "materials/phong.h"
+
 XmlSceneImporter::XmlSceneImporter(const char* path)
 	: path(path)
 {
@@ -148,7 +150,7 @@ void XmlSceneImporter::loadModels(vector<Reference<Primitive> >& models)
 				file += object->GetAttribute("src");
 				if (file.Cmp(wxPathOnly(path)) != 0) {
 					ObjImporter imp;
-					models.push_back(imp.LoadObj(file.mb_str(), new Matte(GREY, 0.1f, 0.9f)));
+					models.push_back(imp.LoadObj(file.mb_str(), new Phong(RGBColor(0.609f, 0.355f, 0.28125f) , RGBColor(0.1f, 0.1f, 0.1f), 0.2f, 0.8f, 20.f)));
 				}
 			}
 

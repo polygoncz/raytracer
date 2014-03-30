@@ -6,11 +6,9 @@
 #include "brdf/transmittance.h"
 
 Phong::Phong(const RGBColor& baseColor, const RGBColor& specularColor,
-			 const RGBColor& reflectionColor, const RGBColor& refractionColor,
-			 float ca, float cd, float exp, float ior)
+			 float ca, float cd, float exp)
 		: baseColor(baseColor), specularColor(specularColor),
-		  reflectionColor(reflectionColor), refractionColor(refractionColor),
-		  ca(ca), cd(cd), exp(exp), ior(ior), Material()
+		  ca(ca), cd(cd), exp(exp), Material()
 {}
 
 Phong::~Phong(void)
@@ -23,8 +21,6 @@ BSDF* Phong::GetBSDF() const
 	bsdf->Add(new Ambient(baseColor * ca));
 	bsdf->Add(new Lambert(cd, baseColor));
 	bsdf->Add(new Specular(exp, specularColor));
-	bsdf->Add(new Reflection(reflectionColor));
-	bsdf->Add(new Transmittance(refractionColor, ior));
 
 	return bsdf;
 }

@@ -248,8 +248,6 @@ RenderCanvas::~RenderCanvas(void)
 {
 	if (m_image != NULL) delete m_image;
 
-	if (scene != NULL) delete scene;
-
 	if (thread != NULL) delete thread;
 
 	if (timer != NULL) delete timer;
@@ -283,10 +281,10 @@ void RenderCanvas::OnRenderCompleted(wxCommandEvent& event)
 {
 	thread = NULL;
 
-	if (scene != NULL)
+	if (renderer != NULL)
 	{
-		delete scene;
-		scene = NULL;
+		delete renderer;
+		renderer = NULL;
 	}
 
 	if (timer != NULL)
@@ -385,7 +383,7 @@ void RenderCanvas::renderStart(void)
 {
 	wxString caption = "Choose a File";
 
-	wxString wildcard = "XML scene files (*.xml)|*.xml|";
+	wxString wildcard = "XML scene files (*.xml)|*.xml";
 	wxString filePath;
 
 	wxString defaultDir = wxEmptyString;
@@ -455,7 +453,7 @@ void RenderThread::setPixel(int x, int y, int r, int g, int b)
 {
 	pixels.push_back(new RenderPixel(x, y, r, g, b));
 
-	if (timer->Time() - lastUpdateTime > 40) NotifyCanvas();
+	if (timer->Time() - lastUpdateTime > 500) NotifyCanvas();
 
 	TestDestroy();
 }

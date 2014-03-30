@@ -720,9 +720,9 @@ public:
 	}
 
 	Ray(const Point& _o, const Vector& _d, float start = 0.f, float end =
-	INFINITY, float eps = EPSILON, int _depth = 0)
-			: o(_o), d(_d), mint(start), maxt(end), rayEpsilon(eps), depth(
-					_depth)
+	INFINITY, float eps = EPSILON, int _depth = 0, float _lastIor = 1.f)
+			: o(_o), d(_d), mint(start), maxt(end), rayEpsilon(eps), depth(_depth),
+			lastIor(_lastIor)
 	{
 	}
 
@@ -737,6 +737,7 @@ public:
 	mutable float maxt; ///< maximalni hodnota parametru t
 	mutable float rayEpsilon; ///< vypocitane epsilon (zamezuje vzniku artefaktu)
 	mutable int depth; ///< hloubka rekurze
+	mutable float lastIor; ///< posledni hodnota IOR
 };
 
 class BBox
