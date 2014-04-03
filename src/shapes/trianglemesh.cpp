@@ -63,7 +63,7 @@ bool TriangleMesh::CanIntersect() const
 void TriangleMesh::Refine(vector<Reference<Primitive> > &refined)
 {
 	for (uint32_t i = 0; i < nfaces; i++)
-		refined.push_back(new Triangle(Reference<TriangleMesh>(this), i));
+		refined.push_back(new Triangle(this, i));
 }
 
 BBox TriangleMesh::Bounds() const
@@ -75,10 +75,10 @@ BBox TriangleMesh::Bounds() const
 }
 
 ////////////////Triangle////////////////////
-Triangle::Triangle(Reference<TriangleMesh>& m, int n)
+Triangle::Triangle(TriangleMesh* m, int n)
 		: mesh(m), GeometricPrimitive(m->material)
 {
-	//mesh->count++;
+	mesh->count++;
 	v = &mesh->topology[3 * n];
 	STATS_ADD_TRIANGLE();
 }

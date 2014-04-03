@@ -16,8 +16,8 @@ public:
 		  float ca, float cd, float exp);
 	virtual ~Phong(void);
 
-	virtual BSDF* GetBSDF() const;
-private:
+	virtual BSDF* GetBSDF(const Vector& normal, const Vector& incident) const;
+protected:
 	RGBColor baseColor, specularColor;
 	float exp;
 	float ca, cd;

@@ -126,7 +126,7 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 		if (voxel != NULL)
 		{
 			hitSomething |= voxel->Intersect(ray, sr);
-			if (hitSomething) return hitSomething; //Neni treba hledat dale pokud jsme nasli prusecik
+			//if (hitSomething) return hitSomething; //Neni treba hledat dale pokud jsme nasli prusecik
 		}
 
 		//Hledani osy pro kterou je treba preskocit do dalsiho voxelu
@@ -143,7 +143,7 @@ bool Grid::Intersect(const Ray &ray, Intersection &sr)
 		nextCrossingT[stepAxis] += deltaT[stepAxis];
 	}
 
-	return false;
+	return hitSomething;
 }
 
 bool Grid::IntersectP(const Ray &ray)

@@ -14,7 +14,7 @@ Phong::Phong(const RGBColor& baseColor, const RGBColor& specularColor,
 Phong::~Phong(void)
 {}
 
-BSDF* Phong::GetBSDF() const
+BSDF* Phong::GetBSDF(const Vector& normal, const Vector& incident) const
 {
 	BSDF* bsdf = new BSDF();
 

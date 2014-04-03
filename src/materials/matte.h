@@ -21,7 +21,7 @@ public:
 	Matte(const RGBColor& baseColor, float ca, float cd);
 	virtual ~Matte(void);
 
-	virtual BSDF* GetBSDF() const;
+	virtual BSDF* GetBSDF(const Vector& normal, const Vector& incident) const;
 
 private:
 	RGBColor color;

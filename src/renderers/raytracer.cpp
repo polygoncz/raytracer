@@ -18,9 +18,9 @@ void Raytracer::Render() const
 	int n = static_cast<int>(sqrt(perPixelSamples));
 	float diff = 1.f / n;
 
-	omp_set_num_threads(numberOfThreads);
+	//omp_set_num_threads(numberOfThreads);
 
-	#pragma omp parallel for schedule(guided)
+	//#pragma omp parallel for schedule(guided)
 	for (int r = 0; r < film->height; r++)
 	{
 		for (int c = 0; c < film->width; c++)
@@ -53,7 +53,7 @@ void Raytracer::Render() const
 
 			color /= (n*n);
 
-			#pragma omp critical
+			//#pragma omp critical
 			{
 				DisplayPixel(c, r, color);
 			}

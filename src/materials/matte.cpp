@@ -9,7 +9,7 @@ Matte::Matte(const RGBColor& baseColor, float ca, float cd)
 Matte::~Matte(void)
 {}
 
-BSDF* Matte::GetBSDF() const
+BSDF* Matte::GetBSDF(const Vector& normal, const Vector& incident) const
 {
 	BSDF* bsdf = new BSDF();
 

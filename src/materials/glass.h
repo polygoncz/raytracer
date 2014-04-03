@@ -13,10 +13,7 @@ public:
 	virtual ~Glass() {};
 
 	virtual Material* Clone() const;
-	virtual RGBColor L(const Intersection& inter, const Vector& wi, const RGBColor& li) const;
-	virtual RGBColor Ambient(const Intersection& inter, const Vector& wi, const RGBColor& li) const;
-	virtual RGBColor Transmitance() const { return WHITE; };
-	virtual BSDF* GetBSDF() const {return NULL;}
+	virtual BSDF* GetBSDF(const Vector& normal, const Vector& incident) const;
 
 private:
 	float ior;

@@ -42,7 +42,7 @@ public:
 
 private:
 	wxXmlNode* FindNode(const wxXmlNode* parent, const char* name);
-	RGBColor GetRGBFromNode(const wxXmlNode* node);
+	RGBColor GetRGBFromNode(const wxXmlNode* node, const RGBColor& def = BLACK);
 
 	template<typename T>
 	T GetVectorTypeFromNode(const wxXmlNode* node);
@@ -52,6 +52,7 @@ private:
 	Reference<Material> LoadMatte(const wxXmlNode* node);
 	Reference<Material> LoadMaterial(const wxXmlNode* parent);
 	Reference<Material> LoadPhong(const wxXmlNode* node);	
+	Reference<Material> LoadReflective(const wxXmlNode* node);	
 
 private:
 	wxXmlDocument doc;

@@ -1,5 +1,8 @@
 #include "glass.h"
 
+#include "brdf/reflection.h"
+#include "brdf/transmittance.h"
+
 Glass::Glass()
 	: ior(1.333f)
 { }
@@ -9,12 +12,14 @@ Material* Glass::Clone() const
 	return new Glass(*this);
 }
 
-RGBColor Glass::Ambient(const Intersection& inter, const Vector& wi, const RGBColor& li) const
+BSDF* Glass::GetBSDF(const Vector& normal, const Vector& incident) const
 {
-	return BLACK;
-}
+	BSDF* bsdf = new BSDF();
 
-RGBColor Glass::L(const Intersection& inter, const Vector& wi, const RGBColor& li) const
-{
-	return BLACK;
+	float r = SchlickReflectance(normal, incident, 1.f, ior);
+
+	bsdf->Add(new Reflection(WHITE * r));
+	bsdf->Add(new Transmittance((1 - r) * WHITE, ior));
+
+	return bsdf;
 }

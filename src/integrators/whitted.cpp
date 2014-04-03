@@ -28,7 +28,7 @@ RGBColor WhittedTracer::L(const Ray& ray, const Scene& scene, Intersection& inte
 
 	RGBColor l;
 
-	BSDF* bsdf = inter.material->GetBSDF();
+	BSDF* bsdf = inter.material->GetBSDF(inter.normal, -inter.ray.d);
 
 	for (uint32_t i = 0; i < bsdf->NumComponents(); ++i)
 	{

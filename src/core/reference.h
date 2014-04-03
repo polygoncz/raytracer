@@ -9,6 +9,7 @@
 #define REFERENCE_H_
 
 #include <cstdlib>
+#include <omp.h>
 
 class ReferenceCounted
 {

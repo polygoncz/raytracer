@@ -38,7 +38,10 @@ public:
 	Material(const Material& material);
 	virtual ~Material(void);
 
-	virtual BSDF* GetBSDF() const = 0;
+	virtual BSDF* GetBSDF(const Vector& normal, const Vector& incident) const = 0;
 };
+
+float SchlickReflectance(const Vector& normal, const Vector& incident, float n1, float n2);
+float FresnelReflectance(const Vector& normal, const Vector& incident, float n1, float n2);
 
 #endif
