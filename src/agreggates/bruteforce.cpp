@@ -1,6 +1,10 @@
 #include "agreggates/bruteforce.h"
 #include "core/constants.h"
 
+/**
+ * Nad každým tělesem zkusí provést Primitive::Refine() tak,
+ * aby bylo možné s každým tělesem provést výpočet průsečíku.
+ */
 BruteForce::BruteForce(vector<Reference<Primitive> > &p)
 {
 	for (unsigned int i = 0; i < p.size(); i++)
@@ -15,11 +19,12 @@ BruteForce::BruteForce(vector<Reference<Primitive> > &p)
 BruteForce::~BruteForce()
 { }
 
+
 BBox BruteForce::Bounds() const
 {
 	BBox b;
 	for (unsigned int i = 0; i < primitives.size(); i++)
-		Union(b, primitives[i]->Bounds());
+		Union(b, primitives[i]->Bounds()); //sjednocování BBox
 	return b;
 }
 

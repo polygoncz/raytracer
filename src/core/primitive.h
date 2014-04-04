@@ -35,7 +35,7 @@ public:
 	virtual bool Intersect(const Ray& ray, Intersection& sr) = 0;
 
 	/**
-	 * Zjistí, zdali má paprsek průsečík s tělesem. Metoda je od dodatečných výpočtů.
+	 * Zjistí, zdali má paprsek průsečík s tělesem. Metoda je oproštěna od dodatečných výpočtů.
 	 * Používá se při výpočtech se stínovými paprsky.
 	 * @param ray paprsek se kterým je počítán průsečík
 	 * @return jestli má paprsek průsečík s tělesem
