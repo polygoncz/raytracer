@@ -1,5 +1,9 @@
 #pragma once
 
+/**
+ * @file
+ */
+
 #ifndef BXDF_H
 #define BXDF_H
 
@@ -10,69 +14,69 @@
 #include "intersection.h"
 
 /**
- * Vıètovı typ, kterı slouí pro indentifikaci typu BRDF. Podle typu s ním lze potom odlišnì pracovat.
+ * VÃ½ÄtovÃ½ typ, kterÃ½ slouÅ¾Ã­ pro indentifikaci typu BRDF. Podle typu s nÃ­m lze potom odliÅ¡nÄ› pracovat.
  */
 enum BxDFType
 {
-	BSDF_REFLECTION		= 1, ///< BRDF, která odráí paprsek a dokáe ho vypoèítat
-	BSDF_TRANSMISSION	= 2, ///< BRDF, která láme paprsek a dokáe ho vypoèítat
-	BSDF_DIFFUSE		= 4, ///< BRDF difúzní sloky
-	BSDF_SPECULAR		= 8, ///< BRDF specular sloky
-	BSDF_AMBIENT		= 16 ///< BRDF okolního osvìtlení
+	BSDF_REFLECTION		= 1, ///< BRDF, kterÃ¡ odrÃ¡Å¾Ã­ paprsek a dokÃ¡Å¾e ho vypoÄÃ­tat
+	BSDF_TRANSMISSION	= 2, ///< BRDF, kterÃ¡ lÃ¡me paprsek a dokÃ¡Å¾e ho vypoÄÃ­tat
+	BSDF_DIFFUSE		= 4, ///< BRDF difÃºznÃ­ sloÅ¾ky
+	BSDF_SPECULAR		= 8, ///< BRDF specular sloÅ¾ky
+	BSDF_AMBIENT		= 16 ///< BRDF okolnÃ­ho osvÄ›tlenÃ­
 };
 
 /**
- * Bázová tøída, která pøedstavuje objekt obousmìrné odrazové distribuèní funkce (BRDF).
+ * BÃ¡zovÃ¡ tÅ™Ã­da, kterÃ¡ pÅ™edstavuje objekt obousmÄ›rnÃ© odrazovÃ© distribuÄnÃ­ funkce (BRDF).
  */
 class BxDF
 {
 public:
 	/**
-	 * Bázovı konstruktor, kterı nastavuje typ funkce.
-	 * @param t typ funkce typu vıètu BxDFType
+	 * BÃ¡zovÃ½ konstruktor, kterÃ½ nastavuje typ funkce.
+	 * @param t typ funkce typu vÃ½Ätu BxDFType
 	 * @see BxDFType
 	 */
 	BxDF(BxDFType t);
 
 	/**
-	 * Kopírovací kontruktor
-	 * @param brdf kopírovaná instance
+	 * KopÃ­rovacÃ­ kontruktor
+	 * @param brdf kopÃ­rovanÃ¡ instance
 	 */
 	BxDF(const BxDF& brdf);
 
 	/**
-	 * Virtuální destruktor
+	 * VirtuÃ¡lnÃ­ destruktor
 	 */
 	virtual ~BxDF();
 
 	/**
-	 * Metoda slouí k vıpoètu svìtelného pøíspìvku, na základì zadanıch hodnot.
-	 * @param wi vektoru smìrem od svìtla
-	 * @parma wo vektoru smìrem k pozorovateli
-	 * @param n normála v bodì dopadu
-	 * @return velikost svìtelného pøíspìvku 
+	 * Metoda slouÅ¾Ã­ k vÃ½poÄtu svÄ›telnÃ©ho pÅ™Ã­spÄ›vku, na zÃ¡kladÄ› zadanÃ½ch hodnot.
+	 * @param wi vektoru smÄ›rem od svÄ›tla
+	 * @parma wo vektoru smÄ›rem k pozorovateli
+	 * @param n normÃ¡la v bodÄ› dopadu
+	 * @return velikost svÄ›telnÃ©ho pÅ™Ã­spÄ›vku 
 	 */
 	virtual RGBColor F(const Vector& wi, const Vector& wo, const Normal& n) const;
 
 	/**
-	 * Metoda vypoèítává hodnotu hodnotu odraeného resp. lomeného paprsku.
-	 * Návrácená hodnota typu RGBColor potom slouí k urèení, jaká èást
-	 * barevného spektra je odraena resp. propuštìna.
-	 * @param wi zpravidla vektor smìru od pozorovatele
-	 * @param wo slouí k návratu vypoèteného vektoru
-	 * @param n normála v bodì dopadu
-	 * @return barevná hodnota, slouící k filtrování spektra
+	 * Metoda vypoÄÃ­tÃ¡vÃ¡ hodnotu hodnotu odraÅ¾enÃ©ho resp. lomenÃ©ho paprsku.
+	 * NÃ¡vrÃ¡cenÃ¡ hodnota typu RGBColor potom slouÅ¾Ã­ k urÄenÃ­, jakÃ¡ ÄÃ¡st
+	 * barevnÃ©ho spektra je odraÅ¾ena resp. propuÅ¡tÄ›na.
+	 * @param wi zpravidla vektor smÄ›ru od pozorovatele
+	 * @param wo slouÅ¾Ã­ k nÃ¡vratu vypoÄtenÃ©ho vektoru
+	 * @param n normÃ¡la v bodÄ› dopadu
+	 * @return barevnÃ¡ hodnota, slouÅ¾Ã­cÃ­ k filtrovÃ¡nÃ­ spektra
 	 */
 	virtual RGBColor SampleF(const Vector& wi, Vector& wo, const Normal& n) const;
 
 	/**
-	 * Slouí pro vıpoèty s globálním osvìtlením. PREPARE FOR FUTURE :-)
+	 * SlouÅ¾Ã­ pro vÃ½poÄty s globÃ¡lnÃ­m osvÄ›tlenÃ­m. PREPARE FOR FUTURE :-)
 	 */
 	virtual RGBColor Rho(const Vector& wi, const Vector& wo, const Normal& n) const;
 
 	/**
-	 * Porovnává, jestli BRDF funkce odpovídá zadanému typu BxDFType.
-	 * @param flags porovnávané typy
+	 * PorovnÃ¡vÃ¡, jestli BRDF funkce odpovÃ­dÃ¡ zadanÃ©mu typu BxDFType.
+	 * @param flags porovnÃ¡vanÃ© typy
 	 * @see BxDFType
 	 * @return true/false
 	 */

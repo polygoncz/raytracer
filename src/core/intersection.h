@@ -1,5 +1,9 @@
 #pragma once
 
+/**
+ * @file
+ */
+
 #include "core.h"
 
 #include "constants.h"
@@ -7,6 +11,11 @@
 #include "geometry.h"
 #include "material.h"
 
+/**
+ * Třída uchovává atributy, které představují souhrn 
+ * informací o průsečíku paprsku s objektem ve scéně.
+ * Všechny její atributy jsou veřejné.
+ */
 class Intersection
 {
 public:
@@ -20,12 +29,11 @@ public:
 	{
 	}
 
-public:
-	bool hitObject;             //Did ray hit object?
-	Point hitPoint;             //Hitpoint in world coordinates
-	Normal normal;              //Surface normal in hit point
-	Ray ray;                    //Ray for computing specular highlights
-	Reference<Material> material;        //Pointer to material of hitted object
-	int depth;                  //Depth of recursion
-	float t;                    //tmin
+	bool hitObject; ///< protnul paprsek objekt?
+	Point hitPoint; ///< Souřadnice místa dopadu
+	Normal normal; ///< Normála v místě dopadu
+	Ray ray; ///< Paprsek, pro který se provádí výpočet
+	Reference<Material> material; ///< Reference na materiál objektu
+	int depth; ///< Hloubka rekurze
+	float t; ///< hodnota parametru t v místě dopadu
 };

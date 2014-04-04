@@ -17,9 +17,9 @@ public:
 	virtual RGBColor L(const Intersection& sr) const;
 
 private:
-	Point location; //position
-	float ls; //intensity
-	RGBColor c; //color
+	Point location; ///< pozice svìtla position
+	float ls; ///< intenzita
+	RGBColor c; ///< barva
 };
 
 inline Vector PointLight::GetDirection(const Intersection& sr) const

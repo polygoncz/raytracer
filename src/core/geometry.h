@@ -563,6 +563,12 @@ public:
 	float z;
 };
 
+/**
+ * Třída reprezentuje normálu v prostoru.\n
+ * Vlastnosti jsou stejné jako u třídy Vector, je dokonce možné mezi nimi převádět.
+ * Třída je zde pouze ze sémantických důvodu.
+ * @see Vector
+ */
 class Normal
 {
 public:
@@ -711,21 +717,39 @@ public:
 	float z;
 };
 
+/**
+ * Třída reprezentuje parpsek(polopřímku) v prostoru.\n
+ * Vychází z parametrické rovnice přímky.
+ */
 class Ray
 {
 public:
+	/**
+	 * Bezparametrický konstruktor.
+	 */
 	Ray()
 			: mint(0.f), maxt(INFINITY), rayEpsilon(EPSILON), depth(0)
-	{
-	}
+	{}
 
+	/**
+	 * Konstruktor
+	 * @param _o počátek paprsku
+	 * @param _d směr paprsku
+	 * @param start minimální hodnota parametru t
+	 * @param end maximální hodnota parametru t
+	 * @param eps hodnota epsilon pro eliminaci chyb při výpočtech s desetinnou čárkou
+	 * @param _depth hloubka rekurze
+	 */
 	Ray(const Point& _o, const Vector& _d, float start = 0.f, float end =
-	INFINITY, float eps = EPSILON, int _depth = 0, float _lastIor = 1.f)
-			: o(_o), d(_d), mint(start), maxt(end), rayEpsilon(eps), depth(_depth),
-			lastIor(_lastIor)
-	{
-	}
+	INFINITY, float eps = EPSILON, int _depth = 0)
+			: o(_o), d(_d), mint(start), maxt(end), rayEpsilon(eps), depth(_depth)
+	{}
 
+	/**
+	 * Pro zadaný parametr t vypočítá bod na polopřímce.
+	 * Použití: Ray r; r(0.568);
+	 * @param t hodnota parametru
+	 */
 	Point operator()(float t) const
 	{
 		return o + d * t;
@@ -737,32 +761,57 @@ public:
 	mutable float maxt; ///< maximalni hodnota parametru t
 	mutable float rayEpsilon; ///< vypocitane epsilon (zamezuje vzniku artefaktu)
 	mutable int depth; ///< hloubka rekurze
-	mutable float lastIor; ///< posledni hodnota IOR
 };
 
+/**
+ * Třída reprezentuje obalový kvádr, jehož stěny jsou rovnoběžné s osami světových souřadnic.
+ */
 class BBox
 {
 public:
+	/**
+	 * Bezparametrický konstruktor.\n
+	 * pMin má všechny složky definované na INFINITY a pmax na -INFINITY
+	 * z důvodu snadnějšího slučování s jinými BBox.
+	 */
 	BBox()
 	{
 		pMin = Point(INFINITY, INFINITY, INFINITY);
 		pMax = Point(-INFINITY, -INFINITY, -INFINITY);
 	}
 
+	/**
+	 * Konstruktor definovaný pomocí jednoho bodu. Vloží jeho hodnotu do pMin a pMax.
+	 * @param p bod
+	 */
 	BBox(const Point& p)
 		: pMin(p), pMax(p)
 	{}
 
+	/**
+	 * Konstruktor definující BBox pomocí dvou bodů.
+	 * Do pMin se vloží minimální složky a do pMax maximální složky z obou bodů.
+	 * @param p1 reference na první bod
+	 * @param p2 reference na druhý bod
+	 */
 	BBox(const Point& p1, const Point& p2)
 	{
 		pMin = Point(Min(p1.x, p2.x), Min(p1.y, p2.y), Min(p1.z, p2.z));
 		pMax = Point(Max(p1.x, p2.x), Max(p1.y, p2.y), Max(p1.z, p2.z));
 	}
 
+	/**
+	 * Kopírovací konstruktor.
+	 */
 	BBox(const BBox& b)
 		: pMin(b.pMin), pMax(b.pMax)
 	{}
 
+	/**
+	 * Kontroluje, jestli bod leží uvnitř BBox.
+	 * @param p kontrolovaný bod
+	 * @return jestli bod leží uvnitř obalové BBox
+	 */
 	bool IsInside(const Point& p) const
 	{
 		return (p.x >= pMin.x && p.x <= pMax.x &&
@@ -770,6 +819,11 @@ public:
 				p.z >= pMin.z && p.z <= pMax.z);
 	}
 
+	/**
+	 * Kontrolu, jestli dochází k překrytí dvou BBox.
+	 * @param b kontrolovaný BBox
+	 * @return jestli se dvě BBox překrývají
+	 */
 	bool IsOverlaps(const BBox& b) const
 	{
 		bool x = (pMax.x >= b.pMin.x && pMin.x <= b.pMax.x);
@@ -778,11 +832,19 @@ public:
 		return (x && y && z);
 	}
 
+	/**
+	 * Vypočítá diagonálu BBox.
+	 ** @return Vector představující diagonálu
+	 */
 	Vector Diagonal() const
 	{
 		return pMax - pMin;
 	}
 
+	/**
+	 * Zjišťuje, ve které ose je BBox nejrozměrnější.
+	 * @return číslo osy (0 - x, 1 - y, 2 - z)
+	 */
 	int MaxDimensionIndex() const
 	{
 		Vector diag = Diagonal();
@@ -794,16 +856,44 @@ public:
 			return 2;
 	}
 
+	/**
+	 * Metoda vypočítá střed (centroid) BBox.
+	 * @return Point reprezentující střed BBox
+	 */
 	Point Centroid() const
 	{
 		return (pMin + pMax) / 2.f;
 	}
 
+	/**
+	 * Provede sjednocení BBox a bodu.
+	 * @param b instance třídy BBox
+	 * @param p instance třídy Point
+	 * @return BBox vzniknutý sjednocením
+	 */
 	friend BBox Union(const BBox& b, const Point& p);
+	
+	/**
+	 * Provede sjednocení BBox a bodu.
+	 * @param b instance třídy BBox
+	 * @param b2 instance třídy BBox
+	 * @return BBox vzniknutý sjednocením
+	 */
 	friend BBox Union(const BBox& b, const BBox& b2);
 
+	/**
+	 * Zjistí, jestli existuje průsečík přímky a BBox.
+	 * Je také možné získat hodnoty parametrů t.
+	 * @param ray paprsek
+	 * @param hitt0 slouží k uložení hodnoty prvního parametru průsečíku t
+	 * @param hitt1 slouží k uložení hodnoty druhého parametru průsečíku t
+	 * @return zdali průsečík protnul BBox
+	 */
 	bool IntersectP(const Ray& ray, float* hitt0, float* hitt1) const;
 
+	/**
+	 * Lineární interpolace uvnitř BBox mezi body pMin a pMax.
+	 */
 	Point Lerp(float tx, float ty, float tz) const
 	{
 		return Point(::Lerp(tx, pMin.x, pMax.x),
@@ -823,8 +913,8 @@ public:
 		return (&pMin)[i];
 	}
 
-	Point pMin;
-	Point pMax;
+	Point pMin; ///< bod s nejmenšími složkami
+	Point pMax; ///< bod s největšími složkami
 };
 
 inline Vector::Vector(const Point& p)
@@ -838,52 +928,76 @@ inline Vector::Vector(const Normal& n)
 }
 
 /**
- * Skalarni soucin
+ * Skalárni součin dvou vektorů.
  */
 inline float Dot(const Vector& u, const Vector& v)
 {
 	return u.x * v.x + u.y * v.y + u.z * v.z;
 }
 
+/**
+ * Skalárni součin dvou vektorů.
+ */
 inline float Dot(const Vector& u, const Normal& v)
 {
 	return u.x * v.x + u.y * v.y + u.z * v.z;
 }
 
+/**
+ * Skalárni součin dvou vektorů.
+ */
 inline float Dot(const Normal& u, const Vector& v)
 {
 	return u.x * v.x + u.y * v.y + u.z * v.z;
 }
 
+/**
+ * Skalárni součin dvou vektorů.
+ */
 inline float Dot(const Normal& u, const Normal& v)
 {
 	return u.x * v.x + u.y * v.y + u.z * v.z;
 }
 
+/**
+ * Vektorový součin dvou vektorů.
+ */
 inline Vector Cross(const Vector& u, const Vector& v)
 {
 	return Vector(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z,
 			u.x * v.y - u.y * v.x);
 }
 
+/**
+ * Vektorový součin dvou vektorů.
+ */
 inline Vector Cross(const Normal& u, const Vector& v)
 {
 	return Vector(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z,
 			u.x * v.y - u.y * v.x);
 }
 
+/**
+ * Vektorový součin dvou vektorů.
+ */
 inline Vector Cross(const Normal& u, const Normal& v)
 {
 	return Vector(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z,
 			u.x * v.y - u.y * v.x);
 }
 
+/**
+ * Vektorový součin dvou vektorů.
+ */
 inline Vector Cross(const Vector& u, const Normal& v)
 {
 	return Vector(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z,
 			u.x * v.y - u.y * v.x);
 }
 
+/**
+ * Vzdálenost dvou bodů.
+ */
 inline float Distance(const Point& p1, const Point& p2)
 {
 	Vector v(p1 - p2);
