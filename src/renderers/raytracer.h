@@ -7,7 +7,14 @@ public:
 	virtual ~Raytracer();
 
 	virtual void Render() const;
+
+	void SetPixelArea(RenderThread* thread);
+
 private:
+	void DisplayPixel(int x, int y, RGBColor& in) const;
+private:
+	Integrator* integrator;
+	RenderThread* pixelArea;
 	int perPixelSamples;
 	int numberOfThreads;
 };

@@ -14,10 +14,8 @@ BSDF::BSDF(void)
 BSDF::~BSDF(void)
 {
 	for (uint32_t i = 0; i < nBxDFs; ++i)
-	{
 		if (bxdfs[i] != NULL)
 			delete bxdfs[i];
-	}
 }
 
 void BSDF::Add(BxDF* bxdf)
@@ -53,7 +51,6 @@ Material::~Material(void)
 /************************************************************************/
 /* Helper functions                                                     */
 /************************************************************************/
-
 float SchlickReflectance(const Vector& normal, const Vector& incident, float n1, float n2)
 {
 	float r0 = (n1 - n2) / (n1 + n2);

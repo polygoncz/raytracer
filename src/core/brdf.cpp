@@ -11,16 +11,25 @@ BxDF::BxDF(const BxDF& brdf)
 BxDF::~BxDF()
 {}
 
+/**
+ * Výchozí implementace vrací černou barvu.
+ */
 RGBColor BxDF::F(const Vector& wi, const Vector& wo, const Normal& n) const
 {
 	return BLACK;
 }
 
+/**
+ * Výchozí implementace vrací černou barvu.
+ */
 RGBColor BxDF::SampleF(const Vector& wi, Vector& wo, const Normal& n) const
 {
 	return BLACK;
 }
 
+/**
+ * Výchozí implementace vrací černou barvu.
+ */
 RGBColor BxDF::Rho(const Vector& wi, const Vector& wo, const Normal& n) const
 {
 	return BLACK;

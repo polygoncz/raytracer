@@ -14,6 +14,7 @@ class RenderThread;
 class RenderPixel;
 class Scene;
 class Renderer;
+class Raytracer;
 
 class ImageBufferApp: public wxApp
 {
@@ -78,7 +79,7 @@ public:
 protected:
 	wxBitmap* m_image;
 	Scene* scene;
-	Renderer* renderer;
+	Raytracer* renderer;
 
 private:
 	RenderThread* thread;

@@ -57,23 +57,7 @@ Scene::~Scene()
 
 BBox Scene::Bounds() const
 {
-	BBox b;
-	for (unsigned int i = 0; i < objects.size(); i++)
-	{
-		Reference<GeometricPrimitive> p = objects[i];
-		b = Union(b, p->Bounds());
-	}
-	return b;
-}
-
-void Scene::AddLight(Light* light)
-{
-	lights.push_back(light);
-}
-
-void Scene::AddObject(GeometricPrimitive* obj)
-{
-	objects.push_back(obj);
+	return aggregator->Bounds();
 }
 
 bool Scene::Intersect(const Ray& ray, Intersection& inter) const

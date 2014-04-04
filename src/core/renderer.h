@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+ * @file 
+ * V souboru se nachází deklarace rozhraní Renderer.
+ */
+
 #include "color.h"
 #include "wxgui/imagebuffer.h"
 #include "film.h"
@@ -7,21 +12,33 @@
 #include "scene.h"
 #include "integrator.h"
 
+/**
+ * Rozhraní Renderer implementují ti potomci, kteří se starají
+ * o implementaci samotné renderovací smyčky a vypočítané
+ * výsledky potom odesílají k dalšímu zpracování.
+ */
 class Renderer
 {
 public:
-	Renderer(Scene* sc, RenderThread* thread);
+	/**
+	 * Nastavuje scénu. Také ze scény vytáhne ukazatele na Film a Camera
+	 * pro přehlednější přístup k nim.
+	 * @param sc scéna která se bude renderovat.
+	 */
+	Renderer(Scene* sc);
+
+	/**
+	 * Destruktor se volá při dokončení vykreslování. Maže po sobě scénu.
+	 */
 	virtual ~Renderer();
 
+	/**
+	 * Slouží ke spuštění renderingu.
+	 */
 	virtual void Render() const = 0;
-	void SetPixelArea(RenderThread* thread);
-
+	
 protected:
-	void DisplayPixel(int x, int y, RGBColor& in) const;
-
-	Scene* scene;
-	RenderThread* pixelArea;
-	Integrator* integrator;
-	Film* film;
-	Camera* cam;
+	Scene* scene; ///< Vykreslovaná scéna.
+	Film* film; ///< Film kamery vytáhnutý ze scene, kvůli přehlednému přístupu.
+	Camera* cam; ///< Kamera vytáhnutá ze scene, kvůli přehlednému přístupu.
 };

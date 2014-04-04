@@ -4,7 +4,7 @@
 #include <omp.h>
 
 Raytracer::Raytracer(Scene* sc, RenderThread* thr, int perPixelSamples /*= 1*/, int numberOfThreads /*= 1*/)
-		: perPixelSamples(perPixelSamples), numberOfThreads(numberOfThreads), Renderer(sc, thr)
+		: perPixelSamples(perPixelSamples), numberOfThreads(numberOfThreads), pixelArea(thr), Renderer(sc)
 {
 	this->integrator = new WhittedTracer();
 }
@@ -59,4 +59,17 @@ void Raytracer::Render() const
 			}
 		}
 	}
+}
+
+void Raytracer::DisplayPixel(int x, int y, RGBColor& in) const
+{
+	RGBColor color = in.Clamp();
+
+	pixelArea->setPixel(x, y, (int) (color.r * 255), (int) (color.g * 255),
+			(int) (color.b * 255));
+}
+
+void Raytracer::SetPixelArea(RenderThread* thread)
+{
+	this->pixelArea = thread;
 }

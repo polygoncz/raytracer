@@ -5,6 +5,9 @@ Camera::Camera(void)
 {
 }
 
+/**
+ * Provede výpočet ortonormální báze.
+ */
 Camera::Camera(const Point& eye, const Point& target, const Vector& up,
 	float exposure /* = 1.f */)
 		: eye(eye), target(target), up(up), exposure(exposure)

@@ -53,7 +53,6 @@ public:
 	 * v potomcích třídy.
 	 * @param sample vzorek na filmu kamery
 	 * @param ray ukazatel na instanci třídy Ray, slouží jako návratová hodnota
-	 * @see Ray
 	 */
 	virtual void GenerateRay(const CameraSample& sample, Ray* ray) const = 0;
 
@@ -64,9 +63,12 @@ protected:
 	void ComputeUVW();
 
 protected:
-	Film* film; ///< ukazatel na film
-	Point eye, target; ///< body pozorovatele a cíle pozorování
-	Vector up; ///< vektor natočení kamery
-	Vector u, v, w; ///< ortonormální báze pohledu
+	Film* film; ///< Ukazatel na film.
+	Point eye; ///< Bod pozorovatele.
+	Point target; ///< Bod cíle pozorování.
+	Vector up; ///< Vektor natočení kamery.
+	Vector u; ///< Vektor ortonormální báze pohledu
+	Vector v; ///< Vektor ortonormální báze pohledu
+	Vector w; ///< Vektor ortonormální báze pohledu
 	float exposure; ///< expozice (FUTURE)
 };
